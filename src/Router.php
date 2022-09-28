@@ -4,7 +4,7 @@ namespace App;
 // Класс "Маршрутизатор"
 class Router
 {
-    /** @var array|Route[] - массив роутеров*/
+    /** @var array|Route[] - массив маршрутов */
     private array $routes = [];
 
     // Регистрация (добавление в массив) нового маршрута для HTTP-метода запроса GET
@@ -16,7 +16,6 @@ class Router
     // Регистрация (добавление в массив) нового маршрута для HTTP-метода запроса POST
     public function post(string $path, array $callback)
     {
-        // @todo: Реализуйте этот метод
         $this->addRoute('post', $path, $callback);
     }
 
@@ -31,7 +30,6 @@ class Router
     {
         // Удалить символ '/' из начала и конца URL-адреса
         $uri = trim($url, '/');
-        // @todo: Преобразуйте значение параметра $method к нижнему регистру
         // Преобразование значения параметра $method к нижнему регистру
         $method = strtolower($method);
         // Перебор всех маршрутов

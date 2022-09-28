@@ -24,6 +24,5 @@ $router->get('about', [StaticPageController::class, 'about']);
 // Создание класса приложения
 $application = new Application($router);
 
-// @todo: передайте http-метод текущего запроса вторым параметром
 // Запуск выполнения приложения с указанием URL текущей страницы и метода запроса
 $application->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

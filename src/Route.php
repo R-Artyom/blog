@@ -41,7 +41,6 @@ class Route
     // Проверка, подходит ли текущий маршрут текущему запросу
     public function match(string $uri, string $method): bool
     {
-        // @todo: добавьте сюда еще проверку http-метода запроса, на совпадение с http-методом текущего маршрута
         return trim($this->getPath(), '/') === $uri && $this->method === $method;
     }
 
