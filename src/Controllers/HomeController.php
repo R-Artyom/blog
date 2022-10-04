@@ -1,11 +1,14 @@
 <?php
 namespace App\Controllers;
 
+// Импорт необходимого класса
+use App\View\View;
+
 class HomeController
 {
     public function index()
     {
-        // html выводится прямо здесь, лишь для знакомства, позже мы вынесем логику формирования html в шаблонизатор
-        return '<a href="/about">На страницу О нас</a>';
+        // Возврат объекта - шаблона главной страницы
+        return new View('homepage', ['title' => 'Главная страница']);
     }
 }

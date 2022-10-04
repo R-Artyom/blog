@@ -1,6 +1,6 @@
 <?php
 
-// Импорт классов их разных пространств имён
+// Импорт классов из разных пространств имён
 use App\Application;
 use App\Controllers\HomeController;
 use App\Controllers\StaticPageController;

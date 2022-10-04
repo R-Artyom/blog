@@ -1,11 +1,14 @@
 <?php
 namespace App\Controllers;
 
+// Импорт необходимого класса
+use App\View\View;
+
 class StaticPageController
 {
     public function about()
     {
-        // html выводится прямо здесь, лишь для знакомства, позже мы вынесем логику формирования html в шаблонизатор
-        return '<a href="/">На главную</a>';
+        // Возврат объекта - шаблона страницы "О нас"
+        return new View('about', ['title' => 'Страница о нас']);
     }
 }
