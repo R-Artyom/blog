@@ -1,6 +1,9 @@
 <?php
 namespace App;
 
+// Импорт классов
+use App\Exception\NotFoundException;
+
 // Класс "Маршрутизатор"
 class Router
 {
@@ -41,6 +44,6 @@ class Router
             }
         }
         // Если такой страницы не существует
-        return 'page not found';
+        throw new NotFoundException('Страница не найдена', 404);
     }
 }

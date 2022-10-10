@@ -1,6 +1,9 @@
 <?php
 namespace App\View;
 
+// Импорт классов
+use App\Exception\ApplicationException;
+
 // Класс "Шаблонизатор приложения" - используется для подключения view страницы
 class View implements Renderable
 {
@@ -17,6 +20,9 @@ class View implements Renderable
     // Отображение необходимого шаблона
     public function render()
     {
+        // Проверка наличия файла шаблона, если такого нет - то выброс исключения
+        // и выход из метода в точку перехвата
+        $this->getIncludeTemplate($this->view);
         // Импорт ключей массива в качестве имён переменных, а их значений -
         // в качестве значений этих переменных
         extract($this->data);
@@ -34,7 +40,15 @@ class View implements Renderable
         // Константа содержит в себе слеш, не зависящий от операционной системы,
         // в которой выполняется приложение
         $view = str_replace('.', DIRECTORY_SEPARATOR, $view);
-        // Возврат полного пути
-        return VIEW_DIR . $view . '.php';
+        // Полный путь к файлу
+        $pathTemplate = VIEW_DIR . $view . '.php';
+        // Если такой файл существует
+        if (file_exists($pathTemplate)) {
+            // Возврат полного пути
+            return VIEW_DIR . $view . '.php';
+        } else {
+            // Если такого файла нет - то выбрасывание исключения
+            throw new ApplicationException("$view.php шаблон не найден");
+        }
     }
 }
