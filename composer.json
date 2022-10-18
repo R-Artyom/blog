@@ -1,0 +1,17 @@
+{
+    "name": "skillbox/starter.project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ryabov Artyom",
+            "email": "ryabov.artyom@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/database": "^8.83"
+    }
+}

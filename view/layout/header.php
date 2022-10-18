@@ -34,9 +34,7 @@ require 'base/header.php';
 
     <ul class="nav nav-pills">
         <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">На главную</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+        <li class="nav-item"><a href="/posts" class="nav-link">Статьи</a></li>
         <li class="nav-item"><a href="/about" class="nav-link">О нас</a></li>
     </ul>
 </header>

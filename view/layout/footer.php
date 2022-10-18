@@ -7,9 +7,7 @@
 
     <ul class="nav col-md-4 justify-content-end">
         <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">На главную</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+        <li class="nav-item"><a href="/posts" class="nav-link px-2 text-muted">Статьи</a></li>
         <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">О нас</a></li>
     </ul>
 </footer>

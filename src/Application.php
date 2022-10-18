@@ -5,6 +5,7 @@ namespace App;
 use App\Exception\ApplicationException;
 use App\View\Renderable;
 use App\View\View;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 // Класс "Приложение"
 class Application
@@ -16,6 +17,8 @@ class Application
     public function __construct(Router $router)
     {
         $this->router = $router;
+        // Подключение ORM Eloquent к базе данных
+        $this->initialize();
     }
 
     // Запуск выполнения приложения с указанием URL текущей страницы и метода запроса
@@ -35,7 +38,6 @@ class Application
         } catch (ApplicationException $e) {
             $this->renderException($e);
         }
-
     }
 
     private function renderException(ApplicationException $e)
@@ -57,5 +59,29 @@ class Application
             // Отображение шаблона данной страницы
             $error->render();
         }
+    }
+
+    // Подключение ORM Eloquent к базе данных
+    private function initialize()
+    {
+        // Создание конфигурации приложения
+        $config = Config::getInstance();
+        // Создание экземпляра менеджера
+        $capsule = new Capsule;
+        // Добавление нового подключения
+        $capsule->addConnection([
+            'driver' => 'mysql',
+            'host' => $config->get('db.mysql.host'),
+            'database' => $config->get('db.mysql.name'),
+            'username' => $config->get('db.mysql.user'),
+            'password' => $config->get('db.mysql.password'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_general_ci',
+            'prefix' => '',
+        ]);
+        // Установить экземпляр Capsule доступным глобально (с помощью статических методов)
+        $capsule->setAsGlobal();
+        // Загрузка библиотеки Eloquent ORM с новым подключением
+        $capsule->bootEloquent();
     }
 }

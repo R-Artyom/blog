@@ -20,6 +20,8 @@ $router = new Router();
 $router->get('',      [HomeController::class, 'index']);
 // Добавление в роутер страницы сайта "О нас" с HTTP-методом запроса GET
 $router->get('about', [StaticPageController::class, 'about']);
+// Добавление в роутер страницы сайта "Статьи" с HTTP-методом запроса GET
+$router->get('posts', [StaticPageController::class, 'posts']);
 
 // Создание класса приложения
 $application = new Application($router);
