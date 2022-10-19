@@ -40,7 +40,7 @@ class Router
             // Если маршрут совпадает с текущим запросом
             if ($route->match($uri, $method)) {
                 // Запуск обработчика маршрута
-                return $route->run();
+                return $route->run($uri);
             }
         }
         // Если такой страницы не существует

@@ -22,4 +22,10 @@ class StaticPageController
         // Возврат объекта - шаблона страницы "Статьи"
         return new View('posts', ['title' => 'Статьи', 'posts' => $posts]);
     }
+
+    // Страница "Тест"
+    public function test($param1, $param2): string
+    {
+        return "Test Page With param1=$param1 param2=$param2";
+    }
 }
