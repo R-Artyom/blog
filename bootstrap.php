@@ -6,7 +6,6 @@ const APP_DIR = __DIR__ . '/';
 const VIEW_DIR = APP_DIR . 'view/';
 // Путь к файлам конфигурации приложения
 const CONFIGS_DIR = APP_DIR . 'configs/';
-// Вспомогательные функции
-require_once APP_DIR . '/helpers.php';
-// Функция автоподгрузки файлов с классами
+
+// Автоподгрузка файлов с классами и вспомогательных файлов проекта
 require_once APP_DIR . '/vendor/autoload.php';
