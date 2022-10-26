@@ -9,6 +9,6 @@ return [
         // Пароль пользователя БД
         'password' => 'root',
         // Название БД
-        'name' => 'starter'
+        'name' => 'blog'
     ]
 ];
