@@ -81,7 +81,7 @@
 - Клонировать https://github.com/R-Artyom/blog.git
 - Импортировать "blog.sql" в базу данных
 - Выполнить команду "composer install" в корне проекта
-- В файле "configs/bd.php" исправить адрес сервера, имя пользователя и пароль ('host', 'user' и 'password') для своей базы данных
+- В файле "configs/db.php" исправить адрес сервера, имя пользователя и пароль ('host', 'user' и 'password') для своей базы данных
 - Логин / Роль / Пароль:  
   admin@gmail.com / Администратор / admin    
   manager@gmail.com / Контент-менеджер / manager    
