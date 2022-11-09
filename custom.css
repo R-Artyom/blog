@@ -1,0 +1,323 @@
+/* Прилепить footer к низу страницы */
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1 0 auto;
+}
+
+/* Для всех элементов класса post */
+.post:not(:last-child) {
+    /* Отступ снизу */
+    margin-bottom: 1.5rem;
+}
+/* Для последнего элемента класса post */
+.post:last-child {
+    /* Отступ снизу */
+    margin-bottom: 0;
+}
+
+/* Эскиз изображения статьи */
+.post-thumbnail {
+    width: 800px;
+    background: white;
+    object-position: 50% 50%;
+    object-fit: contain;
+}
+
+/* Малый эскиз изображения статьи */
+.post-thumbnail-sm {
+    /*max-width: 100%;*/
+    /*max-height: 320px;*/
+    width: 480px;
+    height: 320px;
+    object-position: 50% 50%;
+    object-fit: contain;
+    /*object-fit: cover;*/
+}
+
+/* Эскиз изображения аватарки */
+.avatar-thumbnail {
+    width: 100px;
+    height: 100px;
+    background: white;
+    object-fit: cover;
+}
+
+/* Малый эских изображения аватарки */
+.avatar-thumbnail-sm {
+    width: 45px;
+    height: 45px;
+    background: var(--color-4);
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+/* Эскиз формы комментария */
+.form-thumbnail {
+    width: 400px;
+}
+
+/* Глобальные переменные */
+:root {
+    --color-1: #000000;
+    --color-2: #191919;
+    --color-3: #212529;
+    --color-4: #3a414e;
+    --color-5: #6c757d;
+    --color-6: #b4b4b4;
+    --color-7: #ffffff;
+    --color-8: #ff9907;
+    --color-9: #ffc107;
+}
+
+.color-1 {
+    color: var(--color-1);
+}
+.color-2 {
+    color: var(--color-2);
+}
+.color-3 {
+    color: var(--color-3);
+}
+.color-4 {
+    color: var(--color-4);
+}
+.color-5 {
+    color: var(--color-5);
+}
+.color-6 {
+    color: var(--color-6);
+}
+.color-7 {
+    color: var(--color-7);
+}
+.color-8 {
+    color: var(--color-8);
+}
+.color-9 {
+    color: var(--color-9);
+}
+
+.bg-1 {
+    background-color: var(--color-1);
+}
+.bg-2 {
+    background-color: var(--color-2);
+}
+.bg-3 {
+    background-color: var(--color-3);
+}
+.bg-4 {
+    background-color: var(--color-4);
+}
+.bg-5 {
+    background-color: var(--color-5);
+}
+.bg-6 {
+    background-color: var(--color-6);
+}
+.bg-7 {
+    background-color: var(--color-7);
+}
+.bg-8 {
+    background-color: var(--color-8);
+}
+.bg-9 {
+    background-color: var(--color-9);
+}
+
+/* Градиент шапки и подвала */
+header, footer {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#1e5799+0,7db9e8+100 */
+    background: var(--color-1); /* Old browsers */
+    background: -moz-linear-gradient(left, var(--color-1) 0%,var(--color-4) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, var(--color-1) 0%,var(--color-4) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, var(--color-1) 0%,var(--color-4) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=var(--color-1), endColorstr=var(--color-4),GradientType=1 ); /* IE6-9 */
+}
+
+/* Цвет текста "1" */
+.text-style-1 {
+    color: var(--color-5);
+}
+.text-bg-style-1 {
+    background-color: var(--color-5);
+}
+
+/* Цвет текста "2" */
+.text-style-2 {
+    color: var(--color-8);
+}
+.text-bg-style-2 {
+    background-color: var(--color-8);
+}
+
+/* Кнопка "1" */
+.btn-style-1 {
+    /* Цвет текста кнопки */
+    --bs-btn-color: var(--color-8);
+    /* Цвет фона кнопки */
+    --bs-btn-bg: var(--color-5);
+    /* Рамка кнопки */
+    --bs-btn-border-color: var(--color-4);
+
+    /* Цвет текста при наведении */
+    --bs-btn-hover-color: var(--color-5);
+    /* Цвет фона при наведении */
+    --bs-btn-hover-bg: var(--color-9);
+    /* Рамка при наведении*/
+    --bs-btn-hover-border-color: var(--color-9);
+
+    /* Цвет текста при нажатии */
+    --bs-btn-active-color: var(--color-5);
+    /* Цвет фона при нажатии */
+    --bs-btn-active-bg: var(--color-9);
+    /* Цвет рамки при нажатии */
+    --bs-btn-active-border-color: var(--color-9);
+}
+
+/* Кнопка "2" */
+.btn-style-2 {
+    /* Цвет текста кнопки */
+    --bs-btn-color: var(--color-4);
+    /* Цвет фона кнопки */
+    --bs-btn-bg: var(--color-8);
+    /* Рамка кнопки */
+    --bs-btn-border-color: var(--color-4);
+
+    /* Цвет текста при наведении */
+    --bs-btn-hover-color: var(--color-5);
+    /* Цвет фона при наведении */
+    --bs-btn-hover-bg: var(--color-9);
+    /* Рамка при наведении*/
+    --bs-btn-hover-border-color: var(--color-9);
+
+    /* Цвет текста при нажатии */
+    --bs-btn-active-color: var(--color-5);
+    /* Цвет фона при нажатии */
+    --bs-btn-active-bg: var(--color-9);
+    /* Цвет рамки при нажатии */
+    --bs-btn-active-border-color: var(--color-9);
+}
+
+/* Кнопка "3" */
+.btn-style-3 {
+    /* Цвет текста кнопки */
+    --bs-btn-color: var(--color-8);
+    /* Цвет фона кнопки */
+    --bs-btn-bg: var(--color-3);
+    /* Рамка кнопки */
+    --bs-btn-border-color: var(--color-3);
+
+    /* Цвет текста при наведении */
+    --bs-btn-hover-color: var(--color-5);
+    /* Цвет фона при наведении */
+    --bs-btn-hover-bg: var(--color-9);
+    /* Рамка при наведении*/
+    --bs-btn-hover-border-color: var(--color-9);
+
+    /* Цвет текста при нажатии */
+    --bs-btn-active-color: var(--color-5);
+    /* Цвет фона при нажатии */
+    --bs-btn-active-bg: var(--color-9);
+    /* Цвет рамки при нажатии */
+    --bs-btn-active-border-color: var(--color-9);
+}
+
+/* Форма "1" */
+.form-style-1 {
+    /* Цвет текста после ввода */
+    color: #fff;
+    /* Цвет поля */
+    background-color: var(--color-4);
+    /* Рамка поля */
+    border: 1px solid var(--color-4);
+}
+.form-style-1:focus {
+    /* Цвет текста поля формы */
+    color: var(--color-4);
+    /* Рамка поля */
+    border-color: var(--color-4);
+    /* Тень вокруг поля */
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /*#6c757d*/
+}
+.form-style-1::placeholder {
+    /* Цвет подсказывающего текста */
+    color: var(--color-6);
+}
+
+/* Форма "2" ("Войти") */
+.form-style-2 {
+    /* Цвет поля */
+    background-color: var(--color-6);
+    /* Рамка поля */
+    border: 1px solid var(--color-4);
+    /* Максимальная ширина поля */
+    /*max-width: 330px;*/
+}
+.form-style-2:focus {
+    /* Цвет текста поля формы */
+    color: var(--color-4);
+    /* Рамка поля */
+    border-color: var(--color-4);
+    /* Тень вокруг поля */
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /*#6c757d*/
+}
+.form-style-2::placeholder {
+    /* Цвет подсказывающего текста */
+    color: var(--color-4);
+}
+
+/* Форма "3" ("Комментарий") */
+.form-style-3 {
+    /* Цвет текста после ввода */
+    color: #212529;
+    /* Цвет поля */
+    background-color: var(--color-7);
+    /* Рамка поля */
+    border: 1px solid var(--color-6);
+}
+.form-style-3:focus {
+    /* Цвет текста поля формы */
+    color: var(--color-4);
+    /* Рамка поля */
+    border-color: var(--color-4);
+    /* Тень вокруг поля */
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /*#6c757d*/
+}
+.form-style-3::placeholder {
+    /* Цвет подсказывающего текста */
+    color: var(--color-6);
+}
+
+/* Ссылка "1" ("Зарегистрироваться") */
+.link-style-1 {
+    color: var(--color-4);
+}
+.link-style-1:hover, .link-style-1:focus {
+    color: var(--color-5);
+}
+
+/* Ссылка "2" ("Профиль") */
+.link-style-2 {
+    color: var(--color-8);
+    text-decoration: none;
+}
+.link-style-2:hover, .link-style-2:focus {
+    color: var(--color-7);
+}
+
+/* Чекбокс "1" ("Соглашение с правилами") */
+.check-style-1:checked {
+    background-color: var(--color-8);
+    border-color: var(--color-4);
+}
+.check-style-1:focus {
+    border-color: var(--color-4);
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /*#6c757d*/
+}

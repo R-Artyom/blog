@@ -24,6 +24,12 @@ $router->get('about', [StaticPageController::class, 'about']);
 $router->get('posts', [StaticPageController::class, 'posts']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
+// Страница "Авторизация"
+$router->get('authorization', [StaticPageController::class, 'authorization']);
+// Страница "Регистрация"
+$router->get('registration', [StaticPageController::class, 'registration']);
+// Страница "Правила пользования сайтом"
+$router->get('terms', [StaticPageController::class, 'terms']);
 
 // Создание класса приложения
 $application = new Application($router);

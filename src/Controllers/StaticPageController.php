@@ -28,4 +28,25 @@ class StaticPageController
     {
         return "Test Page With param1=$param1 param2=$param2";
     }
+
+    // Страница "Авторизация"
+    public function authorization(): View
+    {
+        // Возврат объекта - шаблона страницы "Авторизация"
+        return new View('authorization', ['title' => 'Авторизация']);
+    }
+
+    // Страница "Регистрация"
+    public function registration(): View
+    {
+        // Возврат объекта - шаблона страницы "Регистрация"
+        return new View('registration', ['title' => 'Регистрация']);
+    }
+
+    // Страница "Правила пользования сайтом"
+    public function terms(): View
+    {
+        // Возврат объекта - шаблона страницы "Правила пользования сайтом"
+        return new View('terms', ['title' => 'Правила пользования сайтом']);
+    }
 }
