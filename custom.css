@@ -297,7 +297,7 @@ header, footer {
 
 /* Ссылка "1" ("Зарегистрироваться") */
 .link-style-1 {
-    color: var(--color-4);
+    color: var(--color-3);
 }
 .link-style-1:hover, .link-style-1:focus {
     color: var(--color-5);

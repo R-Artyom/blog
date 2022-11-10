@@ -9,7 +9,7 @@
     <!-- Custom CSS -->
     <link href="/custom.css" rel="stylesheet">
     <!-- Favicon -->
-    <link href="/favicon.png" rel="icon" type="image/png">
+    <link href="/img/favicon.png" rel="icon" type="image/png">
 </head>
 
 <body>
