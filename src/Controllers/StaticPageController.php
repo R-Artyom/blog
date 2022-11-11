@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Controllers;
 
 // Импорт необходимого класса
+use App\Exception\NotFoundException;
+use App\Models\Comment;
 use App\Models\Post;
 use App\View\View;
 
@@ -15,12 +18,25 @@ class StaticPageController
     }
 
     // Страница "Статьи"
-    public function posts(): View
+    public function posts($idPost): View
     {
         // Массив объектов таблицы posts модели Post
-        $posts = Post::get();
-        // Возврат объекта - шаблона страницы "Статьи"
-        return new View('posts', ['title' => 'Статьи', 'posts' => $posts]);
+        $post = Post::where('id', $idPost)->get();
+        // Если в БД не найдено ни одной статьи с указанным id
+        if (count($post) < 1) {
+            // Выброс исключения
+            throw new NotFoundException('Страница не найдена', 404);
+        }
+        // Запрос комментариев пользователей к статье с идентификатором id
+        // из таблицы users берутся имя пользователя и название файла-аватарки
+        // сортировка комментариев по дате, сначала новые
+        $comments = Comment:: where('post_id', $idPost)
+            ->leftJoin('users', 'comments.user_id', '=', 'users.id')
+            ->select('comments.*', 'users.name as user_name', 'users.img_name')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        // Возврат объекта - шаблона страницы "Детальная страница статьи"
+        return new View('posts', ['title' => 'Статьи', 'post' => $post[0], 'comments' => $comments]);
     }
 
     // Страница "Тест"
