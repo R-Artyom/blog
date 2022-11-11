@@ -312,6 +312,14 @@ header, footer {
     color: var(--color-7);
 }
 
+/* Ссылка "3" */
+.link-style-3 {
+    color: var(--color-3);
+}
+.link-style-3:hover {
+    background-color: #ece9e9;
+}
+
 /* Чекбокс "1" ("Соглашение с правилами") */
 .check-style-1:checked {
     background-color: var(--color-8);
