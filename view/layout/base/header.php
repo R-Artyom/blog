@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS-->
     <link href="/vendor/twbs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/custom.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
     <!-- Favicon -->
     <link href="/img/favicon.png" rel="icon" type="image/png">
 </head>
