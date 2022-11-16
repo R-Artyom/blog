@@ -21,7 +21,7 @@
                 <input type="text" name="post-id" value="<?=$post->id?>" hidden>
                 <input type="text" name="user-id" value="<?=$post->id?>" hidden>
                 <?php if (!empty($message)):?>
-                    <div class="alert alert-<?=$message['status']?> alert-dismissible fade show" role="alert" tabindex="0" >
+                    <div class="alert alert-<?=$message['status']?> alert-dismissible fade show rounded-0" role="alert" tabindex="0" >
                         <?=$message['text']?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
                     </div>
