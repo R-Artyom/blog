@@ -3,6 +3,7 @@
 // Импорт классов из разных пространств имён
 use App\Application;
 use App\Controllers\HomeController;
+use App\Controllers\PostController;
 use App\Controllers\StaticPageController;
 use App\Router;
 
@@ -21,9 +22,9 @@ $router->get('',      [HomeController::class, 'index']);
 // Добавление в роутер страницы сайта "О нас" с HTTP-методом запроса GET
 $router->get('about', [StaticPageController::class, 'about']);
 // Страница "Детальная страница статьи"
-$router->get('posts/*', [StaticPageController::class, 'posts']);
+$router->get('posts/*', [PostController::class, 'posts']);
 // Страница "Добавление комментария на детальной странице статьи"
-$router->post('posts/*', [StaticPageController::class, 'posts']);
+$router->post('posts/*', [PostController::class, 'posts']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
