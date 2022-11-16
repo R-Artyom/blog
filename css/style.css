@@ -157,6 +157,22 @@ header, footer {
     background-color: var(--color-8);
 }
 
+/* Цвет текста "3" */
+.text-style-3 {
+    color: var(--color-3);
+}
+.text-bg-style-3 {
+    background-color: var(--color-3);
+}
+
+/* Цвет текста "4" */
+.text-style-4 {
+    color: var(--color-4);
+}
+.text-bg-style-4 {
+    background-color: var(--color-4);
+}
+
 /* Кнопка "1" */
 .btn-style-1 {
     /* Цвет текста кнопки */

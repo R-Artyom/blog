@@ -10,5 +10,7 @@
     </footer>
     <!-- Bootstrap JS-->
     <script src="/vendor/twbs/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- Custom JS-->
+    <script src="/js/scripts.js"></script>
 </body>
 </html>

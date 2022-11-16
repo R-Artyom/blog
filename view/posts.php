@@ -15,9 +15,17 @@
             <div class="col-auto me-4 mb-4 avatar-thumbnail">
                 <img class="rounded-3 avatar-thumbnail" src="/img/users/1.jpg" alt="ava">
             </div>
-            <form class="col" method="post" action="/posts/<?=$post->id?>/comments/add">
+            <form class="col" method="post" action="/posts/<?=$post->id?>">
                 <label for="message" class="form-label h4" hidden>Оставить комментарий:</label>
-                <textarea class="mb-2 form-control form-style-3 rounded-0  shadow-sm" id="message" rows="5" placeholder="Введите ваш комментарий"></textarea>
+                <textarea class="mb-2 form-control form-style-3 rounded-0 shadow-sm <?= !empty($message) ? 'focus' : ''?> " name="text" id="message" rows="5" placeholder="Введите ваш комментарий"></textarea>
+                <input type="text" name="post-id" value="<?=$post->id?>" hidden>
+                <input type="text" name="user-id" value="<?=$post->id?>" hidden>
+                <?php if (!empty($message)):?>
+                    <div class="alert alert-<?=$message['status']?> alert-dismissible fade show" role="alert" tabindex="0" >
+                        <?=$message['text']?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    </div>
+                <?php endif?>
                 <div class="d-grid justify-content-end">
                     <button class="btn btn-style-3 rounded-0 justify-content-end d-grid justify-content-end" type="submit" name="send" value="yes">Отправить</button>
                 </div>
@@ -33,7 +41,9 @@
                     <div class="col">
                         <div>
                             <b class="me-2"><?=$comment->user_name?></b>
-                            <span class="p-1 text-bg-style-2 text-dark" hidden>Не проверено модератором</span>
+                            <?php if ($comment->active === 0):?>
+                                <span class="position-absolute p-1 badge rounded-3 text-style-2 text-bg-style-3">Не проверено модератором</span>
+                            <?php endif?>
                         </div>
                         <div>
                             <?=$comment->text?>

@@ -22,6 +22,8 @@ $router->get('',      [HomeController::class, 'index']);
 $router->get('about', [StaticPageController::class, 'about']);
 // Страница "Детальная страница статьи"
 $router->get('posts/*', [StaticPageController::class, 'posts']);
+// Страница "Добавление комментария на детальной странице статьи"
+$router->post('posts/*', [StaticPageController::class, 'posts']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
