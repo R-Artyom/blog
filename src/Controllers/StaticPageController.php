@@ -23,13 +23,6 @@ class StaticPageController
         return "Test Page With param1=$param1 param2=$param2";
     }
 
-    // Страница "Авторизация"
-    public function authorization(): View
-    {
-        // Возврат объекта - шаблона страницы "Авторизация"
-        return new View('authorization', ['title' => 'Авторизация']);
-    }
-
     // Страница "Регистрация"
     public function registration(): View
     {
