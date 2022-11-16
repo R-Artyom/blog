@@ -5,6 +5,7 @@ use App\Application;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
+use App\Controllers\RegistrationController;
 use App\Controllers\StaticPageController;
 use App\Router;
 
@@ -31,7 +32,7 @@ $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
 $router->get('authorization', [AuthorizationController::class, 'authorization']);
 // Страница "Регистрация"
-$router->get('registration', [StaticPageController::class, 'registration']);
+$router->get('registration', [RegistrationController::class, 'registration']);
 // Страница "Правила пользования сайтом"
 $router->get('terms', [StaticPageController::class, 'terms']);
 
