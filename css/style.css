@@ -62,6 +62,23 @@ body {
     width: 400px;
 }
 
+/* Отрицательные поля */
+.mt-n1 {
+    margin-top: -0.25rem;
+}
+.mt-n2 {
+    margin-top: -0.5rem;
+}
+.mt-n3 {
+    margin-top: -1rem;
+}
+.mt-n4 {
+    margin-top: -1.5rem;
+}
+.mt-n5 {
+    margin-top: -3rem;
+}
+
 /* Глобальные переменные */
 :root {
     --color-1: #000000;
