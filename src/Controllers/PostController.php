@@ -30,7 +30,7 @@ class PostController
         $comments = Comment:: where([['post_id', $idPost], ['active', true]])
             ->orWhere([['post_id', $idPost], ['user_id', $user_id], ['active', false]])
             ->leftJoin('users', 'comments.user_id', '=', 'users.id')
-            ->select('comments.*', 'users.name as user_name', 'users.img_name')
+            ->select('comments.*', 'users.name as user_name', 'users.created_at as user_created_at', 'users.img_name')
             ->orderBy('created_at', 'desc')
             ->get();
         // Возврат объекта - шаблона страницы "Детальная страница статьи"
@@ -49,20 +49,21 @@ class PostController
 //                $message['text'] = 'Внимание!!! Отправлять комментарии могут только зарегистрированные пользователи. <a class="link-style-1" href="/registration">Зарегистрироваться?</a>';
 //                return $message;
 //            }
-            // Если поле 'text' заполнено
-            if (!empty($_POST['text'])) {
-                Comment::insert([
-                    'text' => $_POST['text'],
-                    'post_id' => $_POST['post-id'],
-                    'user_id' => 1,
-                ]);
-                $message['status'] = 'success';
-                $message['text'] = 'Комментарий успешно отправлен';
+            // Если поле 'text' не заполнено
+            if (empty($_POST['text'])) {
+                $message['status'] = 'warning';
+                $message['text'] = 'Внимание!!! Комментарий не может быть пустым';
                 return $message;
             }
-            // Если поле 'text' не заполнено
-            $message['status'] = 'warning';
-            $message['text'] = 'Внимание!!! Комментарий не может быть пустым';
+            // Если поле 'text' заполнено
+            Comment::insert([
+                'text' => $_POST['text'],
+                'post_id' => $_POST['post-id'],
+                // TODO - идентификатор зарегистрированного пользователя
+                'user_id' => 1,
+            ]);
+            $message['status'] = 'success';
+            $message['text'] = 'Комментарий успешно отправлен';
             return $message;
         }
         return '';

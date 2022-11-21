@@ -40,15 +40,16 @@
                     </div>
                     <div class="col">
                         <div>
-                            <b class="me-2"><?=$comment->user_name?></b>
+                            <div class="me-2 d-inline-flex"><strong><?=$comment->user_name?></strong></div>
                             <?php if ($comment->active === 0):?>
                                 <span class="position-absolute p-1 badge rounded-3 text-style-2 text-bg-style-3">Не проверено модератором</span>
                             <?php endif?>
+                            <div class="mb-2 text-style-1 small"><?='Зарегистрирован ' . date('d.m.Y [H:i:s]', strtotime($comment->user_created_at))?>
+                            <?='. Дата публикации ' . date('d.m.Y H:i', strtotime($comment->created_at))?></div>
                         </div>
                         <div>
                             <?=$comment->text?>
                         </div>
-                        <span class="text-style-1 small"><?=date('d.m.Y-H:i:s', strtotime($comment->created_at))?></span>
                     </div>
                 </div>
             <?php endforeach?>
