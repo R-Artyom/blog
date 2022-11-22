@@ -25,7 +25,7 @@ $router->get('',      [HomeController::class, 'index']);
 $router->get('about', [StaticPageController::class, 'about']);
 // Страница "Детальная страница статьи"
 $router->get('posts/*', [PostController::class, 'posts']);
-// Страница "Добавление комментария на детальной странице статьи"
+// Страница "Детальная страница статьи - добавление комментария"
 $router->post('posts/*', [PostController::class, 'posts']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
@@ -33,6 +33,8 @@ $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 $router->get('authorization', [AuthorizationController::class, 'authorization']);
 // Страница "Регистрация"
 $router->get('registration', [RegistrationController::class, 'registration']);
+// Страница "Регистрация - отправка формы"
+$router->post('registration', [RegistrationController::class, 'registration']);
 // Страница "Правила пользования сайтом"
 $router->get('terms', [StaticPageController::class, 'terms']);
 
