@@ -3,86 +3,108 @@
 namespace App\Controllers;
 
 // Импорт необходимых классов
+use App\Exception\ApplicationException;
 use App\Models\User;
 use App\View\View;
+use Exception;
+use RuntimeException;
 
 class RegistrationController
 {
     // Страница "Регистрация"
     public function registration(): View
     {
-        // Сообщение о результате добавления пользователя в БД путём регистрации
-        $message = $this->addUser();
+        // Регистрация пользователя, если требуется
+        $result = $this->addUser();
         // Заголовок страницы
-        $message['title'] = 'Регистрация';
+        $result['title'] = 'Регистрация';
         // Возврат объекта - шаблона страницы "Регистрация"
-        return new View('registration', $message);
+        return new View('registration', $result);
     }
 
-    // Добавление комментария на странице "Детальная страница статьи"
+    // Регистрация пользователя
     private function addUser()
     {
-        // Если форма регистрации была отправлена
-        if (!empty($_POST))
-        {
-            // Если поле 'Имя' не заполнено
-            if (empty($_POST['name'])) {
-                $message['errors']['name'] = true;
-            } else {
-                $message['name'] = $_POST['name'];
-            }
-            // Если поле 'Email' не заполнено
-            if (empty($_POST['email'])) {
-                $message['errors']['email'] = 'Введите корректный email';
-            } else {
-                $message['email'] = $_POST['email'];
-            }
-            // Если поле 'Пароль' не заполнено
-            if (empty($_POST['password'])) {
-                $message['errors']['password'] = true;
-            } else {
-                $message['password'] = $_POST['password'];
-                // Если поле 'Подтвердите пароль' не заполнено
-                if (empty($_POST['repeat-password'])) {
-                    $message['errors']['repeatPassword'] = 'Подтвердите пароль';
-                // Если поля 'Пароль' и 'Подтвердите пароль' равны
-                } elseif ($_POST['password'] !== $_POST['repeat-password']) {
-                    $message['errors']['repeatPassword'] = 'Пароли не совпадают';
-                    $message['repeatPassword'] = $_POST['repeat-password'];
-                } else {
-                    $message['repeatPassword'] = $_POST['repeat-password'];
+        // Если форма была отправлена
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Копирование всех непустых данных формы
+            foreach ($_POST as $key => $value) {
+                if (!empty($value)) {
+                    $result[$key] = htmlspecialchars($value);
                 }
             }
-            // Если чекбокс 'Правила сайта' не установлен
-            if (empty($_POST['terms'])) {
-                $message['errors']['terms'] = true;
-            } else {
-                $message['terms'] = $_POST['terms'];
+            try {
+                // Валидация полей формы регистрации
+                $this->validateForm($result);
+                // Сохранение данных пользователя в базе
+                $this->saveData($result);
+            // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
+            } catch (RuntimeException $e) {
+                // Вывод на страницу ошибки при работе с базой данных
+                throw new ApplicationException("Ошибка базы данных");
+            // Исключения формы регистрации
+            } catch (Exception $e) {
+                // Сообщение выброшенного исключения
+                $result['message'] = $e->getMessage();
+                // Код выброшенного исключения
+                $result['error'] = $e->getCode();
             }
-            // Если при заполнении формы регистрации ошибок не было
-            if (!isset($message['errors'])) {
-                // Проверка уникальности email
-                $post = User::where('email', $_POST['email'])->get();
-                // Если в БД не найдено ни одного юзера с таким email
-                if (count($post) < 1) {
-                    // Запись в БД
-                    User::insert([
-                        'name' => $_POST['name'],
-                        'email' => $_POST['email'],
-                        'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                        'img_name' => 'default.jpg',
-                    ]);
-                    $message['success'] = 'Поздравляем! Вы успешно зарегистрировались!';
-                } else {
-                    $message['errors']['email'] = 'Пользователь с таким email уже существует. <a class="text-danger" href="/authorization/">Войти?</a>';
-                    $message['email'] = $_POST['email'];
-                }
-            }
-            // Если при заполнении формы регистрации были ошибки
-            return $message;
+        // Если форма не отправлялась
+        } else {
+            $result['error'] = FORM_NOT_SENT;
         }
-        // Если форма регистрации не отправлялась
-        $message['errors']['empty'] = true;
-        return $message;
+        return $result;
+    }
+
+    // Валидация полей формы
+    private function validateForm(array $data)
+    {
+        // Если поле 'Имя' не заполнено
+        if (empty($data['name'])) {
+            throw new Exception('Введите имя', FORM_NAME);
+        }
+        // Если поле 'Email' не заполнено
+        if (empty($data['email'])) {
+            throw new Exception('Введите email', FORM_EMAIL);
+        }
+        // Если поле 'Email' не соответствует формату
+        if ( filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
+            throw new Exception('Email не соответствует формату', FORM_EMAIL);
+        }
+        // Если поле 'Пароль' не заполнено
+        if (empty($data['password'])) {
+            throw new Exception('Введите пароль', FORM_PASSWORD);
+        }
+        // Если поле 'Повторите пароль' не заполнено
+        if (empty($data['repeatPassword'])) {
+            throw new Exception('Подтвердите пароль', FORM_REPEAT_PASSWORD);
+        }
+        // Если пароли не совпадают
+        if ($data['password'] !== $data['repeatPassword']) {
+            throw new Exception('Пароли не совпадают', FORM_REPEAT_PASSWORD);
+        }
+        // Если чекбокс 'Правила сайта' не установлен
+        if (empty($data['terms'])) {
+            throw new Exception('Необходимо согласиться с правилами сайта', FORM_TERMS);
+        }
+    }
+
+    // Сохранение данных пользователя в базе
+    private function saveData(array $data)
+    {
+        // Проверка уникальности email
+        $post = User::where('email', $data['email'])->get();
+        // Если в БД уже есть пользователь с таким email
+        if (count($post) > 0) {
+            throw new Exception('Пользователь с таким email уже существует. <a class="text-danger" href="/authorization/">Войти?</a>', FORM_EMAIL);
+        }
+        // Если в БД не найдено ни одного пользователя с таким email, сохранение данных
+        User::insert([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+            'img_name' => 'default.jpg',
+        ]);
+        throw new Exception('Поздравляем! Вы успешно зарегистрировались!', FORM_SUCCESS);
     }
 }
