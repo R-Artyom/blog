@@ -7,8 +7,10 @@
         <form method="post" class="py-3 px-4 m-auto" action="/registration">
             <h4 class="mb-3 text-start">Регистрация пользователя</h4>
             <div>
-                <label for="name" class="form-label" hidden>Имя</label>
-                <input type="text" class="form-control form-style-1 rounded-0 <?= $error === FORM_NAME ? 'focus' : ''?>" id="name" name="name" <?=isset($name) ? 'value=' . $name : ''?> placeholder="Введите ваше имя">
+                <label class="placeholder-box">
+                    <input type="text" class="form-control form-style-1 rounded-0 <?= $error === FORM_NAME ? 'focus' : ''?>" name="name" <?=isset($name) ? 'value=' . $name : ''?> required>
+                    <span class="placeholder-text">Введите ваше имя <strong class="text-danger">*</strong></span>
+                </label>
                 <?php if ($error === FORM_NAME):?>
                     <div class="mt-n1 mb-2"><span class="text-danger small"><?=$message?></span></div>
                 <?php else:?>
@@ -16,8 +18,10 @@
                 <?php endif?>
             </div>
             <div>
-                <label for="email" class="form-label" hidden>Адрес электронной почты</label>
-                <input type="text" class="form-control form-style-1 rounded-0 <?= $error === FORM_EMAIL ? 'focus' : ''?>" id="email" name="email" <?=isset($email) ? 'value=' . $email : ''?> placeholder="Введите ваш email">
+                <label class="placeholder-box">
+                    <input type="text" class="form-control form-style-1 rounded-0 <?= $error === FORM_EMAIL ? 'focus' : ''?>" name="email" <?=isset($email) ? 'value=' . $email : ''?> required>
+                    <span class="placeholder-text">Введите ваш email <strong class="text-danger">*</strong></span>
+                </label>
                 <?php if ($error === FORM_EMAIL):?>
                     <div class="mt-n1 mb-2"><span class="text-danger small"><?=$message?></span></div>
                 <?php else:?>
@@ -25,8 +29,10 @@
                 <?php endif?>
             </div>
             <div>
-                <label for="password" class="form-label" hidden>Пароль</label>
-                <input type="password" class="form-control form-style-1 rounded-0 <?= $error === FORM_PASSWORD ? 'focus' : ''?>" id="password" name="password" <?=isset($password) ? 'value=' . $password : ''?> placeholder="Введите ваш пароль">
+                <label class="placeholder-box">
+                    <input type="password" class="form-control form-style-1 rounded-0 <?= $error === FORM_PASSWORD ? 'focus' : ''?>" name="password" <?=isset($password) ? 'value=' . $password : ''?> required>
+                    <span class="placeholder-text">Введите ваш пароль <strong class="text-danger">*</strong></span>
+                </label>
                 <?php if ($error === FORM_PASSWORD):?>
                     <div class="mt-n1 mb-2"><span class="text-danger small"><?=$message?></span></div>
                 <?php else:?>
@@ -34,8 +40,10 @@
                 <?php endif?>
             </div>
             <div>
-                <label for="repeat-password" class="form-label" hidden>Подтверждение пароля</label>
-                <input type="password" class="form-control form-style-1 rounded-0 <?= $error === FORM_REPEAT_PASSWORD ? 'focus' : ''?>" id="repeat-password" name="repeatPassword" <?=isset($repeatPassword) ? 'value=' . $repeatPassword : ''?> placeholder="Введите ваш пароль повторно">
+                <label class="placeholder-box">
+                    <input type="password" class="form-control form-style-1 rounded-0 <?= $error === FORM_REPEAT_PASSWORD ? 'focus' : ''?>" name="repeatPassword" <?=isset($repeatPassword) ? 'value=' . $repeatPassword : ''?> required>
+                    <span class="placeholder-text">Введите ваш пароль повторно <strong class="text-danger">*</strong></span>
+                </label>
                 <?php if ($error === FORM_REPEAT_PASSWORD):?>
                     <div class="mt-n1 mb-2"><span class="text-danger small"><?=$message?></span></div>
                 <?php else:?>
@@ -53,7 +61,7 @@
             <?php else:?>
                 <div class="mb-3"></div>
             <?php endif?>
-            <button type="submit" class="btn btn-style-2 w-100 rounded-0 mb-3" name="reg" value="yes">Зарегистрироваться</button>
+            <button type="submit" class="btn btn-style-2 w-100 rounded-0 mb-3" name="reg" value="yes" formnovalidate>Зарегистрироваться</button>
             <a class="link-style-1" href="/authorization">Войти</a>
         </form>
     <?php endif?>

@@ -362,3 +362,29 @@ header, footer {
     border-color: var(--color-4);
     box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /*#6c757d*/
 }
+
+/* Кастомный placeholder полей формы, чтобы сделать знак '*' (поле обязательно
+ для заполнения) другого цвета */
+.placeholder-box {
+    display: block;
+    position: relative;
+}
+.placeholder-box input {
+    display: block;
+}
+.placeholder-text {
+    display: none;
+    width: 100%;
+    /*line-height: 37px;*/
+    line-height: 2.25;
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    color: var(--color-6);
+    cursor: text;
+    user-select: none;
+}
+.placeholder-box input:invalid + .placeholder-text {
+    display: block;
+}
