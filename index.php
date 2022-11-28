@@ -31,6 +31,8 @@ $router->post('posts/*', [PostController::class, 'posts']);
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
 $router->get('authorization', [AuthorizationController::class, 'authorization']);
+// Страница "Авторизация - отправка формы"
+$router->post('authorization', [AuthorizationController::class, 'authorization']);
 // Страница "Регистрация"
 $router->get('registration', [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"
