@@ -87,17 +87,15 @@ class RegistrationController
         if (empty($data['terms'])) {
             throw new Exception('Необходимо согласиться с правилами сайта', FORM_TERMS);
         }
+        // Если в БД уже есть пользователь с таким email
+        if (count(User::where('email', $data['email'])->get()) > 0) {
+            throw new Exception('Пользователь с таким email уже существует. <a class="text-danger" href="/authorization/">Войти?</a>', FORM_EMAIL);
+        }
     }
 
     // Сохранение данных пользователя в базе
     private function saveData(array $data)
     {
-        // Проверка уникальности email
-        $post = User::where('email', $data['email'])->get();
-        // Если в БД уже есть пользователь с таким email
-        if (count($post) > 0) {
-            throw new Exception('Пользователь с таким email уже существует. <a class="text-danger" href="/authorization/">Войти?</a>', FORM_EMAIL);
-        }
         // Если в БД не найдено ни одного пользователя с таким email, сохранение данных
         User::insert([
             'name' => $data['name'],
