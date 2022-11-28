@@ -5,6 +5,7 @@ namespace App\Controllers;
 // Импорт необходимых классов
 use App\Exception\ApplicationException;
 use App\Models\User;
+use App\Session;
 use App\View\View;
 use Exception;
 use RuntimeException;
@@ -16,6 +17,11 @@ class AuthorizationController
     {
         // Авторизация пользователя, если требуется
         $result = $this->authUser();
+        // Если форма не отправлялась и существует куки 'login'
+        if ($result['error'] === FORM_NOT_SENT && isset($_COOKIE['login'])) {
+            // Автозаполнение поля 'email'
+            $result['email'] = htmlspecialchars($_COOKIE['login']);
+        }
         // Заголовок страницы
         $result['title'] = 'Регистрация';
         // Возврат объекта - шаблона страницы "Авторизация"
@@ -85,6 +91,11 @@ class AuthorizationController
     // Работа с сессией
     private function saveData(array $data)
     {
+        // Создание экземпляра сессии
+        $session = new Session();
+        // Старт сессии
+        $session->start($data['email']);
+        // Сообщение
         throw new Exception('Поздравляем! Вы успешно авторизировались!', FORM_SUCCESS);
     }
 }
