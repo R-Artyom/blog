@@ -62,8 +62,8 @@ body {
     width: 400px;
 }
 
-/* Расположение иконки 'часы' */
-.watch {
+/* Расположение иконок */
+.bi {
     vertical-align: sub;
 }
 
@@ -366,6 +366,29 @@ header, footer {
 .check-style-1:focus {
     border-color: var(--color-4);
     box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25); /*#6c757d*/
+}
+
+/* Выпадающее меню "1"*/
+.dropdown-menu-style-1 {
+    /* Цвет фона меню */
+    background-color: var(--color-4);
+}
+
+/* Выпадающий список "1" */
+.dropdown-item-style-1 {
+    /* Цвет текста элемента списка */
+    color: var(--color-8);
+}
+.dropdown-item-style-1:hover, .dropdown-item-style-1:focus,
+.dropdown-item-style-1.active, .dropdown-item-style-1:active {
+    /* Цвет текста при наведении и в активном состоянии */
+    color: var(--color-7);
+    /* Цвет фона при наведении и в активном состоянии */
+    background-color: var(--color-4);
+}
+.dropdown-item-style-1.disabled, .dropdown-item-style-1:disabled {
+    /* Цвет текста в неактивном состоянии */
+    color: var(--color-5);
 }
 
 /* Кастомный placeholder полей формы, чтобы сделать знак '*' (поле обязательно

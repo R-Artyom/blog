@@ -3,6 +3,8 @@ namespace App\View;
 
 // Импорт классов
 use App\Exception\ApplicationException;
+use App\Exception\NotFoundException;
+use App\Profile;
 
 // Класс "Шаблонизатор приложения" - используется для подключения view страницы
 class View implements Renderable
@@ -26,6 +28,18 @@ class View implements Renderable
         // Импорт ключей массива в качестве имён переменных, а их значений -
         // в качестве значений этих переменных
         extract($this->data);
+        // Данные о пользователе
+        $userName = Profile::getInstance()->get('name');
+        $imgName = Profile::getInstance()->get('img_name');
+        $userStatus = Profile::getInstance()->get('role_id') ?? UNREG;
+        // Если это страница с информацией об успешной отправке формы
+        if (isset($error) && ($error !== FORM_SUCCESS)) {
+            // Проверка прав доступа пользователя к странице сайта
+            if (($userStatus & ACCESS_TO_PAGE[$this->view]) === 0) {
+                // Такой страницы не существует
+                throw new NotFoundException('Страница не найдена', 404);
+            }
+        }
         // Шапка страницы
         require $this->getIncludeTemplate('layout.header');
         // Шаблон страницы

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 30 2022 г., 06:15
+-- Время создания: Дек 01 2022 г., 08:56
 -- Версия сервера: 5.7.38
 -- Версия PHP: 7.4.29
 
@@ -79,8 +79,7 @@ INSERT INTO `comments` (`id`, `post_id`, `user_id`, `text`, `active`, `created_a
 (43, 2, 3, 'И я', 0, '2022-11-29 09:00:18'),
 (44, 1, 3, 'Требуется проверка?', 0, '2022-11-29 09:02:58'),
 (45, 2, 2, 'Требуется проверка?', 1, '2022-11-29 09:03:56'),
-(46, 2, 2, 'Манагер', 1, '2022-11-29 19:37:40'),
-(47, 2, 3, 'user', 0, '2022-11-29 19:38:47');
+(46, 2, 2, 'Манагер', 1, '2022-11-29 19:37:40');
 
 -- --------------------------------------------------------
 
@@ -123,9 +122,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
-(1, 'user', 'Зарегистрированный пользователь – может оставлять комментарии'),
-(2, 'manager', 'Контент менеджер – может изменять/создавать статьи и модерирует комментарии к ним'),
-(3, 'admin', 'Администратор – полный доступ к админке');
+(2, 'user', 'Зарегистрированный пользователь – может оставлять комментарии'),
+(4, 'manager', 'Контент менеджер – может изменять/создавать статьи и модерирует комментарии к ним'),
+(8, 'admin', 'Администратор – полный доступ к админке');
 
 -- --------------------------------------------------------
 
@@ -148,25 +147,25 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `img_name`, `created_at`) VALUES
-(1, 3, 'Иванов Иван Иванович', 'admin@gmail.com', '$2y$10$2JZkDrjAmyy998bsHwzqyO/UhKeEajoqKYoeGHsVSV6x5YYEUUife', 'default.jpg', '2022-09-09 10:18:40'),
-(2, 2, 'Петров Пётр Петрович', 'manager@gmail.com', '$2y$10$bWMB8bpsgCUG639YPC3sU.hNotseZsbZGvuoNqMqT7810oIE5sVC.', '2.jpg', '2022-09-09 10:18:43'),
-(3, 1, 'Сидоров Сидор Сидорович', 'user@gmail.com', '$2y$10$XtIeUhwA6nLBtaCTzJLKX.YZDl4XZSJ2I7C7XEaF8G4AZ2skpKc.a', '3.jpg', '2022-09-09 10:18:45'),
-(4, 1, 'Васильев Василий Васильевич', 'vasiliev@gmail.com', '$2y$10$bZbHhWIfGNUA9UHNe0HNc.6XK9J3e2Y56v0FOU1IkQo.oy9yc29Zy', '', '2022-09-09 10:18:47'),
-(5, 1, 'Андреев Андрей Андреевич', 'andreev@gmail.com', '$2y$10$7vWGrFJf35Hj/o/5FL.90uLvhctur1cuXyWsbRJCTLFB.qBnGho7W', '', '2022-09-09 10:18:49'),
-(6, 1, 'Александров Александр Александрович', 'aleksandrov@gmail.com', '$2y$10$u1Paw83vBxpxwkrboOo80upkk3RV8vTm.mfGtZle8VscKvZUVs/d.', '', '2022-09-09 10:18:50'),
-(7, 1, 'Любаев Любим Любимович', 'lyubaev@gmail.com', '$2y$10$LPU0n1/UawbLhZxVkj.AZePDkTu8lK69JuXIKqddSDcbMP./vZBda', '', '2022-09-09 10:18:51'),
-(17, 1, 'Ю', 'yu@gmail.com', '$2y$10$KuzhWXEGcovqKmXZ4fdWHekuLBNEimAxosP4Ucskxd/sKe12/k5cC', '1.jpg', '2022-09-09 10:18:54'),
-(23, 1, 'Ива', 'sidorov@gmail.com', '$2y$10$junTauKtEnk77uSAQh.OGuPuvORvBV5zE4ONeRMY4TRky1oIv6Mj2', 'default.jpg', '2022-09-09 10:18:55'),
-(24, 1, 'Tem', 'ivano@gmail.com', '$2y$10$NQhPG1yZhfwspqtFbdGPgupw2vOEX1CSpHg2Ri3RG5N87o6.UAzBi', 'default.jpg', '2022-11-21 10:26:34'),
-(25, 1, 'Ар', 'ivan@gmail.com', '$2y$10$iV8jZotdLaqj011JbNPIru0Zv5ECd1iRJhI5gh2ikktIafTZNAkQC', 'default.jpg', '2022-11-21 12:51:39'),
-(26, 1, 'Arte', 'asd@gmail.com', '$2y$10$zngfa6hEIIO6snUKzPbL6OzSdK9ohlEcLee8xqV6JxsVzjLdwBsZO', 'default.jpg', '2022-11-23 11:20:00'),
-(27, 1, 'Arte', 'asd2@gmail.com', '$2y$10$/ddIm1Q8NaCT.qAXm5scEeVO8d5uFAYZYfvpyUw5UanQ/nAlBvRbm', 'default.jpg', '2022-11-23 11:21:51'),
-(28, 1, 'Arte', 'asd3@gmail.com', '$2y$10$3pFA3RX35h6slX/npfXwn.XK9u8X/sD522G54NxZ0efmMXJVJtEeO', 'default.jpg', '2022-11-23 11:22:25'),
-(29, 1, 'D', 'Emai@m.ru', '$2y$10$Q7uJA5FBlWQdtz9L1oe0R.6cjWF.pxO2vQUBuRWoaWkJs.3rngzma', 'default.jpg', '2022-11-23 11:30:57'),
-(40, 1, 'ert', 'ivanove@gmail.com', '$2y$10$Te6Nm4Ib8ZmAO5IRBJb7lOFDlTYBqx1CLp1warurzRNGOsSJekeZK', 'default.jpg', '2022-11-23 17:34:50'),
-(41, 1, 'Кolyan', 'ko@gmail.com', '$2y$10$oaFTGoqjk8yDC91nBSCyO.f.0rLHsMZ0nbVlpXvF0AgeK3rrOUEka', 'default.jpg', '2022-11-24 07:28:16'),
-(42, 1, 'Ivva', 'iva@gmail.com', '$2y$10$cXRJanzFlDgD6FS1VL0doetKaYw5ZdjzNO6L7uZdolkkAUhCCiUQK', 'default.jpg', '2022-11-24 19:09:03'),
-(43, 1, 'варвар', 'ivanovk@gmail.com', '$2y$10$GNrsPMXumZkyhVTSBbpndOwLglPh.eYkNT34/11w.h7Egiul1p9HW', 'default.jpg', '2022-11-27 14:46:05');
+(1, 8, 'Иванов Иван Иванович', 'admin@gmail.com', '$2y$10$2JZkDrjAmyy998bsHwzqyO/UhKeEajoqKYoeGHsVSV6x5YYEUUife', 'default.jpg', '2022-09-09 10:18:40'),
+(2, 4, 'Петров Пётр Петрович', 'manager@gmail.com', '$2y$10$bWMB8bpsgCUG639YPC3sU.hNotseZsbZGvuoNqMqT7810oIE5sVC.', '2.jpg', '2022-09-09 10:18:43'),
+(3, 2, 'Сидоров Сидор Сидорович', 'user@gmail.com', '$2y$10$XtIeUhwA6nLBtaCTzJLKX.YZDl4XZSJ2I7C7XEaF8G4AZ2skpKc.a', '3.jpg', '2022-09-09 10:18:45'),
+(4, 2, 'Васильев Василий Васильевич', 'vasiliev@gmail.com', '$2y$10$bZbHhWIfGNUA9UHNe0HNc.6XK9J3e2Y56v0FOU1IkQo.oy9yc29Zy', '', '2022-09-09 10:18:47'),
+(5, 2, 'Андреев Андрей Андреевич', 'andreev@gmail.com', '$2y$10$7vWGrFJf35Hj/o/5FL.90uLvhctur1cuXyWsbRJCTLFB.qBnGho7W', '', '2022-09-09 10:18:49'),
+(6, 2, 'Александров Александр Александрович', 'aleksandrov@gmail.com', '$2y$10$u1Paw83vBxpxwkrboOo80upkk3RV8vTm.mfGtZle8VscKvZUVs/d.', '', '2022-09-09 10:18:50'),
+(7, 2, 'Любаев Любим Любимович', 'lyubaev@gmail.com', '$2y$10$LPU0n1/UawbLhZxVkj.AZePDkTu8lK69JuXIKqddSDcbMP./vZBda', '', '2022-09-09 10:18:51'),
+(17, 2, 'Ю', 'yu@gmail.com', '$2y$10$KuzhWXEGcovqKmXZ4fdWHekuLBNEimAxosP4Ucskxd/sKe12/k5cC', '1.jpg', '2022-09-09 10:18:54'),
+(23, 2, 'Ива', 'sidorov@gmail.com', '$2y$10$junTauKtEnk77uSAQh.OGuPuvORvBV5zE4ONeRMY4TRky1oIv6Mj2', 'default.jpg', '2022-09-09 10:18:55'),
+(24, 2, 'Tem', 'ivano@gmail.com', '$2y$10$NQhPG1yZhfwspqtFbdGPgupw2vOEX1CSpHg2Ri3RG5N87o6.UAzBi', 'default.jpg', '2022-11-21 10:26:34'),
+(25, 2, 'Ар', 'ivan@gmail.com', '$2y$10$iV8jZotdLaqj011JbNPIru0Zv5ECd1iRJhI5gh2ikktIafTZNAkQC', 'default.jpg', '2022-11-21 12:51:39'),
+(26, 2, 'Arte', 'asd@gmail.com', '$2y$10$zngfa6hEIIO6snUKzPbL6OzSdK9ohlEcLee8xqV6JxsVzjLdwBsZO', 'default.jpg', '2022-11-23 11:20:00'),
+(27, 2, 'Arte', 'asd2@gmail.com', '$2y$10$/ddIm1Q8NaCT.qAXm5scEeVO8d5uFAYZYfvpyUw5UanQ/nAlBvRbm', 'default.jpg', '2022-11-23 11:21:51'),
+(28, 2, 'Arte', 'asd3@gmail.com', '$2y$10$3pFA3RX35h6slX/npfXwn.XK9u8X/sD522G54NxZ0efmMXJVJtEeO', 'default.jpg', '2022-11-23 11:22:25'),
+(29, 2, 'D', 'Emai@m.ru', '$2y$10$Q7uJA5FBlWQdtz9L1oe0R.6cjWF.pxO2vQUBuRWoaWkJs.3rngzma', 'default.jpg', '2022-11-23 11:30:57'),
+(40, 2, 'ert', 'ivanove@gmail.com', '$2y$10$Te6Nm4Ib8ZmAO5IRBJb7lOFDlTYBqx1CLp1warurzRNGOsSJekeZK', 'default.jpg', '2022-11-23 17:34:50'),
+(41, 2, 'Кolyan', 'ko@gmail.com', '$2y$10$oaFTGoqjk8yDC91nBSCyO.f.0rLHsMZ0nbVlpXvF0AgeK3rrOUEka', 'default.jpg', '2022-11-24 07:28:16'),
+(42, 2, 'Ivva', 'iva@gmail.com', '$2y$10$cXRJanzFlDgD6FS1VL0doetKaYw5ZdjzNO6L7uZdolkkAUhCCiUQK', 'default.jpg', '2022-11-24 19:09:03'),
+(43, 2, 'варвар', 'ivanovk@gmail.com', '$2y$10$GNrsPMXumZkyhVTSBbpndOwLglPh.eYkNT34/11w.h7Egiul1p9HW', 'default.jpg', '2022-11-27 14:46:05');
 
 --
 -- Индексы сохранённых таблиц
@@ -213,7 +212,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор комментария', AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор комментария', AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT для таблицы `posts`
