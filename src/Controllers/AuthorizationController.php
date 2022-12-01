@@ -98,4 +98,13 @@ class AuthorizationController
         // Сообщение
         throw new Exception('Поздравляем! Вы успешно авторизировались!', FORM_SUCCESS);
     }
+
+    // Страница "Разавторизация"
+    public function logOut()
+    {
+        // Создание экземпляра сессии
+        $session = new Session();
+        // Остановить сессию
+        $session->stop();
+    }
 }

@@ -38,6 +38,8 @@ $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 $router->get('authorization', [AuthorizationController::class, 'authorization']);
 // Страница "Авторизация - отправка формы"
 $router->post('authorization', [AuthorizationController::class, 'authorization']);
+// Страница "Разавторизация"
+$router->get('logout', [AuthorizationController::class, 'logOut']);
 // Страница "Регистрация"
 $router->get('registration', [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"

@@ -65,7 +65,7 @@ final class Session
     }
 
     // Остановка сессии
-    private function stop()
+    public function stop()
     {
         // Удаление временного хранилища на сервере
         session_destroy();
