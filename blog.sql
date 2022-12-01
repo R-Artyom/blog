@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 01 2022 г., 08:56
+-- Время создания: Дек 01 2022 г., 09:28
 -- Версия сервера: 5.7.38
 -- Версия PHP: 7.4.29
 
@@ -134,7 +134,7 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL COMMENT 'Уникальный идентификатор пользователя',
-  `role_id` int(11) NOT NULL DEFAULT '1' COMMENT 'Роль пользователя на сайте',
+  `role_id` int(11) NOT NULL DEFAULT '2' COMMENT 'Роль пользователя на сайте',
   `name` varchar(255) NOT NULL COMMENT 'Имя пользователя',
   `email` varchar(255) NOT NULL COMMENT 'Электронная почта (логин)',
   `password` varchar(255) NOT NULL COMMENT 'Пароль (в зашифрованном виде)',
@@ -165,7 +165,8 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `img_name`, `
 (40, 2, 'ert', 'ivanove@gmail.com', '$2y$10$Te6Nm4Ib8ZmAO5IRBJb7lOFDlTYBqx1CLp1warurzRNGOsSJekeZK', 'default.jpg', '2022-11-23 17:34:50'),
 (41, 2, 'Кolyan', 'ko@gmail.com', '$2y$10$oaFTGoqjk8yDC91nBSCyO.f.0rLHsMZ0nbVlpXvF0AgeK3rrOUEka', 'default.jpg', '2022-11-24 07:28:16'),
 (42, 2, 'Ivva', 'iva@gmail.com', '$2y$10$cXRJanzFlDgD6FS1VL0doetKaYw5ZdjzNO6L7uZdolkkAUhCCiUQK', 'default.jpg', '2022-11-24 19:09:03'),
-(43, 2, 'варвар', 'ivanovk@gmail.com', '$2y$10$GNrsPMXumZkyhVTSBbpndOwLglPh.eYkNT34/11w.h7Egiul1p9HW', 'default.jpg', '2022-11-27 14:46:05');
+(43, 2, 'варвар', 'ivanovk@gmail.com', '$2y$10$GNrsPMXumZkyhVTSBbpndOwLglPh.eYkNT34/11w.h7Egiul1p9HW', 'default.jpg', '2022-11-27 14:46:05'),
+(49, 2, 'Ян', 'yan@mail.com', '$2y$10$2JKhpSkZ.IhwhInevQoqZOajXrqmD94OvUF8oZ/.f6wTCsTITu/d.', 'default.jpg', '2022-12-01 09:23:24');
 
 --
 -- Индексы сохранённых таблиц
@@ -230,7 +231,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор пользователя', AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор пользователя', AUTO_INCREMENT=51;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

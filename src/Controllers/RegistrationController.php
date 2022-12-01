@@ -5,6 +5,7 @@ namespace App\Controllers;
 // Импорт необходимых классов
 use App\Exception\ApplicationException;
 use App\Models\User;
+use App\Session;
 use App\View\View;
 use Exception;
 use RuntimeException;
@@ -103,6 +104,10 @@ class RegistrationController
             'password' => password_hash($data['password'], PASSWORD_DEFAULT),
             'img_name' => 'default.jpg',
         ]);
+        // Создание экземпляра сессии
+        $session = new Session();
+        // Старт сессии
+        $session->start($data['email']);
         throw new Exception('Поздравляем! Вы успешно зарегистрировались!', FORM_SUCCESS);
     }
 }
