@@ -29,6 +29,7 @@ class View implements Renderable
         // в качестве значений этих переменных
         extract($this->data);
         // Данные о пользователе
+        // TODO Вместо запроса одного параметра надо запрашивать массив и делать extract
         $userName = Profile::getInstance()->get('name');
         $imgName = Profile::getInstance()->get('img_name');
         $userStatus = Profile::getInstance()->get('role_id') ?? UNREG;
