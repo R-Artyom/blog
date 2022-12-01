@@ -18,7 +18,7 @@ const ROLES = [
 ];
 
 /**
- * Массив "Права доступа к страницам сайта"
+ * Массив "Права доступа к страницам сайта" (к файлам сайта)
  */
 const ACCESS_TO_PAGE = [
     'about'         => ALL, // О нас
@@ -56,3 +56,51 @@ const FORM_REPEAT_PASSWORD = 4;
 const FORM_TERMS = 5;
 // 'Успешная регистрация'
 const FORM_SUCCESS = 6;
+
+/**
+ * Выпадающее меню профиля зарегистрированного пользователя
+ */
+const DROPDOWN_MENU = [
+    [
+        'title' => 'Профиль', // Название элемента списка
+        'path' => '/profile', // Ссылка на страницу, куда ведет элемент списка
+        'icon' => '<i class="bi bi-person"></i>', // Иконка
+        'access' => USER | MANAGER | ADMIN, // Разрешение доступа пользователей к странице
+    ],
+    [
+        'title' => 'Статьи',
+        'path' => '/admin/posts',
+        'icon' => '<i class="bi bi-book"></i>',
+        'access' => MANAGER | ADMIN,
+    ],
+    [
+        'title' => 'Комментарии',
+        'path' => '/admin/comments',
+        'icon' => '<i class="bi bi-chat-square-text"></i>',
+        'access' => MANAGER | ADMIN,
+    ],
+    [
+        'title' => 'Пользователи',
+        'path' => '/admin/users',
+        'icon' => '<i class="bi bi-people"></i>',
+        'access' => ADMIN,
+    ],
+    [
+        'title' => 'Статические страницы',
+        'path' => '/admin/static',
+        'icon' => '<i class="bi bi-filetype-html"></i>',
+        'access' => MANAGER | ADMIN,
+    ],
+    [
+        'title' => 'Настройки',
+        'path' => '/settings',
+        'icon' => '<i class="bi bi-gear"></i>',
+        'access' => MANAGER | ADMIN,
+    ],
+    [
+        'title' => 'Выйти',
+        'path' => '/logout',
+        'icon' => '<i class="bi bi-box-arrow-right"></i>',
+        'access' => USER | MANAGER | ADMIN,
+    ],
+];

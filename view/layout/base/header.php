@@ -41,48 +41,17 @@
                             <span class=""><?=$userName?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-style-1 dropdown-menu-end rounded-0">
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="#">
-                                    <i class="bi bi-person"></i>
-                                    Профиль (<?=ROLES[$userStatus]?>)
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="#">
-                                    <i class="bi bi-book"></i>
-                                    Статьи
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="#">
-                                    <i class="bi bi-chat-square-text"></i>
-                                    Комментарии
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="#">
-                                    <i class="bi bi-people"></i>
-                                    Пользователи
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="#">
-                                    <i class="bi bi-filetype-html"></i>
-                                    Статические страницы
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="#">
-                                    <i class="bi bi-gear"></i>
-                                    Настройки
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item dropdown-item-style-1" href="/logout">
-                                    <i class="bi bi-box-arrow-right"></i>
-                                    Выйти
-                                </a>
-                            </li>
+                            <?php foreach (DROPDOWN_MENU as $value):?>
+                                <?php if (($userStatus & $value['access']) > 0):?>
+                                    <li>
+                                        <a class="dropdown-item dropdown-item-style-1" href="<?=$value['path']?>">
+                                            <?=$value['icon']?>
+                                            <?=$value['title']?>
+                                            <?=$value['title'] === 'Профиль' ? '(' . ROLES[$userStatus] . ')': ''?>
+                                        </a>
+                                    </li>
+                                <?php endif?>
+                            <?php endforeach?>
 <!--                            <li><a class="dropdown-item active" href="#">Активная ссылка</a></li>-->
 <!--                            <li><a class="dropdown-item disabled" href="#">Отключенная ссылка</a></li>-->
                         </ul>
