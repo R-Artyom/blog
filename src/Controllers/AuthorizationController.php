@@ -23,7 +23,7 @@ class AuthorizationController
             $result['email'] = htmlspecialchars($_COOKIE['login']);
         }
         // Заголовок страницы
-        $result['title'] = 'Регистрация';
+        $result['title'] = 'Авторизация';
         // Возврат объекта - шаблона страницы "Авторизация"
         return new View('authorization', $result);
     }
