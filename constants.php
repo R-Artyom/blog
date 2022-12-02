@@ -80,6 +80,8 @@ const FORM_REPEAT_PASSWORD = 4;
 const FORM_TERMS = 5;
 // 'Успешная регистрация'
 const FORM_SUCCESS = 6;
+// Поле 'Text'
+const FORM_TEXT = 7;
 
 /**
  * Выпадающее меню профиля зарегистрированного пользователя

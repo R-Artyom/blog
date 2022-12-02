@@ -3,21 +3,24 @@
 namespace App\Controllers;
 
 // Импорт необходимых классов
+use App\Exception\ApplicationException;
 use App\Exception\NotFoundException;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Profile;
 use App\View\View;
+use Exception;
+use RuntimeException;
 
 class PostController
 {
     // Страница "Детальная страница статьи"
     public function posts($idPost): View
     {
-        // Идентификатор пользователя
-        $userId = Profile::getInstance()->get('id');
-        // Сообщение, в случае добавления комментария
-        $message = $this->addComment();
+        // Данные пользователя
+        $result['user'] = Profile::getInstance()->getAll();
+        // Работа с формой "Добавление комментария"
+        $result['form'] = $this->addComment();
         // Массив объектов таблицы posts модели Post
         $post = Post::where('id', $idPost)->get();
         // Если в БД не найдено ни одной статьи с указанным id
@@ -26,7 +29,7 @@ class PostController
             throw new NotFoundException('Страница не найдена', 404);
         }
         // Если это незарегистрированный пользователь
-        if ($userId === null) {
+        if ($result['user'] === null) {
             // Запрос комментариев пользователей к статье с идентификатором id.
             // Только отмодерированные комментарии любого пользователя.
             // Из таблицы users берутся имя пользователя, дата регистрации и название файла-аватарки.
@@ -43,50 +46,85 @@ class PostController
             // Из таблицы users берутся имя пользователя, дата регистрации и название файла-аватарки.
             // Сортировка комментариев по дате, сначала новые.
             $comments = Comment:: where([['post_id', $idPost], ['active', true]])
-                ->orWhere([['post_id', $idPost], ['user_id', $userId], ['active', false]])
+                ->orWhere([['post_id', $idPost], ['user_id', $result['user']['id']], ['active', false]])
                 ->leftJoin('users', 'comments.user_id', '=', 'users.id')
                 ->select('comments.*', 'users.name as user_name', 'users.created_at as user_created_at', 'users.img_name')
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
+        // Заголовок страницы
+        $result['title'] = 'Статьи';
+        // Статья
+        $result['post'] = $post[0];
+        // Комментарии
+        $result['comments'] = $comments;
         // Возврат объекта - шаблона страницы "Детальная страница статьи"
-        return new View('posts', ['title' => 'Статьи', 'post' => $post[0], 'comments' => $comments, 'message' => $message]);
+        return new View('posts', $result);
     }
 
     // Добавление комментария на странице "Детальная страница статьи"
     private function addComment()
     {
-        // Если комментарий был отправлен
-        if (!empty($_POST))
-        {
-            // Если это незарегистрированный пользователь
-            if (Profile::getInstance()->get('id') === null) {
-                $message['status'] = 'warning';
-                $message['text'] =
-                    'Внимание!!! Отправлять комментарии могут только зарегистрированные пользователи.
+        // Если форма была отправлена
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Копирование всех непустых данных формы
+            foreach ($_POST as $key => $value) {
+                if (isset($value) && $value !== '') {
+                    $result[$key] = htmlspecialchars($value);
+                }
+            }
+            try {
+                // Валидация полей формы регистрации
+                $this->validateForm($result);
+                // Сохранение данных пользователя в базе
+                $this->saveData($result);
+                // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
+            } catch (RuntimeException $e) {
+                // Вывод на страницу ошибки при работе с базой данных
+                throw new ApplicationException("Ошибка базы данных");
+                // Исключения формы регистрации
+            } catch (Exception $e) {
+                // Сообщение выброшенного исключения
+                $result['message'] = $e->getMessage();
+                // Код выброшенного исключения
+                $result['error'] = $e->getCode();
+            }
+            // Если форма не отправлялась
+        } else {
+            $result['error'] = FORM_NOT_SENT;
+        }
+        return $result;
+    }
+
+    // Валидация полей формы
+    private function validateForm(array $data)
+    {
+        // Если это незарегистрированный пользователь
+        if (Profile::getInstance()->get('id') === null) {
+            throw new Exception(
+                'Внимание!!! Отправлять комментарии могут только зарегистрированные пользователи.
                     <a class="link-style-1" href="/authorization">Войдите</a>
                     или <a class="link-style-1" href="/registration">зарегистрируйтесь</a>,
-                    чтобы у вас появилась такая возможность.';
-                return $message;
-            }
-            // Если поле 'text' не заполнено
-            if (empty($_POST['text'])) {
-                $message['status'] = 'warning';
-                $message['text'] = 'Внимание!!! Комментарий не может быть пустым';
-                return $message;
-            }
-            // Если поле 'text' заполнено
-            Comment::insert([
-                'text' => $_POST['text'],
-                'post_id' => $_POST['post-id'],
-                'user_id' => Profile::getInstance()->get('id'),
-                // Для модераторов и администраторов комментарий не требует проверки
-                'active' => Profile::getInstance()->get('role_id') > USER ? COMMENT_ACTIVE : COMMENT_NO_ACTIVE,
-            ]);
-            $message['status'] = 'success';
-            $message['text'] = 'Комментарий успешно отправлен';
-            return $message;
+                    чтобы у вас появилась такая возможность.',
+                FORM_TEXT
+            );
         }
-        return '';
+        // Если поле 'Text' не заполнено
+        if (!(isset($data['text']) && $data['text'] !== '')) {
+            throw new Exception('Внимание!!! Комментарий не может быть пустым', FORM_TEXT);
+        }
+    }
+
+    // Сохранение данных пользователя в базе
+    private function saveData(array $data)
+    {
+        Comment::insert([
+            'text' => $data['text'],
+            'post_id' => $data['post-id'],
+            'user_id' => $data['user-id'],
+            // Для модераторов и администраторов комментарий не требует проверки
+            'active' => $data['active'],
+        ]);
+        throw new Exception('Комментарий успешно отправлен!', FORM_SUCCESS);
     }
 }

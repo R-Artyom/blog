@@ -15,17 +15,15 @@
         <div class="row mb-3 text-left h4">Комментарии (<?=count($comments)?>)</div>
 
         <div class="row mb-3 g-0">
-            <div class="col-auto me-4 mb-4 avatar-thumbnail">
-                <img class="rounded-3 avatar-thumbnail" src="<?=PATH_IMG_USERS . '/' . ''?>" alt="ava">
-            </div>
             <form class="col" method="post" action="<?=PATH_POSTS . '/' . $post->id?>">
                 <label for="message" class="form-label h4" hidden>Оставить комментарий:</label>
-                <textarea class="mb-2 form-control form-style-3 rounded-0 shadow-sm <?= !empty($message) ? 'focus' : ''?> " name="text" id="message" rows="5" placeholder="Введите ваш комментарий"></textarea>
+                <textarea class="mb-2 form-control form-style-3 rounded-0 shadow-sm <?= $form['error'] === FORM_TEXT ? 'focus' : ''?> " name="text" id="message" rows="5" placeholder="Введите ваш комментарий"></textarea>
                 <input type="text" name="post-id" value="<?=$post->id?>" hidden>
-                <input type="text" name="user-id" value="<?=$post->id?>" hidden>
-                <?php if (!empty($message)):?>
-                    <div class="alert alert-<?=$message['status']?> alert-dismissible fade show rounded-0" role="alert" tabindex="0" >
-                        <?=$message['text']?>
+                <input type="text" name="user-id" value="<?=$user['id']?>" hidden>
+                <input type="text" name="active" value="<?=$user['role_id'] > USER ? COMMENT_ACTIVE : COMMENT_NO_ACTIVE?>" hidden>
+                <?php if (isset($form['message'])):?>
+                    <div class="alert alert-<?= isset($form['error']) && $form['error'] === FORM_SUCCESS ? 'success' : 'danger'?>  alert-dismissible fade show rounded-0" role="alert" tabindex="0" >
+                        <?=$form['message']?>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
                     </div>
                 <?php endif?>
