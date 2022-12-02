@@ -30,7 +30,7 @@ class RegistrationController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Копирование всех непустых данных формы
             foreach ($_POST as $key => $value) {
-                if (!empty($value)) {
+                if (isset($value) && $value !== '') {
                     $result[$key] = htmlspecialchars($value);
                 }
             }
@@ -61,11 +61,11 @@ class RegistrationController
     private function validateForm(array $data)
     {
         // Если поле 'Имя' не заполнено
-        if (empty($data['name'])) {
+        if (!(isset($data['name']) && $data['name'] !== '')) {
             throw new Exception('Введите имя', FORM_NAME);
         }
         // Если поле 'Email' не заполнено
-        if (empty($data['email'])) {
+        if (!(isset($data['email']) && $data['email'] !== '')) {
             throw new Exception('Введите email', FORM_EMAIL);
         }
         // Если поле 'Email' не соответствует формату
@@ -73,11 +73,11 @@ class RegistrationController
             throw new Exception('Email не соответствует формату', FORM_EMAIL);
         }
         // Если поле 'Пароль' не заполнено
-        if (empty($data['password'])) {
+        if (!(isset($data['password']) && $data['password'] !== '')) {
             throw new Exception('Введите пароль', FORM_PASSWORD);
         }
         // Если поле 'Повторите пароль' не заполнено
-        if (empty($data['repeatPassword'])) {
+        if (!(isset($data['repeatPassword']) && $data['repeatPassword'] !== '')) {
             throw new Exception('Подтвердите пароль', FORM_REPEAT_PASSWORD);
         }
         // Если пароли не совпадают
@@ -85,7 +85,7 @@ class RegistrationController
             throw new Exception('Пароли не совпадают', FORM_REPEAT_PASSWORD);
         }
         // Если чекбокс 'Правила сайта' не установлен
-        if (empty($data['terms'])) {
+        if (!(isset($data['terms']) && $data['terms'] !== '')) {
             throw new Exception('Необходимо согласиться с правилами сайта', FORM_TERMS);
         }
         // Если в БД уже есть пользователь с таким email

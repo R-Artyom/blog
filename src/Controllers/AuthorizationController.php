@@ -35,7 +35,7 @@ class AuthorizationController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Копирование всех непустых данных формы
             foreach ($_POST as $key => $value) {
-                if (!empty($value)) {
+                if (isset($value) && $value !== '') {
                     $result[$key] = htmlspecialchars($value);
                 }
             }
@@ -66,15 +66,15 @@ class AuthorizationController
     private function validateForm(array $data)
     {
         // Если поле 'Email' не заполнено
-        if (empty($data['email'])) {
+        if (!(isset($data['email']) && $data['email'] !== '')) {
             throw new Exception('Введите email', FORM_EMAIL);
         }
         // Если поле 'Email' не соответствует формату
-        if ( filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
+        if (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
             throw new Exception('Email не соответствует формату', FORM_EMAIL);
         }
         // Если поле 'Пароль' не заполнено
-        if (empty($data['password'])) {
+        if (!(isset($data['password']) && $data['password'] !== '')) {
             throw new Exception('Введите пароль', FORM_PASSWORD);
         }
         // Поиск пользователя в базе данных
