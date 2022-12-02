@@ -77,7 +77,7 @@ final class Session
         // Удаление сессионного куки в браузере
         setcookie($this->name, '', 1, '/');
         // Перенаправление на страницу авторизации
-        header ('Location:' . '/authorization');
+        header ('Location:' . PATH_AUTHORIZATION);
         // Прерывание выполнения скрипта
         exit();
     }

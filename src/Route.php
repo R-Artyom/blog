@@ -35,7 +35,8 @@ class Route
     // Запрос текущего значения свойства $path
     public function getPath(): string
     {
-        return $this->path;
+        // Удалить символ '/' из начала и конца URL-адреса и вернуть результат
+        return trim($this->path, '/');
     }
 
     // Проверка, подходит ли текущий маршрут текущему запросу

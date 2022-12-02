@@ -9,10 +9,10 @@
                         <?=date('d-m-Y, H:i', strtotime($post->created_at))?>
                     </p>
                     <p class="mb-3"><?=$post->short_text?></p>
-                    <p><a href="/posts/<?=$post->id?>" class="stretched-link link-style-1">Читать статью</a></p>
+                    <p><a href="<?=PATH_POSTS . '/' . $post->id?>" class="stretched-link link-style-1">Читать статью</a></p>
                 </div>
                 <div class="col-auto d-none d-lg-block align-self-center">
-                    <img class="post-thumbnail-sm" src="/img/posts/<?=$post->img_name?>" alt="dots icon">
+                    <img class="post-thumbnail-sm" src="<?=PATH_IMG_POSTS . '/' . $post->img_name?>" alt="dots icon">
                 </div>
             </div>
         <?php endforeach?>

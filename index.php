@@ -25,27 +25,27 @@ $session->run();
 // Создание маршрутизатора
 $router = new Router();
 // Добавление в роутер страницы сайта "Главная" с HTTP-методом запроса GET
-$router->get('',      [HomeController::class, 'index']);
+$router->get(PATH_HOME, [HomeController::class, 'index']);
 // Добавление в роутер страницы сайта "О нас" с HTTP-методом запроса GET
-$router->get('about', [StaticPageController::class, 'about']);
+$router->get(PATH_ABOUT, [StaticPageController::class, 'about']);
 // Страница "Детальная страница статьи"
-$router->get('posts/*', [PostController::class, 'posts']);
+$router->get(PATH_POSTS . '/*', [PostController::class, 'posts']);
 // Страница "Детальная страница статьи - добавление комментария"
-$router->post('posts/*', [PostController::class, 'posts']);
+$router->post(PATH_POSTS . '/*', [PostController::class, 'posts']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
-$router->get('authorization', [AuthorizationController::class, 'authorization']);
+$router->get(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
 // Страница "Авторизация - отправка формы"
-$router->post('authorization', [AuthorizationController::class, 'authorization']);
+$router->post(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
 // Страница "Разавторизация"
-$router->get('logout', [AuthorizationController::class, 'logOut']);
+$router->get(PATH_LOGOUT, [AuthorizationController::class, 'logOut']);
 // Страница "Регистрация"
-$router->get('registration', [RegistrationController::class, 'registration']);
+$router->get(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"
-$router->post('registration', [RegistrationController::class, 'registration']);
+$router->post(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Правила пользования сайтом"
-$router->get('terms', [StaticPageController::class, 'terms']);
+$router->get(PATH_TERMS, [StaticPageController::class, 'terms']);
 
 // Создание класса приложения
 $application = new Application($router);

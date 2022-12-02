@@ -90,7 +90,7 @@ class RegistrationController
         }
         // Если в БД уже есть пользователь с таким email
         if (count(User::where('email', $data['email'])->get()) > 0) {
-            throw new Exception('Пользователь с таким email уже существует. <a class="text-danger" href="/authorization/">Войти?</a>', FORM_EMAIL);
+            throw new Exception('Пользователь с таким email уже существует. <a class="text-danger" href="/authorization">Войти?</a>', FORM_EMAIL);
         }
     }
 

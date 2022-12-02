@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2 d-flex align-items-center mb-2">
-                    <a class="navbar-brand text-white fw-bold fs-1" href="/">Blog</a>
+                    <a class="navbar-brand text-white fw-bold fs-1" href="<?=PATH_HOME?>">Blog</a>
                 </div>
                 <div class="col-4 d-flex align-items-center">
                     <form class="input-group justify-content-start">
@@ -30,14 +30,14 @@
                 <?php if (!isset($userName)):?>
                     <div class="col-6 d-flex align-items-center">
                         <div class="input-group justify-content-end">
-                            <a class="btn btn-style-1 rounded-0" href="/authorization">Войти</a>
-                            <a class="btn btn-style-1 rounded-0" href="/registration">Зарегистрироваться</a>
+                            <a class="btn btn-style-1 rounded-0" href="<?=PATH_AUTHORIZATION?>">Войти</a>
+                            <a class="btn btn-style-1 rounded-0" href="<?=PATH_REGISTRATION?>">Зарегистрироваться</a>
                         </div>
                     </div>
                 <?php else:?>
                     <div class="col-6 dropdown d-flex align-items-center justify-content-end">
                         <a class="link-style-2 dropdown-toggle" data-bs-toggle="dropdown"  href="#" role="button" aria-expanded="true">
-                            <img class="avatar-thumbnail-sm p-0 me-1" src="/img/users/<?=$imgName?>" alt="dots icon">
+                            <img class="avatar-thumbnail-sm p-0 me-1" src="<?=PATH_IMG_USERS . '/' . $imgName?>" alt="dots icon">
                             <span class=""><?=$userName?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-style-1 dropdown-menu-end rounded-0">
@@ -61,9 +61,9 @@
         </div>
         <div class="container py-2 g-2">
             <nav class="nav d-flex justify-content-start">
-                <a class="p-2 nav-link link-style-2" href="/">Главная</a>
+                <a class="p-2 nav-link link-style-2" href="<?=PATH_HOME?>">Главная</a>
                 <a class="p-2 nav-link disabled" href="#">Неактивная ссылка</a>
-                <a class="p-2 nav-link link-style-2" href="/terms">Правила пользования сайтом</a>
+                <a class="p-2 nav-link link-style-2" href="<?=PATH_TERMS?>">Правила пользования сайтом</a>
             </nav>
         </div>
     </header>

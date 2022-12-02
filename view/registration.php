@@ -4,7 +4,7 @@
             <?=$message?>
         </div>
     <?php else:?>
-        <form method="post" class="py-3 px-4 m-auto" action="/registration">
+        <form method="post" class="py-3 px-4 m-auto" action="<?=PATH_REGISTRATION?>">
             <h4 class="mb-3 text-start">Регистрация пользователя</h4>
             <div>
                 <label class="placeholder-box">
@@ -53,7 +53,7 @@
             <div class="form-check">
                 <input class="form-check-input check-style-1 <?= $error === FORM_TERMS ? 'focus' : ''?>" type="checkbox" name="terms" value="yes" id="terms" <?=isset($terms) ? 'checked="checked"' : ''?>>
                 <label class="form-check-label ms-2" for="terms">
-                    Cогласен c <a class="link-style-1" href="/terms">правилами сайта</a>
+                    Cогласен c <a class="link-style-1" href="<?=PATH_TERMS?>">правилами сайта</a>
                 </label>
             </div>
             <?php if ($error === FORM_TERMS):?>
@@ -62,7 +62,7 @@
                 <div class="mb-3"></div>
             <?php endif?>
             <button type="submit" class="btn btn-style-2 w-100 rounded-0 mb-3" name="reg" value="yes" formnovalidate>Зарегистрироваться</button>
-            <a class="link-style-1" href="/authorization">Войти</a>
+            <a class="link-style-1" href="<?=PATH_AUTHORIZATION?>">Войти</a>
         </form>
     <?php endif?>
 </div>

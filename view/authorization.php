@@ -4,7 +4,7 @@
             <?=$message?>
         </div>
     <?php else:?>
-        <form method="post" class="py-3 px-4 m-auto" action="/authorization">
+        <form method="post" class="py-3 px-4 m-auto" action="<?=PATH_AUTHORIZATION?>">
             <h4 class="mb-3 text-start">Авторизация</h4>
             <div>
                 <label class="placeholder-box">
@@ -29,7 +29,7 @@
                 <?php endif?>
             </div>
             <button type="submit" class="btn btn-style-2 w-100 rounded-0 mb-3" name="reg" value="yes" formnovalidate>Войти в личный кабинет</button>
-            <a class="link-style-1" href="/registration">Зарегистрироваться</a>
+            <a class="link-style-1" href="<?=PATH_REGISTRATION?>">Зарегистрироваться</a>
         </form>
     <?php endif?>
 </div>

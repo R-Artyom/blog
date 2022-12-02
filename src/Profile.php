@@ -42,6 +42,8 @@ class Profile
             $result = User::where('email', $_SESSION['login'])->get();
             // Сохранение данных пользователя в свойстве класса
             $this->user = $result[0];
+//            $result[0]->toArray();
+//            $a = $result[0];
         }
     }
 

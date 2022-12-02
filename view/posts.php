@@ -6,7 +6,7 @@
             <?=date('d-m-Y H:i', strtotime($post->created_at))?>
         </p>
         <p class="row mb-4 g-0 justify-content-center">
-            <img class="post-thumbnail shadow" src="/img/posts/<?=$post->img_name?>" alt="dots icon">
+            <img class="post-thumbnail shadow" src="<?=PATH_IMG_POSTS . '/' . $post->img_name?>" alt="dots icon">
         </p>
         <p class="row mb-3 g-0"><?=$post->text?></p>
     </div>
@@ -16,9 +16,9 @@
 
         <div class="row mb-3 g-0">
             <div class="col-auto me-4 mb-4 avatar-thumbnail">
-                <img class="rounded-3 avatar-thumbnail" src="/img/users/1.jpg" alt="ava">
+                <img class="rounded-3 avatar-thumbnail" src="<?=PATH_IMG_USERS . '/' . ''?>" alt="ava">
             </div>
-            <form class="col" method="post" action="/posts/<?=$post->id?>">
+            <form class="col" method="post" action="<?=PATH_POSTS . '/' . $post->id?>">
                 <label for="message" class="form-label h4" hidden>Оставить комментарий:</label>
                 <textarea class="mb-2 form-control form-style-3 rounded-0 shadow-sm <?= !empty($message) ? 'focus' : ''?> " name="text" id="message" rows="5" placeholder="Введите ваш комментарий"></textarea>
                 <input type="text" name="post-id" value="<?=$post->id?>" hidden>
@@ -39,7 +39,7 @@
             <?php foreach ($comments as $comment):?>
                 <div class="row mb-3 g-0">
                     <div class="col-auto pt-2 me-4 mb-4 avatar-thumbnail">
-                        <img class="rounded-3 avatar-thumbnail" src="/img/users/<?=$comment->img_name?>" alt="ava">
+                        <img class="rounded-3 avatar-thumbnail" src="<?=PATH_IMG_USERS . '/' . $comment->img_name?>" alt="ava">
                     </div>
                     <div class="col">
                         <div>

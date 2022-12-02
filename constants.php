@@ -1,5 +1,29 @@
 <?php
 /**
+ * Ссылки.
+ * Замечание. Если в конце ссылки ставить символ '/' (слеш), то при отправке
+ * формы метод POST превращается в GET, хотя в action формы явно указан POST
+ */
+// Аватарки пользователей
+const PATH_IMG_USERS = '/img/users';
+// Изображения к статьям
+const PATH_IMG_POSTS = '/img/posts';
+// Страница "Главная"
+const PATH_HOME = '/';
+// Страница "О нас"
+const PATH_ABOUT = '/about';
+// Страница "Детальная страница статьи"
+const PATH_POSTS = '/posts';
+// Страница "Авторизация"
+const PATH_AUTHORIZATION = '/authorization';
+// Страница "Разавторизация"
+const PATH_LOGOUT = '/logout';
+// Страница "Регистрация"
+const PATH_REGISTRATION = '/registration';
+// Страница "Правила пользования сайтом"
+const PATH_TERMS = '/terms';
+
+/**
  * Роли пользователей на сайте (в виде маски для прав доступа к страницам сайта)
  */
 const UNREG     = 0b0001; // 1 - Незарегистрированный пользователь
@@ -18,7 +42,7 @@ const ROLES = [
 ];
 
 /**
- * Массив "Права доступа к страницам сайта" (к файлам сайта)
+ * Массив "Права доступа к шаблонам сайта"
  */
 const ACCESS_TO_PAGE = [
     'about'         => ALL, // О нас
@@ -99,7 +123,7 @@ const DROPDOWN_MENU = [
     ],
     [
         'title' => 'Выйти',
-        'path' => '/logout',
+        'path' => PATH_LOGOUT,
         'icon' => '<i class="bi bi-box-arrow-right"></i>',
         'access' => USER | MANAGER | ADMIN,
     ],
