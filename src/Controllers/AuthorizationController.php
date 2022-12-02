@@ -16,11 +16,11 @@ class AuthorizationController
     public function authorization(): View
     {
         // Авторизация пользователя, если требуется
-        $result = $this->authUser();
+        $result['form'] = $this->authUser();
         // Если форма не отправлялась и существует куки 'login'
-        if ($result['error'] === FORM_NOT_SENT && isset($_COOKIE['login'])) {
+        if ($result['form']['error'] === FORM_NOT_SENT && isset($_COOKIE['login'])) {
             // Автозаполнение поля 'email'
-            $result['email'] = htmlspecialchars($_COOKIE['login']);
+            $result['form']['email'] = htmlspecialchars($_COOKIE['login']);
         }
         // Заголовок страницы
         $result['title'] = 'Авторизация';

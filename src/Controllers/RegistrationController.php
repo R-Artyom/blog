@@ -16,7 +16,7 @@ class RegistrationController
     public function registration(): View
     {
         // Регистрация пользователя, если требуется
-        $result = $this->addUser();
+        $result['form'] = $this->addUser();
         // Заголовок страницы
         $result['title'] = 'Регистрация';
         // Возврат объекта - шаблона страницы "Регистрация"
