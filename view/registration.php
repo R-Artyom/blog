@@ -53,7 +53,7 @@
             <div class="form-check">
                 <input class="form-check-input check-style-1 <?= $error === FORM_TERMS ? 'focus' : ''?>" type="checkbox" name="terms" value="yes" id="terms" <?=isset($terms) ? 'checked="checked"' : ''?>>
                 <label class="form-check-label ms-2" for="terms">
-                    Cогласен c <a class="link-style-1" href="<?=PATH_TERMS?>">правилами сайта</a>
+                    Согласен c <a class="link-style-1" href="<?=PATH_TERMS?>">правилами сайта</a>
                 </label>
             </div>
             <?php if ($error === FORM_TERMS):?>
