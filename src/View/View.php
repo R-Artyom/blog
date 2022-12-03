@@ -34,7 +34,7 @@ class View implements Renderable
         $imgName = Profile::getInstance()->get('img_name');
         $userStatus = Profile::getInstance()->get('role_id') ?? UNREG;
         // Если это страница с информацией об успешной отправке формы
-        if (isset($error) && ($error !== FORM_SUCCESS)) {
+        if (isset($form['error']) && ($form['error'] !== FORM_SUCCESS)) {
             // Проверка прав доступа пользователя к странице сайта
             if (($userStatus & ACCESS_TO_PAGE[$this->view]) === 0) {
                 // Такой страницы не существует
