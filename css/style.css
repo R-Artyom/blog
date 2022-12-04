@@ -48,7 +48,15 @@ body {
     object-fit: cover;
 }
 
-/* Малый эских изображения аватарки */
+/* Большой эскиз изображения аватарки */
+.avatar-thumbnail-lg {
+    width: 200px;
+    height: 200px;
+    background: white;
+    object-fit: cover;
+}
+
+/* Малый эскиз изображения аватарки */
 .avatar-thumbnail-sm {
     width: 45px;
     height: 45px;
@@ -60,6 +68,11 @@ body {
 /* Эскиз формы комментария */
 .form-thumbnail {
     width: 400px;
+}
+
+/* Эскиз профиля пользователя */
+.profile-thumbnail {
+    width: 800px;
 }
 
 /* Отрицательные поля */

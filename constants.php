@@ -14,6 +14,10 @@ const PATH_HOME = '/';
 const PATH_ABOUT = '/about';
 // Страница "Детальная страница статьи"
 const PATH_POSTS = '/posts';
+// Страница "Профиль пользователя"
+const PATH_PROFILE = '/profile';
+// Страница "Редактирование профиля пользователя"
+const PATH_PROFILE_EDIT = '/profile/edit';
 // Страница "Авторизация"
 const PATH_AUTHORIZATION = '/authorization';
 // Страница "Разавторизация"
@@ -30,6 +34,7 @@ const UNREG     = 0b0001; // 1 - Незарегистрированный пол
 const USER      = 0b0010; // 2 - Зарегистрированный пользователь
 const MANAGER   = 0b0100; // 4 - Контент-менеджер
 const ADMIN     = 0b1000; // 8 - Администратор
+const REG       = 0b1110; // 14 - Любой зарегистрированный
 const ALL       = 0b1111; // 15 - Любой пользователь
 
 /**
@@ -49,6 +54,7 @@ const ACCESS_TO_PAGE = [
     'authorization' => UNREG, // Авторизация
     'homepage'      => ALL, // Главнаая
     'posts'         => ALL, // Детальная страница статьи
+    'profile'       => REG, // Профиль пользователя
     'registration'  => UNREG, // Регистрация
     'terms'         => ALL, // Правила пользования сайтом
     'errors/404'    => ALL, // Страница не найдена
@@ -89,7 +95,7 @@ const FORM_TEXT = 7;
 const DROPDOWN_MENU = [
     [
         'title' => 'Профиль', // Название элемента списка
-        'path' => '/profile', // Ссылка на страницу, куда ведет элемент списка
+        'path' => PATH_PROFILE, // Ссылка на страницу, куда ведет элемент списка
         'icon' => '<i class="bi bi-person"></i>', // Иконка
         'access' => USER | MANAGER | ADMIN, // Разрешение доступа пользователей к странице
     ],

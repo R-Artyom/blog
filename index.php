@@ -5,6 +5,7 @@ use App\Application;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
+use App\Controllers\ProfileController;
 use App\Controllers\RegistrationController;
 use App\Controllers\StaticPageController;
 use App\Router;
@@ -32,6 +33,8 @@ $router->get(PATH_ABOUT, [StaticPageController::class, 'about']);
 $router->get(PATH_POSTS . '/*', [PostController::class, 'posts']);
 // Страница "Детальная страница статьи - добавление комментария"
 $router->post(PATH_POSTS . '/*', [PostController::class, 'posts']);
+// Страница "Профиль пользователя"
+$router->get(PATH_PROFILE, [ProfileController::class, 'profile']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
