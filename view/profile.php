@@ -17,7 +17,7 @@
         <strong>О себе:</strong> <?=$user['about_me']?>
     </p>
     <p class="mb-3">
-        <strong>Подписка:</strong> <?=$user['subscription'] === 1 ? 'Подписан' : 'Не подписан'?>
+        <strong>Подписка:</strong> <?=$user['subscription'] === ACTIVE ? 'Подписан' : 'Не подписан'?>
     </p>
     <hr>
     <a class="link-style-1 mb-2" href="<?=PATH_PROFILE_EDIT?>">

@@ -62,12 +62,20 @@ const ACCESS_TO_PAGE = [
 ];
 
 /**
+ * Признак активности в базе данных
+ */
+// Неактивен
+const NO_ACTIVE = 0;
+// Активен
+const ACTIVE = 1;
+
+/**
  * Признак активности комментария
  */
 // Комментарий не прошел модерацию
-const COMMENT_NO_ACTIVE = 0;
+const COMMENT_NO_ACTIVE = NO_ACTIVE;
 // Комментарий прошел модерацию
-const COMMENT_ACTIVE = 1;
+const COMMENT_ACTIVE = ACTIVE;
 
 /**
  * Коды исключения при работе с формами
