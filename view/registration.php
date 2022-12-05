@@ -8,7 +8,7 @@
             <h4 class="mb-3 text-start">Регистрация пользователя</h4>
             <div>
                 <label class="placeholder-box">
-                    <input type="text" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_NAME ? 'focus' : ''?>" name="name" <?=isset($form['name']) ? 'value=' . $form['name'] : ''?> required>
+                    <input type="text" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_NAME ? 'focus' : ''?>" name="name" value="<?= $form['name'] ?? ''?>" required>
                     <span class="placeholder-text">Введите ваше имя <strong class="text-danger">*</strong></span>
                 </label>
                 <?php if ($form['error'] === FORM_NAME):?>
@@ -19,7 +19,7 @@
             </div>
             <div>
                 <label class="placeholder-box">
-                    <input type="text" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_EMAIL ? 'focus' : ''?>" name="email" <?=isset($form['email']) ? 'value=' . $form['email'] : ''?> required>
+                    <input type="text" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_EMAIL ? 'focus' : ''?>" name="email" value="<?= $form['email'] ?? ''?>" required>
                     <span class="placeholder-text">Введите ваш email <strong class="text-danger">*</strong></span>
                 </label>
                 <?php if ($form['error'] === FORM_EMAIL):?>
@@ -30,7 +30,7 @@
             </div>
             <div>
                 <label class="placeholder-box">
-                    <input type="password" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_PASSWORD ? 'focus' : ''?>" name="password" <?=isset($form['password']) ? 'value=' . $form['password'] : ''?> required>
+                    <input type="password" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_PASSWORD ? 'focus' : ''?>" name="password" value="<?= $form['password'] ?? ''?>" required>
                     <span class="placeholder-text">Введите ваш пароль <strong class="text-danger">*</strong></span>
                 </label>
                 <?php if ($form['error'] === FORM_PASSWORD):?>
@@ -41,7 +41,7 @@
             </div>
             <div>
                 <label class="placeholder-box">
-                    <input type="password" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_REPEAT_PASSWORD ? 'focus' : ''?>" name="repeatPassword" <?=isset($form['repeatPassword']) ? 'value=' . $form['repeatPassword'] : ''?> required>
+                    <input type="password" class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_REPEAT_PASSWORD ? 'focus' : ''?>" name="repeatPassword" value="<?= $form['repeatPassword'] ?? ''?>" required>
                     <span class="placeholder-text">Введите ваш пароль повторно <strong class="text-danger">*</strong></span>
                 </label>
                 <?php if ($form['error'] === FORM_REPEAT_PASSWORD):?>
