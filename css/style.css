@@ -371,6 +371,15 @@ header, footer {
     background-color: #ece9e9;
 }
 
+/* Ссылка "4" */
+.link-style-4 {
+    text-decoration: none;
+    color: var(--color-3);
+}
+.link-style-4:hover, .link-style-4:focus {
+    color: var(--color-5);
+}
+
 /* Чекбокс "1" ("Соглашение с правилами") */
 .check-style-1:checked {
     background-color: var(--color-8);

@@ -16,7 +16,7 @@
                     <div class="mb-4 justify-content-center d-flex">
                         <img class="avatar-thumbnail-lg rounded-3" id="preview" src="<?=PATH_IMG_USERS . '/' . $user['img_name']?>" alt="dots icon">
                     </div>
-                    <div class="justify-content-center d-flex">
+                    <div>
                         <input type="hidden" name="MAX_FILE_SIZE" value="<?=MAX_FILE_SIZE?>">
                         <input class="form-control form-style-3 <?= $form['error'] === FORM_IMAGE ? 'focus' : ''?>" type="file" name="imgName" id="imgName" accept="<?php foreach (ALLOWED_IMG_TYPE as $value):?><?=$value . ','?><?php endforeach ?>"/>
                     </div>
@@ -97,9 +97,14 @@
                     <div class="mb-4"></div>
                 <?php endif?>
             </div>
-
-            <div class="d-flex justify-content-end">
+            <div class="col d-flex justify-content-end">
                 <button type="submit" class="btn btn-style-2 width-200 rounded-0 mb-3 justify-content-end" name="save" value="yes" formnovalidate>Сохранить изменения</button>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <a class="link-style-4 mb-2" href="<?=PATH_PROFILE?>">
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span class="text-decoration-underline">Отмена</span>
+                </a>
             </div>
         </form>
     <?php endif?>

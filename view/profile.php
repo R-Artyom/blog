@@ -20,8 +20,10 @@
         <strong>Подписка:</strong> <?=$user['subscription'] === ACTIVE ? 'Подписан' : 'Не подписан'?>
     </p>
     <hr>
-    <a class="link-style-1 mb-2" href="<?=PATH_PROFILE_EDIT?>">
-        <i class="bi bi-pencil"></i>
-        Редактировать
-    </a>
+    <div class="d-flex justify-content-end">
+        <a class="link-style-4 mb-2" href="<?=PATH_PROFILE_EDIT?>">
+            <i class="bi bi-pencil"></i>
+            <span class="text-decoration-underline">Редактировать</span>
+        </a>
+    </div>
 </div>
