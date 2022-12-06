@@ -27,7 +27,7 @@
                         <input class="form-control form-style-1 rounded-0" type="text" placeholder="Введите ваш email" aria-label="Введите ваш email">
                     </form>
                 </div>
-                <?php if (!isset($userName)):?>
+                <?php if (!isset($user['name'])):?>
                     <div class="col-6 d-flex align-items-center">
                         <div class="input-group justify-content-end">
                             <a class="btn btn-style-1 rounded-0" href="<?=PATH_AUTHORIZATION?>">Войти</a>
@@ -37,17 +37,17 @@
                 <?php else:?>
                     <div class="col-6 dropdown d-flex align-items-center justify-content-end">
                         <a class="link-style-2 dropdown-toggle" data-bs-toggle="dropdown"  href="#" role="button" aria-expanded="true">
-                            <img class="avatar-thumbnail-sm p-0 me-1" src="<?=PATH_IMG_USERS . '/' . $imgName?>" alt="dots icon">
-                            <span class=""><?=$userName?></span>
+                            <img class="avatar-thumbnail-sm p-0 me-1" src="<?=PATH_IMG_USERS . '/' . $user['img_name']?>" alt="dots icon">
+                            <span class=""><?=$user['name']?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-style-1 dropdown-menu-end rounded-0">
                             <?php foreach (DROPDOWN_MENU as $value):?>
-                                <?php if (($userStatus & $value['access']) > 0):?>
+                                <?php if (($user['role_id'] & $value['access']) > 0):?>
                                     <li>
                                         <a class="dropdown-item dropdown-item-style-1" href="<?=$value['path']?>">
                                             <?=$value['icon']?>
                                             <?=$value['title']?>
-                                            <?=$value['title'] === 'Профиль' ? '(' . ROLES[$userStatus] . ')': ''?>
+                                            <?=$value['title'] === 'Профиль' ? '(' . ROLES[$user['role_id']] . ')': ''?>
                                         </a>
                                     </li>
                                 <?php endif?>

@@ -16,6 +16,9 @@ class View implements Renderable
     // Инициализация свойств
     public function __construct($view, $data)
     {
+        // Добавление данных пользователя в свойство класса
+        $data['user'] = Profile::getInstance()->getAll();
+        // Сохранение
         $this->view = $view;
         $this->data = $data;
     }
@@ -28,15 +31,10 @@ class View implements Renderable
         // Импорт ключей массива в качестве имён переменных, а их значений -
         // в качестве значений этих переменных
         extract($this->data);
-        // Данные о пользователе
-        // TODO Вместо запроса одного параметра надо запрашивать массив и делать extract
-        $userName = Profile::getInstance()->get('name');
-        $imgName = Profile::getInstance()->get('img_name');
-        $userStatus = Profile::getInstance()->get('role_id') ?? UNREG;
-        // Если это страница с информацией об успешной отправке формы
+        // Если это страница не с информацией об успешной отправке формы
         if (isset($form['error']) && ($form['error'] !== FORM_SUCCESS)) {
             // Проверка прав доступа пользователя к странице сайта
-            if (($userStatus & ACCESS_TO_PAGE[$this->view]) === 0) {
+            if ((($user['role_id'] ?? UNREG) & ACCESS_TO_PAGE[$this->view]) === 0) {
                 // Такой страницы не существует
                 throw new NotFoundException('Страница не найдена', 404);
             }
