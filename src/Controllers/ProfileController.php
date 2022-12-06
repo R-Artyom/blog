@@ -15,8 +15,6 @@ class ProfileController
     // Страница "Профиль пользователя"
     public function profile(): View
     {
-        // Данные пользователя
-        $result['user'] = Profile::getInstance()->getAll();
         // Заголовок страницы
         $result['title'] = 'Профиль пользователя';
         // Возврат объекта - шаблона страницы "Профиль пользователя"
@@ -30,6 +28,7 @@ class ProfileController
         $result['user'] = Profile::getInstance()->getAll();
         // Проверка формы
         $result['form'] = $this->checkForm();
+        // Если форма не отправлялась, то некоторые поля надо заполнить сразу
         if ($result['form']['error'] === FORM_NOT_SENT) {
             $result['form']['name'] = $result['user']['name'];
             $result['form']['email'] = $result['user']['email'];
