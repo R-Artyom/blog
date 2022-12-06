@@ -35,6 +35,10 @@ $router->get(PATH_POSTS . '/*', [PostController::class, 'posts']);
 $router->post(PATH_POSTS . '/*', [PostController::class, 'posts']);
 // Страница "Профиль пользователя"
 $router->get(PATH_PROFILE, [ProfileController::class, 'profile']);
+// Страница "Редактирование профиля пользователя"
+$router->get(PATH_PROFILE_EDIT, [ProfileController::class, 'profileEdit']);
+// Страница "Редактирование профиля пользователя" - отправка формы
+$router->post(PATH_PROFILE_EDIT, [ProfileController::class, 'profileEdit']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Авторизация"
