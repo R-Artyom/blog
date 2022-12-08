@@ -35,7 +35,7 @@ class ProfileController
             $result['form']['aboutMe'] = $result['user']['about_me'];
         }
         // Заголовок страницы
-        $result['title'] = 'Профиль пользователя';
+        $result['title'] = 'Редактирование профиля пользователя';
         // Возврат объекта - шаблона страницы "Профиль пользователя"
         return new View('profile_edit', $result);
     }

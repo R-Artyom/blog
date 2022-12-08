@@ -6,7 +6,7 @@
     <?php else:?>
 
         <form method="post" class="py-3 px-4 m-auto" enctype="multipart/form-data" action="<?=PATH_PROFILE_EDIT?>">
-            <h4 class="mb-3 text-start">Профиль пользователя</h4>
+            <h4 class="mb-3 text-start">Редактирование профиля пользователя</h4>
 
             <p class="mb-2">
                 <strong>Аватар:</strong>
@@ -98,9 +98,9 @@
                 <?php endif?>
             </div>
             <div class="col d-flex justify-content-end">
-                <button type="submit" class="btn btn-style-2 width-200 rounded-0 mb-3 justify-content-end" name="save" value="yes" formnovalidate>Сохранить изменения</button>
+                <button type="submit" class="btn btn-style-4 width-200 rounded-0 mb-3" name="save" value="yes" formnovalidate>Сохранить изменения</button>
             </div>
-            <div class="col d-flex justify-content-end">
+            <div class="col d-flex justify-content-start">
                 <a class="link-style-4 mb-2" href="<?=PATH_PROFILE?>">
                     <i class="bi bi-box-arrow-left"></i>
                     <span class="text-decoration-underline">Отмена</span>
