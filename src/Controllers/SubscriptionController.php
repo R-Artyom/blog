@@ -2,17 +2,16 @@
 
 namespace App\Controllers;
 
-use App\Exception\ApplicationException;
+// Импорт необходимых классов
 use App\Models\Subscriber;
 use App\View\View;
 use Exception;
-use RuntimeException;
 
-class SubscriptionController
+class SubscriptionController extends FormController
 {
     // Страница "Оформление подписки"
     public function subscription(): View
-    {;
+    {
         // Проверка формы
         $result['form'] = $this->checkForm();
         // Заголовок страницы
@@ -21,43 +20,8 @@ class SubscriptionController
         return new View('subscription', $result);
     }
 
-    // Проверка формы
-    private function checkForm()
-    {
-        // Если форма была отправлена
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Копирование всех непустых данных формы
-            foreach ($_POST as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
-            try {
-                // Валидация полей формы регистрации
-                $this->validateForm($result);
-                // Сохранение данных пользователя в базе
-                $this->saveData($result);
-                // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
-            } catch (RuntimeException $e) {
-                var_dump($e->getMessage());
-                // Вывод на страницу ошибки при работе с базой данных
-                throw new ApplicationException("Ошибка базы данных");
-                // Исключения формы регистрации
-            } catch (Exception $e) {
-                // Сообщение выброшенного исключения
-                $result['message'] = $e->getMessage();
-                // Код выброшенного исключения
-                $result['error'] = $e->getCode();
-            }
-            // Если форма не отправлялась
-        } else {
-            $result['error'] = FORM_NOT_SENT;
-        }
-        return $result;
-    }
-
     // Валидация полей формы
-    private function validateForm(array $data)
+    protected function validateForm(array $data)
     {
         // Если поле 'Email' не заполнено
         if (!(isset($data['email']) && $data['email'] !== '')) {
@@ -70,7 +34,7 @@ class SubscriptionController
     }
 
     // Сохранение данных в базе
-    private function saveData(array $data)
+    protected function saveData(array $data)
     {
         // Подписка
         if ($data['subscribe'] === 'yes') {

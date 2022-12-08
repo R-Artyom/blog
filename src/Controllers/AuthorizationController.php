@@ -3,20 +3,18 @@
 namespace App\Controllers;
 
 // Импорт необходимых классов
-use App\Exception\ApplicationException;
 use App\Models\User;
 use App\Session;
 use App\View\View;
 use Exception;
-use RuntimeException;
 
-class AuthorizationController
+class AuthorizationController extends FormController
 {
     // Страница "Авторизация"
     public function authorization(): View
     {
-        // Авторизация пользователя, если требуется
-        $result['form'] = $this->authUser();
+        // Проверка формы
+        $result['form'] = $this->checkForm();
         // Если форма не отправлялась и существует куки 'login'
         if ($result['form']['error'] === FORM_NOT_SENT && isset($_COOKIE['login'])) {
             // Автозаполнение поля 'email'
@@ -28,42 +26,8 @@ class AuthorizationController
         return new View('authorization', $result);
     }
 
-    // Авторизация пользователя
-    private function authUser()
-    {
-        // Если форма была отправлена
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Копирование всех непустых данных формы
-            foreach ($_POST as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
-            try {
-                // Валидация полей формы авторизации
-                $this->validateForm($result);
-                // Работа с сессией
-                $this->saveData($result);
-                // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
-            } catch (RuntimeException $e) {
-                // Вывод на страницу ошибки при работе с базой данных
-                throw new ApplicationException("Ошибка базы данных");
-                // Исключения формы регистрации
-            } catch (Exception $e) {
-                // Сообщение выброшенного исключения
-                $result['message'] = $e->getMessage();
-                // Код выброшенного исключения
-                $result['error'] = $e->getCode();
-            }
-            // Если форма не отправлялась
-        } else {
-            $result['error'] = FORM_NOT_SENT;
-        }
-        return $result;
-    }
-
     // Валидация полей формы
-    private function validateForm(array $data)
+    protected function validateForm(array $data)
     {
         // Если поле 'Email' не заполнено
         if (!(isset($data['email']) && $data['email'] !== '')) {
@@ -89,7 +53,7 @@ class AuthorizationController
         }
     }
     // Работа с сессией
-    private function saveData(array $data)
+    protected function saveData(array $data)
     {
         // Создание экземпляра сессии
         $session = new Session();

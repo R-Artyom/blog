@@ -2,15 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Exception\ApplicationException;
+// Импорт необходимых классов
 use App\Models\User;
 use App\Profile;
 use App\Session;
 use App\View\View;
 use Exception;
-use RuntimeException;
 
-class ProfileController
+class ProfileController extends FormController
 {
     // Страница "Профиль пользователя"
     public function profile(): View
@@ -40,43 +39,8 @@ class ProfileController
         return new View('profile_edit', $result);
     }
 
-    // Проверка формы
-    private function checkForm()
-    {
-        // Если форма была отправлена
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Копирование всех непустых данных формы
-            foreach ($_POST as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
-            try {
-                // Валидация полей формы регистрации
-                $this->validateForm($result);
-                // Сохранение данных пользователя в базе
-                $this->saveData($result);
-                // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
-            } catch (RuntimeException $e) {
-                var_dump($e->getMessage());
-                // Вывод на страницу ошибки при работе с базой данных
-                throw new ApplicationException("Ошибка базы данных");
-                // Исключения формы регистрации
-            } catch (Exception $e) {
-                // Сообщение выброшенного исключения
-                $result['message'] = $e->getMessage();
-                // Код выброшенного исключения
-                $result['error'] = $e->getCode();
-            }
-            // Если форма не отправлялась
-        } else {
-            $result['error'] = FORM_NOT_SENT;
-        }
-        return $result;
-    }
-
     // Валидация полей формы
-    private function validateForm(array $data)
+    protected function validateForm(array $data)
     {
         // Если причина ошибки - слишком большой размер файла
         if ($_FILES['imgName']['error'] === UPLOAD_ERR_FORM_SIZE) {
@@ -124,7 +88,7 @@ class ProfileController
     }
 
     // Сохранение данных пользователя в базе
-    private function saveData(array $data)
+    protected function saveData(array $data)
     {
         // Если на сервер необходимо загрузить новую аватарку
         if ($_FILES['imgName']['tmp_name'] !== '') {

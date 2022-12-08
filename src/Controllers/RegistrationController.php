@@ -3,62 +3,26 @@
 namespace App\Controllers;
 
 // Импорт необходимых классов
-use App\Exception\ApplicationException;
 use App\Models\User;
 use App\Session;
 use App\View\View;
 use Exception;
-use RuntimeException;
 
-class RegistrationController
+class RegistrationController extends FormController
 {
     // Страница "Регистрация"
     public function registration(): View
     {
-        // Регистрация пользователя, если требуется
-        $result['form'] = $this->addUser();
+        // Проверка формы
+        $result['form'] = $this->checkForm();
         // Заголовок страницы
         $result['title'] = 'Регистрация';
         // Возврат объекта - шаблона страницы "Регистрация"
         return new View('registration', $result);
     }
 
-    // Регистрация пользователя
-    private function addUser()
-    {
-        // Если форма была отправлена
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Копирование всех непустых данных формы
-            foreach ($_POST as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
-            try {
-                // Валидация полей формы регистрации
-                $this->validateForm($result);
-                // Сохранение данных пользователя в базе
-                $this->saveData($result);
-            // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
-            } catch (RuntimeException $e) {
-                // Вывод на страницу ошибки при работе с базой данных
-                throw new ApplicationException("Ошибка базы данных");
-            // Исключения формы регистрации
-            } catch (Exception $e) {
-                // Сообщение выброшенного исключения
-                $result['message'] = $e->getMessage();
-                // Код выброшенного исключения
-                $result['error'] = $e->getCode();
-            }
-        // Если форма не отправлялась
-        } else {
-            $result['error'] = FORM_NOT_SENT;
-        }
-        return $result;
-    }
-
     // Валидация полей формы
-    private function validateForm(array $data)
+    protected function validateForm(array $data)
     {
         // Если поле 'Имя' не заполнено
         if (!(isset($data['name']) && $data['name'] !== '')) {
@@ -95,7 +59,7 @@ class RegistrationController
     }
 
     // Сохранение данных пользователя в базе
-    private function saveData(array $data)
+    protected function saveData(array $data)
     {
         // Если в БД не найдено ни одного пользователя с таким email, сохранение данных
         User::insert([

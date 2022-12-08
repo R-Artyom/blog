@@ -3,24 +3,22 @@
 namespace App\Controllers;
 
 // Импорт необходимых классов
-use App\Exception\ApplicationException;
 use App\Exception\NotFoundException;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Profile;
 use App\View\View;
 use Exception;
-use RuntimeException;
 
-class PostController
+class PostController extends FormController
 {
     // Страница "Детальная страница статьи"
     public function posts($idPost): View
     {
         // Данные пользователя
         $result['user'] = Profile::getInstance()->getAll();
-        // Работа с формой "Добавление комментария"
-        $result['form'] = $this->addComment();
+        // Проверка формы "Добавление комментария"
+        $result['form'] = $this->checkForm();
         // Массив объектов таблицы posts модели Post
         $post = Post::where('id', $idPost)->get();
         // Если в БД не найдено ни одной статьи с указанным id
@@ -62,42 +60,8 @@ class PostController
         return new View('posts', $result);
     }
 
-    // Добавление комментария на странице "Детальная страница статьи"
-    private function addComment()
-    {
-        // Если форма была отправлена
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Копирование всех непустых данных формы
-            foreach ($_POST as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
-            try {
-                // Валидация полей формы регистрации
-                $this->validateForm($result);
-                // Сохранение данных пользователя в базе
-                $this->saveData($result);
-                // Исключения ORM Eloquent (класс PDOException является наследником RuntimeException)
-            } catch (RuntimeException $e) {
-                // Вывод на страницу ошибки при работе с базой данных
-                throw new ApplicationException("Ошибка базы данных");
-                // Исключения формы регистрации
-            } catch (Exception $e) {
-                // Сообщение выброшенного исключения
-                $result['message'] = $e->getMessage();
-                // Код выброшенного исключения
-                $result['error'] = $e->getCode();
-            }
-            // Если форма не отправлялась
-        } else {
-            $result['error'] = FORM_NOT_SENT;
-        }
-        return $result;
-    }
-
     // Валидация полей формы
-    private function validateForm(array $data)
+    protected function validateForm(array $data)
     {
         // Если это незарегистрированный пользователь
         if (Profile::getInstance()->get('id') === null) {
@@ -116,7 +80,7 @@ class PostController
     }
 
     // Сохранение данных пользователя в базе
-    private function saveData(array $data)
+    protected function saveData(array $data)
     {
         Comment::insert([
             'text' => $data['text'],
