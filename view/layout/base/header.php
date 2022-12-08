@@ -22,10 +22,12 @@
                     <a class="navbar-brand text-white fw-bold fs-1" href="<?=PATH_HOME?>">Blog</a>
                 </div>
                 <div class="col-4 d-flex align-items-center">
-                    <form class="input-group justify-content-start">
-                        <button class="btn btn-style-2 rounded-0" type="submit" name="subscribe" value="yes">Подписаться</button>
-                        <input class="form-control form-style-1 rounded-0" type="text" placeholder="Введите ваш email" aria-label="Введите ваш email">
-                    </form>
+                    <?php if (!isset($user['role_id']) || isset($user['isSubscriber']) && $user['isSubscriber'] === NO):?>
+                        <form method="post" class="input-group justify-content-start" action="<?=PATH_SUBSCRIPTION?>">
+                            <button class="btn btn-style-2 rounded-0" type="submit" name="subscribe" value="yes">Подписаться</button>
+                            <input class="form-control form-style-1 rounded-0 <?= $form['error'] === FORM_EMAIL ? 'focus' : ''?>" type="text" name="email" placeholder="Введите ваш email" aria-label="Введите ваш email" value="<?=isset($user['role_id']) ? $user['email'] : ''?>" <?=isset($user['role_id']) ? 'hidden' : ''?> >
+                        </form>
+                    <?php endif?>
                 </div>
                 <?php if (!isset($user['name'])):?>
                     <div class="col-6 d-flex align-items-center">

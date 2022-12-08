@@ -75,6 +75,11 @@ body {
     width: 800px;
 }
 
+/* Ширина элемента 120 px */
+.width-120 {
+    width: 120px;
+}
+
 /* Ширина элемента 200 px */
 .width-200 {
     width: 200px;
@@ -108,6 +113,7 @@ body {
     --color-7: #ffffff;
     --color-8: #ff9907;
     --color-9: #ffc107;
+    --color-10: #d4d4d4;
 }
 
 .color-1 {
@@ -137,6 +143,9 @@ body {
 .color-9 {
     color: var(--color-9);
 }
+.color-10 {
+    color: var(--color-10);
+}
 
 .bg-1 {
     background-color: var(--color-1);
@@ -164,6 +173,9 @@ body {
 }
 .bg-9 {
     background-color: var(--color-9);
+}
+.bg-10 {
+    background-color: var(--color-10);
 }
 
 /* Градиент шапки и подвала */
@@ -278,6 +290,64 @@ header, footer {
     --bs-btn-active-bg: var(--color-9);
     /* Цвет рамки при нажатии */
     --bs-btn-active-border-color: var(--color-9);
+}
+
+/* Кнопка "4" */
+.btn-style-4 {
+    /* Цвет текста кнопки */
+    --bs-btn-color: var(--color-4);
+    /* Цвет фона кнопки */
+    --bs-btn-bg: var(--color-8);
+    /* Рамка кнопки */
+    --bs-btn-border-color: var(--color-7);
+
+    /* Цвет текста при наведении */
+    --bs-btn-hover-color: var(--color-5);
+    /* Цвет фона при наведении */
+    --bs-btn-hover-bg: var(--color-9);
+    /* Рамка при наведении*/
+    --bs-btn-hover-border-color: var(--color-9);
+
+    /* Цвет текста при нажатии */
+    --bs-btn-active-color: var(--color-5);
+    /* Цвет фона при нажатии */
+    --bs-btn-active-bg: var(--color-9);
+    /* Цвет рамки при нажатии */
+    --bs-btn-active-border-color: var(--color-9);
+}
+
+/* Кнопка "5" */
+.btn-style-5 {
+    /* Цвет текста кнопки */
+    --bs-btn-color: var(--color-4);
+    /* Цвет фона кнопки */
+    --bs-btn-bg: var(--color-6);
+    /* Рамка кнопки */
+    --bs-btn-border-color: var(--color-7);
+
+    /* Цвет текста при наведении */
+    --bs-btn-hover-color: var(--color-5);
+    /* Цвет фона при наведении */
+    --bs-btn-hover-bg: var(--color-10);
+    /* Рамка при наведении*/
+    --bs-btn-hover-border-color: var(--color-10);
+
+    /* Цвет текста при нажатии */
+    --bs-btn-active-color: var(--color-5);
+    /* Цвет фона при нажатии */
+    --bs-btn-active-bg: var(--color-10);
+    /* Цвет рамки при нажатии */
+    --bs-btn-active-border-color: var(--color-10);
+}
+/* Текст кнопки "5" */
+.btn-style-5::before {
+    content: attr(text);
+    font-weight: bold;
+}
+/* Текст кнопки "5" после наведения на неё */
+.btn-style-5:hover::before {
+    content: attr(hover-text);
+    font-weight: bold;
 }
 
 /* Форма "1" */

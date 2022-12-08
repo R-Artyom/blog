@@ -8,6 +8,7 @@ use App\Controllers\PostController;
 use App\Controllers\ProfileController;
 use App\Controllers\RegistrationController;
 use App\Controllers\StaticPageController;
+use App\Controllers\SubscriptionController;
 use App\Router;
 use App\Session;
 
@@ -51,6 +52,8 @@ $router->get(PATH_LOGOUT, [AuthorizationController::class, 'logOut']);
 $router->get(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"
 $router->post(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
+// Страница "Оформление подписки"
+$router->post(PATH_SUBSCRIPTION, [SubscriptionController::class, 'subscription']);
 // Страница "Правила пользования сайтом"
 $router->get(PATH_TERMS, [StaticPageController::class, 'terms']);
 

@@ -34,6 +34,8 @@ const PATH_LOGOUT = '/logout';
 const PATH_REGISTRATION = '/registration';
 // Страница "Правила пользования сайтом"
 const PATH_TERMS = '/terms';
+// Страница "Подписаться / Отписаться"
+const PATH_SUBSCRIPTION = '/subscription';
 
 /**
  * Роли пользователей на сайте (в виде маски для прав доступа к страницам сайта)
@@ -65,6 +67,7 @@ const ACCESS_TO_PAGE = [
     'profile'       => REG, // Профиль пользователя
     'profile_edit'  => REG, // Редактирование профиля пользователя
     'registration'  => UNREG, // Регистрация
+    'subscription'  => ALL, // Оформление подписки
     'terms'         => ALL, // Правила пользования сайтом
     'errors/404'    => ALL, // Страница не найдена
     'errors/error'  => ALL, // Шаблон странцы не найден
@@ -74,17 +77,17 @@ const ACCESS_TO_PAGE = [
  * Признак активности в базе данных
  */
 // Неактивен
-const NO_ACTIVE = 0;
+const NO = 0;
 // Активен
-const ACTIVE = 1;
+const YES = 1;
 
 /**
  * Признак активности комментария
  */
 // Комментарий не прошел модерацию
-const COMMENT_NO_ACTIVE = NO_ACTIVE;
+const COMMENT_NO_ACTIVE = NO;
 // Комментарий прошел модерацию
-const COMMENT_ACTIVE = ACTIVE;
+const COMMENT_ACTIVE = YES;
 
 /**
  * Коды исключения при работе с формами

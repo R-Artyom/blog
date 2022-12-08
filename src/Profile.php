@@ -3,6 +3,7 @@
 namespace App;
 
 // Импорт классов
+use App\Models\Subscriber;
 use App\Models\User;
 
 // Класс "Профиль пользователя" (Порождающий шаблон проектирования Singleton)
@@ -46,6 +47,8 @@ class Profile
             $this->user = $result[0];
             // Данные пользователя в виде массива
             $this->userArray = $result->toArray()[0];
+            // Признак подписчика
+            $this->userArray['isSubscriber'] = count(Subscriber::where('email', $_SESSION['login'])->get()) > 0 ? YES : NO;
         }
     }
 
