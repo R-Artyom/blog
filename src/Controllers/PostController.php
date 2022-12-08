@@ -27,7 +27,7 @@ class PostController extends FormController
             throw new NotFoundException('Страница не найдена', 404);
         }
         // Если это незарегистрированный пользователь
-        if ($result['user'] === null) {
+        if (Profile::getInstance()->isUnregUser()) {
             // Запрос комментариев пользователей к статье с идентификатором id.
             // Только отмодерированные комментарии любого пользователя.
             // Из таблицы users берутся имя пользователя, дата регистрации и название файла-аватарки.
@@ -64,7 +64,7 @@ class PostController extends FormController
     protected function validateForm(array $data)
     {
         // Если это незарегистрированный пользователь
-        if (Profile::getInstance()->get('id') === null) {
+        if (Profile::getInstance()->isUnregUser()) {
             throw new Exception(
                 'Внимание!!! Отправлять комментарии могут только зарегистрированные пользователи.
                     <a class="link-style-1" href="/authorization">Войдите</a>

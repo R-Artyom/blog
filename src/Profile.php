@@ -68,4 +68,12 @@ class Profile
         // Для зарегистрированных - массив строки "user"
         return $this->user;
     }
+
+    /**
+     * Признак незарегистрированного пользователя
+     */
+    public function isUnregUser(): bool
+    {
+        return $this->user === null;
+    }
 }
