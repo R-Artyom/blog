@@ -11,10 +11,8 @@ class Profile
 {
     // Переменная для хранения единственного экземпляра данного класса
     private static $instance;
-    // Данные профиля пользователя в виде объекта или null
-    private $user;
     // Данные профиля пользователя в виде массива
-    private $userArray;
+    private $user;
     // Защита от создания через new Config
     private function __construct()
     {
@@ -43,24 +41,22 @@ class Profile
         if (isset($_SESSION['login'])) {
             // Поиск пользователя в базе данных
             $result = User::where('email', $_SESSION['login'])->get();
-            // Данные пользователя в виде объекта
-            $this->user = $result[0];
             // Данные пользователя в виде массива
-            $this->userArray = $result->toArray()[0];
+            $this->user = $result->toArray()[0];
             // Признак подписчика
-            $this->userArray['isSubscriber'] = count(Subscriber::where('email', $_SESSION['login'])->get()) > 0 ? YES : NO;
+            $this->user['isSubscriber'] = count(Subscriber::where('email', $_SESSION['login'])->get()) > 0 ? YES : NO;
         }
     }
 
     /**
      * Запрос данных пользователя без обращения к базе данных
-     * @param string $param - название столбца таблицы "users"
+     * @param string $param - ключ массива профиля пользователя
      */
     public function get(string $param)
     {
         // Для незарегистрированных пользователей вернётся null
-        // Для зарегистрированных - значение ячейки строки "user"
-        return is_object($this->user) ? $this->user->$param : null;
+        // Для зарегистрированных - значение элемента массива
+        return $this->user[$param] ?? null;
     }
 
     /**
@@ -70,6 +66,6 @@ class Profile
     {
         // Для незарегистрированных пользователей вернётся null
         // Для зарегистрированных - массив строки "user"
-        return $this->userArray;
+        return $this->user;
     }
 }
