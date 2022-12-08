@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 06 2022 г., 17:24
+-- Время создания: Дек 08 2022 г., 10:58
 -- Версия сервера: 5.7.38
 -- Версия PHP: 7.4.29
 
@@ -129,6 +129,28 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `subscribers`
+--
+
+CREATE TABLE `subscribers` (
+  `id` int(11) NOT NULL COMMENT 'Уникальный идентификатор подписчика',
+  `email` varchar(255) NOT NULL COMMENT 'Электронная почта подписчика'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `email`) VALUES
+(9, 'admin@gmail.com'),
+(15, 'manager@gmail.com'),
+(11, 'sdf@ngs.ru'),
+(10, 'tem@gmail.com'),
+(12, 'user@gmail.com');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -140,7 +162,6 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL COMMENT 'Пароль (в зашифрованном виде)',
   `img_name` varchar(255) NOT NULL COMMENT 'Аватар (название файла)',
   `about_me` varchar(255) NOT NULL DEFAULT '' COMMENT 'Краткая информация о себе',
-  `subscription` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Признак подписки (подписан [1] / не подписан [0])',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата и время регистрации пользователя',
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Дата и время обновления данных пользователя'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -149,29 +170,29 @@ CREATE TABLE `users` (
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `img_name`, `about_me`, `subscription`, `created_at`, `updated_at`) VALUES
-(1, 8, 'Иванов Иван', 'admin@gmail.com', '$2y$10$ABMDc.6IcRZyfdPnJqCCGuYlVIXarYxHM.eFXHE8p423KUtDcC3ly', '1.jpg', 'Я - робот', 0, '2022-09-09 10:18:40', '2022-12-06 11:01:18'),
-(2, 4, 'Петров Пётр Петрович', 'manager@gmail.com', '$2y$10$bWMB8bpsgCUG639YPC3sU.hNotseZsbZGvuoNqMqT7810oIE5sVC.', '2.jpg', '', 0, '2022-09-09 10:18:43', '2022-12-05 10:00:52'),
-(3, 2, 'Сидоров Сидор Сидорович', 'user@gmail.com', '$2y$10$XtIeUhwA6nLBtaCTzJLKX.YZDl4XZSJ2I7C7XEaF8G4AZ2skpKc.a', '3.jpg', 'Картельные сговоры не допускают ситуации, при которой некоторые особенности внутренней политики являются только методом политического участия и призваны к ответу.', 0, '2022-09-09 10:18:45', '2022-12-05 10:00:52'),
-(4, 2, 'Васильев Василий Васильевич', 'vasiliev@gmail.com', '$2y$10$bZbHhWIfGNUA9UHNe0HNc.6XK9J3e2Y56v0FOU1IkQo.oy9yc29Zy', '4.jpg', 'Краткость', 0, '2022-09-09 10:18:47', '2022-12-06 13:14:19'),
-(5, 2, 'Андреев Андрей Андреевич', 'andreev@gmail.com', '$2y$10$7vWGrFJf35Hj/o/5FL.90uLvhctur1cuXyWsbRJCTLFB.qBnGho7W', '', '', 0, '2022-09-09 10:18:49', '2022-12-05 10:00:52'),
-(6, 2, 'Александров Александр Александрович', 'aleksandrov@gmail.com', '$2y$10$u1Paw83vBxpxwkrboOo80upkk3RV8vTm.mfGtZle8VscKvZUVs/d.', '', '', 0, '2022-09-09 10:18:50', '2022-12-05 10:00:52'),
-(7, 2, 'Любаев Любим Любимович', 'lyubaev@gmail.com', '$2y$10$LPU0n1/UawbLhZxVkj.AZePDkTu8lK69JuXIKqddSDcbMP./vZBda', '', '', 0, '2022-09-09 10:18:51', '2022-12-05 10:00:52'),
-(23, 2, 'Ива', 'sidorov@gmail.com', '$2y$10$junTauKtEnk77uSAQh.OGuPuvORvBV5zE4ONeRMY4TRky1oIv6Mj2', 'default.jpg', '', 0, '2022-09-09 10:18:55', '2022-12-05 10:00:52'),
-(24, 2, 'Tem', 'ivano@gmail.com', '$2y$10$NQhPG1yZhfwspqtFbdGPgupw2vOEX1CSpHg2Ri3RG5N87o6.UAzBi', 'default.jpg', '', 0, '2022-11-21 10:26:34', '2022-12-05 10:00:52'),
-(25, 2, 'Ар', 'ivan@gmail.com', '$2y$10$iV8jZotdLaqj011JbNPIru0Zv5ECd1iRJhI5gh2ikktIafTZNAkQC', 'default.jpg', '', 0, '2022-11-21 12:51:39', '2022-12-05 10:00:52'),
-(26, 2, 'Arte', 'asd@gmail.com', '$2y$10$zngfa6hEIIO6snUKzPbL6OzSdK9ohlEcLee8xqV6JxsVzjLdwBsZO', 'default.jpg', '', 0, '2022-11-23 11:20:00', '2022-12-05 10:00:52'),
-(27, 2, 'Arte', 'asd2@gmail.com', '$2y$10$/ddIm1Q8NaCT.qAXm5scEeVO8d5uFAYZYfvpyUw5UanQ/nAlBvRbm', 'default.jpg', '', 0, '2022-11-23 11:21:51', '2022-12-05 10:00:52'),
-(28, 2, 'Arte', 'asd3@gmail.com', '$2y$10$3pFA3RX35h6slX/npfXwn.XK9u8X/sD522G54NxZ0efmMXJVJtEeO', 'default.jpg', '', 0, '2022-11-23 11:22:25', '2022-12-05 10:00:52'),
-(29, 2, 'D', 'Emai@m.ru', '$2y$10$Q7uJA5FBlWQdtz9L1oe0R.6cjWF.pxO2vQUBuRWoaWkJs.3rngzma', 'default.jpg', '', 0, '2022-11-23 11:30:57', '2022-12-05 10:00:52'),
-(40, 2, 'ert', 'ivanove@gmail.com', '$2y$10$Te6Nm4Ib8ZmAO5IRBJb7lOFDlTYBqx1CLp1warurzRNGOsSJekeZK', 'default.jpg', '', 0, '2022-11-23 17:34:50', '2022-12-05 10:00:52'),
-(41, 2, 'Кolyan', 'ko@gmail.com', '$2y$10$oaFTGoqjk8yDC91nBSCyO.f.0rLHsMZ0nbVlpXvF0AgeK3rrOUEka', 'default.jpg', '', 0, '2022-11-24 07:28:16', '2022-12-05 10:00:52'),
-(42, 2, 'Ivva', 'iva@gmail.com', '$2y$10$cXRJanzFlDgD6FS1VL0doetKaYw5ZdjzNO6L7uZdolkkAUhCCiUQK', 'default.jpg', '', 0, '2022-11-24 19:09:03', '2022-12-05 10:00:52'),
-(43, 2, 'варвар', 'ivanovk@gmail.com', '$2y$10$GNrsPMXumZkyhVTSBbpndOwLglPh.eYkNT34/11w.h7Egiul1p9HW', 'default.jpg', '', 0, '2022-11-27 14:46:05', '2022-12-05 10:00:52'),
-(49, 2, 'Ян', 'yan@mail.com', '$2y$10$2JKhpSkZ.IhwhInevQoqZOajXrqmD94OvUF8oZ/.f6wTCsTITu/d.', 'default.jpg', '', 0, '2022-12-01 09:23:24', '2022-12-05 10:00:52'),
-(51, 2, 'min', 'min@gmail.com', '$2y$10$suiB8/uWkHKIzoy5lIPmf.ssrrTrGkbJY2NalhqCY9neyRB44ImqK', 'default.jpg', '', 0, '2022-12-02 17:21:18', '2022-12-05 10:00:52'),
-(52, 2, 'Петров Иван Иваныч', 'petr@petr.ru', '$2y$10$bG2c.c.BlBW37yDMmAub7efQx3Q0X3coNU3oDaUb7oX65s0dwoOX6', 'default.jpg', '', 0, '2022-12-04 16:02:02', '2022-12-05 10:00:52'),
-(53, 2, 'Иванов Иван Иванович', 'gmail@gmail.com', '$2y$10$S3TnLkJ3otxSxsCnGzEE/.OomdJcqS07fYbk3m/1abuTCrkGLg9x6', 'default.jpg', '', 0, '2022-12-05 08:00:04', '2022-12-05 10:00:52');
+INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `img_name`, `about_me`, `created_at`, `updated_at`) VALUES
+(1, 8, 'Иванов Иван Иванович', 'admin@gmail.com', '$2y$10$ABMDc.6IcRZyfdPnJqCCGuYlVIXarYxHM.eFXHE8p423KUtDcC3ly', '1.jpg', 'Я - робот', '2022-09-09 10:18:40', '2022-12-08 07:34:38'),
+(2, 4, 'Петров Пётр Петрович', 'manager@gmail.com', '$2y$10$bWMB8bpsgCUG639YPC3sU.hNotseZsbZGvuoNqMqT7810oIE5sVC.', '2.jpg', '', '2022-09-09 10:18:43', '2022-12-05 10:00:52'),
+(3, 2, 'Сидоров Сидор Сидорович', 'user@gmail.com', '$2y$10$XtIeUhwA6nLBtaCTzJLKX.YZDl4XZSJ2I7C7XEaF8G4AZ2skpKc.a', '3.jpg', 'Картельные сговоры не допускают ситуации, при которой некоторые особенности внутренней политики являются только методом политического участия и призваны к ответу.', '2022-09-09 10:18:45', '2022-12-05 10:00:52'),
+(4, 2, 'Васильев Василий Васильевич', 'vasiliev@gmail.com', '$2y$10$bZbHhWIfGNUA9UHNe0HNc.6XK9J3e2Y56v0FOU1IkQo.oy9yc29Zy', '4.jpg', 'Краткость', '2022-09-09 10:18:47', '2022-12-06 13:14:19'),
+(5, 2, 'Андреев Андрей Андреевич', 'andreev@gmail.com', '$2y$10$7vWGrFJf35Hj/o/5FL.90uLvhctur1cuXyWsbRJCTLFB.qBnGho7W', '', '', '2022-09-09 10:18:49', '2022-12-05 10:00:52'),
+(6, 2, 'Александров Александр Александрович', 'aleksandrov@gmail.com', '$2y$10$u1Paw83vBxpxwkrboOo80upkk3RV8vTm.mfGtZle8VscKvZUVs/d.', '', '', '2022-09-09 10:18:50', '2022-12-05 10:00:52'),
+(7, 2, 'Любаев Любим Любимович', 'lyubaev@gmail.com', '$2y$10$LPU0n1/UawbLhZxVkj.AZePDkTu8lK69JuXIKqddSDcbMP./vZBda', '', '', '2022-09-09 10:18:51', '2022-12-05 10:00:52'),
+(23, 2, 'Ива', 'sidorov@gmail.com', '$2y$10$junTauKtEnk77uSAQh.OGuPuvORvBV5zE4ONeRMY4TRky1oIv6Mj2', 'default.jpg', '', '2022-09-09 10:18:55', '2022-12-05 10:00:52'),
+(24, 2, 'Tem', 'ivano@gmail.com', '$2y$10$NQhPG1yZhfwspqtFbdGPgupw2vOEX1CSpHg2Ri3RG5N87o6.UAzBi', 'default.jpg', '', '2022-11-21 10:26:34', '2022-12-05 10:00:52'),
+(25, 2, 'Ар', 'ivan@gmail.com', '$2y$10$iV8jZotdLaqj011JbNPIru0Zv5ECd1iRJhI5gh2ikktIafTZNAkQC', 'default.jpg', '', '2022-11-21 12:51:39', '2022-12-05 10:00:52'),
+(26, 2, 'Arte', 'asd@gmail.com', '$2y$10$zngfa6hEIIO6snUKzPbL6OzSdK9ohlEcLee8xqV6JxsVzjLdwBsZO', 'default.jpg', '', '2022-11-23 11:20:00', '2022-12-05 10:00:52'),
+(27, 2, 'Arte', 'asd2@gmail.com', '$2y$10$/ddIm1Q8NaCT.qAXm5scEeVO8d5uFAYZYfvpyUw5UanQ/nAlBvRbm', 'default.jpg', '', '2022-11-23 11:21:51', '2022-12-05 10:00:52'),
+(28, 2, 'Arte', 'asd3@gmail.com', '$2y$10$3pFA3RX35h6slX/npfXwn.XK9u8X/sD522G54NxZ0efmMXJVJtEeO', 'default.jpg', '', '2022-11-23 11:22:25', '2022-12-05 10:00:52'),
+(29, 2, 'D', 'Emai@m.ru', '$2y$10$Q7uJA5FBlWQdtz9L1oe0R.6cjWF.pxO2vQUBuRWoaWkJs.3rngzma', 'default.jpg', '', '2022-11-23 11:30:57', '2022-12-05 10:00:52'),
+(40, 2, 'ert', 'ivanove@gmail.com', '$2y$10$Te6Nm4Ib8ZmAO5IRBJb7lOFDlTYBqx1CLp1warurzRNGOsSJekeZK', 'default.jpg', '', '2022-11-23 17:34:50', '2022-12-05 10:00:52'),
+(41, 2, 'Кolyan', 'ko@gmail.com', '$2y$10$oaFTGoqjk8yDC91nBSCyO.f.0rLHsMZ0nbVlpXvF0AgeK3rrOUEka', 'default.jpg', '', '2022-11-24 07:28:16', '2022-12-05 10:00:52'),
+(42, 2, 'Ivva', 'iva@gmail.com', '$2y$10$cXRJanzFlDgD6FS1VL0doetKaYw5ZdjzNO6L7uZdolkkAUhCCiUQK', 'default.jpg', '', '2022-11-24 19:09:03', '2022-12-05 10:00:52'),
+(43, 2, 'варвар', 'ivanovk@gmail.com', '$2y$10$GNrsPMXumZkyhVTSBbpndOwLglPh.eYkNT34/11w.h7Egiul1p9HW', 'default.jpg', '', '2022-11-27 14:46:05', '2022-12-05 10:00:52'),
+(49, 2, 'Ян', 'yan@mail.com', '$2y$10$2JKhpSkZ.IhwhInevQoqZOajXrqmD94OvUF8oZ/.f6wTCsTITu/d.', 'default.jpg', '', '2022-12-01 09:23:24', '2022-12-05 10:00:52'),
+(51, 2, 'min', 'min@gmail.com', '$2y$10$suiB8/uWkHKIzoy5lIPmf.ssrrTrGkbJY2NalhqCY9neyRB44ImqK', 'default.jpg', '', '2022-12-02 17:21:18', '2022-12-05 10:00:52'),
+(52, 2, 'Петров Иван Иваныч', 'petr@petr.ru', '$2y$10$bG2c.c.BlBW37yDMmAub7efQx3Q0X3coNU3oDaUb7oX65s0dwoOX6', 'default.jpg', '', '2022-12-04 16:02:02', '2022-12-05 10:00:52'),
+(53, 2, 'Иванов Иван Иванович', 'gmail@gmail.com', '$2y$10$S3TnLkJ3otxSxsCnGzEE/.OomdJcqS07fYbk3m/1abuTCrkGLg9x6', 'default.jpg', '', '2022-12-05 08:00:04', '2022-12-05 10:00:52');
 
 --
 -- Индексы сохранённых таблиц
@@ -200,6 +221,14 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`),
   ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Индексы таблицы `subscribers`
+--
+ALTER TABLE `subscribers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Индексы таблицы `users`
@@ -231,6 +260,12 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор группы', AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `subscribers`
+--
+ALTER TABLE `subscribers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор подписчика', AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
