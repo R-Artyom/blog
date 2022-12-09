@@ -46,7 +46,7 @@
                             <?php foreach (DROPDOWN_MENU as $value):?>
                                 <?php if (($user['role_id'] & $value['access']) > 0):?>
                                     <li>
-                                        <a class="dropdown-item dropdown-item-style-1" href="<?=$value['path']?>">
+                                        <a class="dropdown-item dropdown-item-style-1 <?=isCurrentUrl($value['path']) ? 'active' : ''?>" href="<?=$value['path']?>">
                                             <?=$value['icon']?>
                                             <?=$value['title']?>
                                             <?=$value['title'] === 'Профиль' ? '(' . ROLES[$user['role_id']] . ')': ''?>
@@ -63,9 +63,8 @@
         </div>
         <div class="container py-2 g-2">
             <nav class="nav d-flex justify-content-start">
-                <a class="p-2 nav-link link-style-2" href="<?=PATH_HOME?>">Главная</a>
-                <a class="p-2 nav-link disabled" href="#">Неактивная ссылка</a>
-                <a class="p-2 nav-link link-style-2" href="<?=PATH_TERMS?>">Правила пользования сайтом</a>
+                <a class="p-2 nav-link link-style-2 <?=isCurrentUrl(PATH_HOME) ? 'active' : ''?>" href="<?=PATH_HOME?>">Главная</a>
+                <a class="p-2 nav-link link-style-2 <?=isCurrentUrl(PATH_TERMS) ? 'active' : ''?>" href="<?=PATH_TERMS?>">Правила пользования сайтом</a>
             </nav>
         </div>
     </header>

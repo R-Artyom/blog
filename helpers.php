@@ -65,3 +65,14 @@ function array_get(array $array, string $key, $default = null)
     // Значение по умолчанию (для пустой строки)
     return $default;
 }
+
+/**
+ * Функция определения активности текущей страницы
+ * @param $path - ссылка на страницу, куда ведет пункт меню, которую необходимо проверить
+ * @return bool возвращает результат проверки (true / false)
+ */
+function isCurrentUrl($path): bool
+{
+    // Возврат результата сравнения
+    return $path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+}

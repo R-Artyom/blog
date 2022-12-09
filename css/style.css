@@ -432,6 +432,9 @@ header, footer {
 .link-style-2:hover, .link-style-2:focus {
     color: var(--color-7);
 }
+.link-style-2.active, .link-style-2:active {
+    color: var(--color-5);
+}
 
 /* Ссылка "3" */
 .link-style-3 {
@@ -471,11 +474,16 @@ header, footer {
     /* Цвет текста элемента списка */
     color: var(--color-8);
 }
-.dropdown-item-style-1:hover, .dropdown-item-style-1:focus,
-.dropdown-item-style-1.active, .dropdown-item-style-1:active {
-    /* Цвет текста при наведении и в активном состоянии */
+.dropdown-item-style-1:hover, .dropdown-item-style-1:focus {
+    /* Цвет текста при наведении */
     color: var(--color-7);
-    /* Цвет фона при наведении и в активном состоянии */
+    /* Цвет фона при наведении */
+    background-color: var(--color-4);
+}
+.dropdown-item-style-1.active, .dropdown-item-style-1:active {
+    /* Цвет текста в активном состоянии */
+    color: var(--color-5);
+    /* Цвет фона в активном состоянии */
     background-color: var(--color-4);
 }
 .dropdown-item-style-1.disabled, .dropdown-item-style-1:disabled {
