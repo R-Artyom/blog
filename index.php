@@ -2,6 +2,7 @@
 
 // Импорт классов из разных пространств имён
 use App\Application;
+use App\Controllers\AdminPostController;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
@@ -26,10 +27,28 @@ $session->run();
 
 // Создание маршрутизатора
 $router = new Router();
-// Добавление в роутер страницы сайта "Главная" с HTTP-методом запроса GET
-$router->get(PATH_HOME, [HomeController::class, 'index']);
 // Добавление в роутер страницы сайта "О нас" с HTTP-методом запроса GET
 $router->get(PATH_ABOUT, [StaticPageController::class, 'about']);
+// Страница "Управление статьями"
+$router->get(PATH_ADMIN_POSTS, [AdminPostController::class, 'adminPost']);
+// Страница "Редактирование статьи"
+$router->get(PATH_ADMIN_POSTS . '/*/edit', [AdminPostController::class, 'adminPostEdit']);
+// Страница "Редактирование статьи - отправка формы"
+$router->post(PATH_ADMIN_POSTS . '/*/edit', [AdminPostController::class, 'adminPostEdit']);
+// Страница "Редактирование статьи"
+$router->get(PATH_ADMIN_POSTS . '/add', [AdminPostController::class, 'adminPostAdd']);
+// Страница "Редактирование статьи - отправка формы"
+$router->post(PATH_ADMIN_POSTS . '/add', [AdminPostController::class, 'adminPostAdd']);
+// Страница "Удаление статьи"
+$router->post(PATH_ADMIN_POSTS . '/*/delete', [AdminPostController::class, 'adminPostDelete']);
+// Страница "Авторизация"
+$router->get(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
+// Страница "Авторизация - отправка формы"
+$router->post(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
+// Добавление в роутер страницы сайта "Главная" с HTTP-методом запроса GET
+$router->get(PATH_HOME, [HomeController::class, 'index']);
+// Страница "Разавторизация"
+$router->get(PATH_LOGOUT, [AuthorizationController::class, 'logOut']);
 // Страница "Детальная страница статьи"
 $router->get(PATH_POSTS . '/*', [PostController::class, 'posts']);
 // Страница "Детальная страница статьи - добавление комментария"
@@ -42,12 +61,6 @@ $router->get(PATH_PROFILE_EDIT, [ProfileController::class, 'profileEdit']);
 $router->post(PATH_PROFILE_EDIT, [ProfileController::class, 'profileEdit']);
 // Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
 $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
-// Страница "Авторизация"
-$router->get(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
-// Страница "Авторизация - отправка формы"
-$router->post(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
-// Страница "Разавторизация"
-$router->get(PATH_LOGOUT, [AuthorizationController::class, 'logOut']);
 // Страница "Регистрация"
 $router->get(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"

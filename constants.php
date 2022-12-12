@@ -20,6 +20,8 @@ const PATH_IMG_POSTS = '/img/posts';
 const PATH_HOME = '/';
 // Страница "О нас"
 const PATH_ABOUT = '/about';
+// Страница "Управление статьями"
+const PATH_ADMIN_POSTS = '/admin/posts';
 // Страница "Детальная страница статьи"
 const PATH_POSTS = '/posts';
 // Страница "Профиль пользователя"
@@ -34,7 +36,7 @@ const PATH_LOGOUT = '/logout';
 const PATH_REGISTRATION = '/registration';
 // Страница "Правила пользования сайтом"
 const PATH_TERMS = '/terms';
-// Страница "Подписаться / Отписаться"
+// Страница "Оформление подписки"
 const PATH_SUBSCRIPTION = '/subscription';
 
 /**
@@ -61,6 +63,8 @@ const ROLES = [
  */
 const ACCESS_TO_PAGE = [
     'about'         => ALL, // О нас
+    'admin_post_edit' => ADMIN | MANAGER, // Редактирование статьи
+    'admin_posts'   => ADMIN | MANAGER, // Управление статьями
     'authorization' => UNREG, // Авторизация
     'homepage'      => ALL, // Главнаая
     'posts'         => ALL, // Детальная страница статьи
@@ -110,6 +114,10 @@ const FORM_SUCCESS = 6;
 const FORM_TEXT = 7;
 // Поле 'Загрузить изображение'
 const FORM_IMAGE = 8;
+// Поле 'Заголовок'
+const FORM_TITLE = 9;
+// Поле 'Краткое описание статьи'
+const FORM_SHORT_TEXT = 10;
 
 /**
  * Выпадающее меню профиля зарегистрированного пользователя
@@ -123,7 +131,7 @@ const DROPDOWN_MENU = [
     ],
     [
         'title' => 'Статьи',
-        'path' => '/admin/posts',
+        'path' => PATH_ADMIN_POSTS,
         'icon' => '<i class="bi bi-book"></i>',
         'access' => MANAGER | ADMIN,
     ],

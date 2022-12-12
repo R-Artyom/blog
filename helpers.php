@@ -76,3 +76,40 @@ function isCurrentUrl($path): bool
     // Возврат результата сравнения
     return $path === parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 }
+
+/**
+ * Функция загрузки файла на сервер
+ * @param array $file - массив данных файла
+ * @param string $path - ссылка на папку, куда загружать файл
+ * @param string $name - новое название файла
+ * @return string|null возвращает полное новое название файла, включая расширение
+ */
+function uploadFile(array $file, string $path, string $name): ?string
+{
+    // Если есть что загружать
+    if ($file['tmp_name'] !== '') {
+        // Определение номера позиции знака "точка" в названии зашружаемого файла
+        while (true) {
+            // Начальное смещение при поиске
+            static $offset = 0;
+            // Поиск первой точки в названии файла, начиная с $offset
+            $positionPointTmp = mb_strpos($file['name'], '.', $offset);
+            // Если ни одной точки больше не найдено
+            if ($positionPointTmp === false) {
+                break;
+            } else {
+                $positionPoint = $positionPointTmp;
+                // Новое смещение для поиска следующей точки в названии
+                $offset = $positionPoint + 1;
+            }
+        }
+        // Определение расширение файла, зная позицию знака "точка"
+        $filenameExtension = mb_substr($file['name'], $positionPoint);
+        // Новое полное название файла
+        $newNameFile = $name . $filenameExtension;
+        // Загрузка файла в папку
+        move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $path . '/' . $newNameFile);
+    }
+    // Новое название файла
+    return $newNameFile ?? null;
+}

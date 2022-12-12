@@ -453,6 +453,15 @@ header, footer {
     color: var(--color-5);
 }
 
+/* Ссылка "5" */
+.link-style-5 {
+    text-decoration: none;
+    color: var(--color-6);
+}
+.link-style-5:hover, .link-style-5:focus {
+    color: var(--color-6);
+}
+
 /* Чекбокс "1" ("Соглашение с правилами") */
 .check-style-1:checked {
     background-color: var(--color-8);
@@ -500,6 +509,9 @@ header, footer {
 .placeholder-box input {
     display: block;
 }
+.placeholder-box textarea {
+    display: block;
+}
 .placeholder-text {
     display: none;
     width: 100%;
@@ -514,5 +526,8 @@ header, footer {
     user-select: none;
 }
 .placeholder-box input:invalid + .placeholder-text {
+    display: block;
+}
+.placeholder-box textarea:invalid + .placeholder-text {
     display: block;
 }
