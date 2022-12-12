@@ -142,16 +142,16 @@ const DROPDOWN_MENU = [
         'access' => MANAGER | ADMIN,
     ],
     [
-        'title' => 'Пользователи',
-        'path' => '/admin/users',
-        'icon' => '<i class="bi bi-people"></i>',
-        'access' => ADMIN,
-    ],
-    [
         'title' => 'Статические страницы',
         'path' => '/admin/static',
         'icon' => '<i class="bi bi-filetype-html"></i>',
         'access' => MANAGER | ADMIN,
+    ],
+    [
+        'title' => 'Пользователи',
+        'path' => '/admin/users',
+        'icon' => '<i class="bi bi-people"></i>',
+        'access' => ADMIN,
     ],
     [
         'title' => 'Настройки',
