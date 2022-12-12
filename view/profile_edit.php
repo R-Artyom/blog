@@ -97,14 +97,16 @@
                     <div class="mb-4"></div>
                 <?php endif?>
             </div>
-            <div class="col d-flex justify-content-end">
-                <button type="submit" class="btn btn-style-4 width-200 rounded-0 mb-3" name="save" value="yes" formnovalidate>Сохранить изменения</button>
-            </div>
-            <div class="col d-flex justify-content-start">
-                <a class="link-style-4 mb-2" href="<?=PATH_PROFILE?>">
-                    <i class="bi bi-box-arrow-left"></i>
-                    <span class="text-decoration-underline">Отмена</span>
-                </a>
+            <div class="row mb-3">
+                <div class="col d-flex justify-content-start align-items-end">
+                    <a class="link-style-4" href="<?=PATH_PROFILE?>">
+                        <i class="bi bi-box-arrow-left me-1"></i>
+                        <span class="text-decoration-underline">Отмена</span>
+                    </a>
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <button type="submit" class="btn btn-style-4 width-200 rounded-0" name="save" value="yes" formnovalidate>Сохранить изменения</button>
+                </div>
             </div>
         </form>
     <?php endif?>
