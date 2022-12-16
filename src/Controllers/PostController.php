@@ -32,7 +32,7 @@ class PostController extends FormController
             // Только отмодерированные комментарии любого пользователя.
             // Из таблицы users берутся имя пользователя, дата регистрации и название файла-аватарки.
             // Сортировка комментариев по дате, сначала новые.
-            $comments = Comment:: where([['post_id', $idPost], ['active', true]])
+            $result['comments'] = Comment:: where([['post_id', $idPost], ['active', true]])
                 ->leftJoin('users', 'comments.user_id', '=', 'users.id')
                 ->select('comments.*', 'users.name as user_name', 'users.created_at as user_created_at', 'users.img_name')
                 ->orderBy('created_at', 'desc')
@@ -43,19 +43,17 @@ class PostController extends FormController
             // Отмодерированные комментарии любого пользователя + неотмодерированные текущего пользователя.
             // Из таблицы users берутся имя пользователя, дата регистрации и название файла-аватарки.
             // Сортировка комментариев по дате, сначала новые.
-            $comments = Comment:: where([['post_id', $idPost], ['active', true]])
+            $result['comments'] = Comment:: where([['post_id', $idPost], ['active', true]])
                 ->orWhere([['post_id', $idPost], ['user_id', $result['user']['id']], ['active', false]])
                 ->leftJoin('users', 'comments.user_id', '=', 'users.id')
                 ->select('comments.*', 'users.name as user_name', 'users.created_at as user_created_at', 'users.img_name')
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
-        // Заголовок страницы
-        $result['title'] = 'Статьи';
         // Статья
         $result['post'] = $post[0];
-        // Комментарии
-        $result['comments'] = $comments;
+        // Заголовок страницы
+        $result['title'] = 'Статьи';
         // Возврат объекта - шаблона страницы "Детальная страница статьи"
         return new View('posts', $result);
     }

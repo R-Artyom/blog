@@ -42,7 +42,7 @@
                     <div class="col">
                         <div>
                             <div class="me-2 d-inline-flex"><strong><?=$comment->user_name?></strong></div>
-                            <?php if ($comment->active === 0):?>
+                            <?php if ($comment->active === NO):?>
                                 <span class="position-absolute p-1 badge rounded-3 text-style-2 text-bg-style-3">Не проверено модератором</span>
                             <?php endif?>
                             <div class="mb-2 text-style-1 small"><?=date('Зарегистрирован d-m-Y H:i', strtotime($comment->user_created_at))?></div>
