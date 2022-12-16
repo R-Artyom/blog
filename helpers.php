@@ -88,6 +88,8 @@ function uploadFile(array $file, string $path, string $name): ?string
 {
     // Если есть что загружать
     if ($file['tmp_name'] !== '') {
+        // Полный путь
+        $path = $_SERVER['DOCUMENT_ROOT'] . $path . '/';
         // Определение номера позиции знака "точка" в названии зашружаемого файла
         while (true) {
             // Начальное смещение при поиске
@@ -105,11 +107,30 @@ function uploadFile(array $file, string $path, string $name): ?string
         }
         // Определение расширение файла, зная позицию знака "точка"
         $filenameExtension = mb_substr($file['name'], $positionPoint);
-        // Новое полное название файла
-        $newNameFile = $name . $filenameExtension;
+        // Новое полное название файла, time() - для обхода кэширования изображения браузером
+        $newNameFile = $name . '_' . time() . $filenameExtension;
         // Загрузка файла в папку
-        move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . $path . '/' . $newNameFile);
+        move_uploaded_file($file['tmp_name'], $path . $newNameFile);
     }
     // Новое название файла
     return $newNameFile ?? null;
+}
+
+/**
+ * Функция удаления файла на сервере
+ * @param string $path - ссылка на папку проекта, откуда удаляется файл
+ * @param string $name - название удаляемого файла
+ */
+function deleteFile(string $path, string $name)
+{
+    // Полный путь
+    $path = $_SERVER['DOCUMENT_ROOT'] . $path . '/';
+    // Список файлов и каталогов, расположенных в директории изображений к статьям
+    $files = scandir($path);
+    // Если в папке есть файл, который необходимо удалить (без этой проверки
+    // нельзя удалять файл, т.к. в случае отсутствия файла сработает "Warning")
+    if (in_array($name, $files, true)) {
+        // Удаление файла из папки
+        unlink($path . $name);
+    }
 }

@@ -90,32 +90,12 @@ class ProfileController extends FormController
     // Сохранение данных пользователя в базе
     protected function saveData(array $data)
     {
-        // Если на сервер необходимо загрузить новую аватарку
-        if ($_FILES['imgName']['tmp_name'] !== '') {
-            // Определение номера позиции знака "точка" в названии зашружаемого файла
-            while (true) {
-                // Начальное смещение при поиске
-                static $offset = 0;
-                // Поиск первой точки в названии файла, начиная с $offset
-                $positionPointTmp  = mb_strpos($_FILES['imgName']['name'], '.', $offset);
-                // Если ни одной точки больше не найдено
-                if ($positionPointTmp === false) {
-                    break;
-                } else {
-                    $positionPoint = $positionPointTmp;
-                    // Менем смещение, для поиска следующей точки в названии
-                    $offset = $positionPoint + 1;
-                }
-            }
-            // Определение расширение файла, зная позицию знака "точка"
-            $filenameExtension = mb_substr($_FILES['imgName']['name'], $positionPoint);
-            // Новое уникальное название изображения, которое будет присвоено пользователю
-            // (состоит из ID пользователя + расширение загружаемого файла)
-            $newNamePhoto = Profile::getInstance()->get('id') . $filenameExtension;
-            // Загрузка файла в папку, если нет никаких ошибок
-            move_uploaded_file($_FILES['imgName']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . PATH_IMG_USERS . '/' . $newNamePhoto);
+        // Загрузить изображение на сервер
+        $newNamePhoto = uploadFile($_FILES['imgName'],PATH_IMG_USERS, Profile::getInstance()->get('id'));
+        // Удалить старое изображение на сервере
+        if (isset($newNamePhoto) && Profile::getInstance()->get('img_name') !== 'default.jpg') {
+            deleteFile(PATH_IMG_USERS, Profile::getInstance()->get('img_name'));
         }
-
         // Обновление данных в базе
         User::where('id', Profile::getInstance()->get('id'))
             ->update([

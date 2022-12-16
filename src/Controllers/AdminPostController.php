@@ -121,16 +121,7 @@ class AdminPostController extends FormController
             // Если в БД есть такая запись
             if (count($post) > 0) {
                 // Удалить файл изображения на сервере
-                $imgPath = $_SERVER['DOCUMENT_ROOT'] . PATH_IMG_POSTS;
-                // Список файлов и каталогов, расположенных в директории изображений к статьям
-                $files = scandir($imgPath);
-                $a = $post[0]->img_name;
-                // Если в папке есть файл, который необходимо удалить (без этой проверки
-                // нельзя удалять файл, т.к. в случае отсутствия файла сработает "Warning")
-                if (in_array($post[0]->img_name, $files, true)) {
-                    // Удаление файла изображения из папки
-                    unlink($imgPath . '/' . $post[0]->img_name);
-                }
+                deleteFile(PATH_IMG_POSTS, $post[0]->img_name);
                 // Удалить запись из БД
                 Post::where('id', $data['idPost'])->delete();
             }
@@ -138,8 +129,14 @@ class AdminPostController extends FormController
         }
         // Если это редактирование статьи
         if (isset($data['idPost'])) {
+            // Получить данные статьи
+            $post = Post::where('id', $data['idPost'])->get();
             // Загрузить изображение на сервер
             $newNamePhoto = uploadFile($_FILES['imgName'],PATH_IMG_POSTS, $data['idPost']);
+            // Удалить старое изображение на сервере
+            if (isset($newNamePhoto) && $post[0]->img_name !== 'default.jpg') {
+                deleteFile(PATH_IMG_POSTS, $post[0]->img_name);
+            }
             // Обновление данных в базе
             Post::where('id', $data['idPost'])
                 ->update([
