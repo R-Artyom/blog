@@ -20,6 +20,8 @@ const PATH_IMG_POSTS = '/img/posts';
 const PATH_HOME = '/';
 // Страница "О нас"
 const PATH_ABOUT = '/about';
+// Страница "Управление комментариями"
+const PATH_ADMIN_COMMENTS = '/admin/comments';
 // Страница "Управление статьями"
 const PATH_ADMIN_POSTS = '/admin/posts';
 // Страница "Детальная страница статьи"
@@ -63,6 +65,7 @@ const ROLES = [
  */
 const ACCESS_TO_PAGE = [
     'about'         => ALL, // О нас
+    'admin_comments' => ADMIN | MANAGER, // Управление комментариями
     'admin_post_edit' => ADMIN | MANAGER, // Редактирование статьи
     'admin_posts'   => ADMIN | MANAGER, // Управление статьями
     'authorization' => UNREG, // Авторизация
@@ -137,7 +140,7 @@ const DROPDOWN_MENU = [
     ],
     [
         'title' => 'Комментарии',
-        'path' => '/admin/comments',
+        'path' => PATH_ADMIN_COMMENTS,
         'icon' => '<i class="bi bi-chat-square-text"></i>',
         'access' => MANAGER | ADMIN,
     ],

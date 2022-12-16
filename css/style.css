@@ -10,13 +10,13 @@ body {
     flex: 1 0 auto;
 }
 
-/* Для всех элементов класса post */
-.post:not(:last-child) {
+/* Для всех элементов класса post или comment */
+.post:not(:last-child), .comment:not(:last-child) {
     /* Отступ снизу */
     margin-bottom: 1.5rem;
 }
-/* Для последнего элемента класса post */
-.post:last-child {
+/* Для последнего элемента класса post или comment */
+.post:last-child, .comment:last-child {
     /* Отступ снизу */
     margin-bottom: 0;
 }

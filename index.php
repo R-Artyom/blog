@@ -2,6 +2,7 @@
 
 // Импорт классов из разных пространств имён
 use App\Application;
+use App\Controllers\AdminCommentsController;
 use App\Controllers\AdminPostController;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
@@ -29,6 +30,10 @@ $session->run();
 $router = new Router();
 // Добавление в роутер страницы сайта "О нас" с HTTP-методом запроса GET
 $router->get(PATH_ABOUT, [StaticPageController::class, 'about']);
+// Страница "Управление комментариями"
+$router->get(PATH_ADMIN_COMMENTS, [AdminCommentsController::class, 'adminComments']);
+// Страница "Редактирование комментария"
+$router->post(PATH_ADMIN_COMMENTS . '/*/edit', [AdminCommentsController::class, 'adminComments']);
 // Страница "Управление статьями"
 $router->get(PATH_ADMIN_POSTS, [AdminPostController::class, 'adminPost']);
 // Страница "Редактирование статьи"
