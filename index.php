@@ -4,6 +4,7 @@
 use App\Application;
 use App\Controllers\AdminCommentsController;
 use App\Controllers\AdminPostController;
+use App\Controllers\AdminUserController;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
 use App\Controllers\PostController;
@@ -46,6 +47,10 @@ $router->get(PATH_ADMIN_POSTS . '/add', [AdminPostController::class, 'adminPostA
 $router->post(PATH_ADMIN_POSTS . '/add', [AdminPostController::class, 'adminPostAdd']);
 // Страница "Удаление статьи"
 $router->post(PATH_ADMIN_POSTS . '/*/delete', [AdminPostController::class, 'adminPostDelete']);
+// Страница "Управление пользователями"
+$router->get(PATH_ADMIN_USERS, [AdminUserController::class, 'adminUsers']);
+// Страница "Редактирование профиля пользователя"
+$router->post(PATH_ADMIN_USERS, [AdminUserController::class, 'adminUsers']);
 // Страница "Авторизация"
 $router->get(PATH_AUTHORIZATION, [AuthorizationController::class, 'authorization']);
 // Страница "Авторизация - отправка формы"

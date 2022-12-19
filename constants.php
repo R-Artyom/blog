@@ -24,6 +24,8 @@ const PATH_ABOUT = '/about';
 const PATH_ADMIN_COMMENTS = '/admin/comments';
 // Страница "Управление статьями"
 const PATH_ADMIN_POSTS = '/admin/posts';
+// Страница "Управление пользователями"
+const PATH_ADMIN_USERS = '/admin/users';
 // Страница "Детальная страница статьи"
 const PATH_POSTS = '/posts';
 // Страница "Профиль пользователя"
@@ -68,6 +70,7 @@ const ACCESS_TO_PAGE = [
     'admin_comments' => ADMIN | MANAGER, // Управление комментариями
     'admin_post_edit' => ADMIN | MANAGER, // Редактирование статьи
     'admin_posts'   => ADMIN | MANAGER, // Управление статьями
+    'admin_users'   => ADMIN, // Управление пользователями
     'authorization' => UNREG, // Авторизация
     'homepage'      => ALL, // Главнаая
     'posts'         => ALL, // Детальная страница статьи
@@ -152,7 +155,7 @@ const DROPDOWN_MENU = [
     ],
     [
         'title' => 'Пользователи',
-        'path' => '/admin/users',
+        'path' => PATH_ADMIN_USERS,
         'icon' => '<i class="bi bi-people"></i>',
         'access' => ADMIN,
     ],

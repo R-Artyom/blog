@@ -416,6 +416,15 @@ header, footer {
     color: var(--color-6);
 }
 
+.form-select-style-1:focus {
+    /* Цвет текста поля формы */
+    color: var(--color-5);
+    /* Рамка поля */
+    border-color: var(--color-4);
+    /* Тень вокруг поля */
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
 /* Ссылка "1" ("Зарегистрироваться") */
 .link-style-1 {
     color: var(--color-3);
