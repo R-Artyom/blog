@@ -33,7 +33,7 @@
                                 </button>
                             <?php endif?>
                         </div>
-                        <div class="col-auto d-flex justify-content-end"">
+                        <div class="col-auto d-flex justify-content-end">
                             <input type="text" name="idComment" value="<?=$comment->id?>" hidden>
                             <button class="btn btn-style-5 rounded-0" type="submit" name="delete" value="yes">
                                 <i class="bi bi-trash me-1"></i>Удалить комментарий
