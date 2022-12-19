@@ -24,7 +24,7 @@
                     <p class="mb-4"><?=$post->short_text?></p>
 
                     <div class="row mb-2">
-                        <a class="col d-flex link-style-4 justify-content-start align-items-end " href="<?=PATH_ADMIN_POSTS . '/' . $post->id . '/edit'?>">
+                        <a class="col d-flex link-style-4 justify-content-start align-items-end" href="<?=PATH_ADMIN_POSTS . '/' . $post->id . '/edit'?>">
                             <i class="bi bi-pencil me-1"></i>
                             <span class="text-decoration-underline">Редактировать статью</span>
                         </a>

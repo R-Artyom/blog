@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Exception\NotFoundException;
 use App\Models\Comment;
-use App\Models\Post;
-use App\Profile;
 use App\View\View;
 use Exception;
 
@@ -55,9 +52,7 @@ class AdminCommentsController extends FormController
         if (isset($data['approve'])) {
             // Обновление данных в базе
             Comment::where('id', $data['idComment'])
-                ->update([
-                    'active' => $data['approve'] === 'yes' ? YES : NO,
-                ]);
+                ->update(['active' => $data['approve'] === 'yes' ? YES : NO]);
             throw new Exception($data['approve'] === 'yes' ? 'Комментарий одобрен!' : 'Комментарий отклонен!', FORM_SUCCESS);
         }
     }
