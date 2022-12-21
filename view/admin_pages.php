@@ -44,7 +44,7 @@
 <?php else:?>
     <div class="row g-0 m-auto">
         <div class="post row g-0">
-            <span class="post h3">На данный момент не создано ни одной статической страницы</span>
+            <span class="post h3">На данный момент не создано ни одной статичной страницы</span>
         </div>
         <div class="post row g-0 border">
             <div class="col d-flex link-style-3 justify-content-center align-items-center position-relative border shadow">

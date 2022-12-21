@@ -19,7 +19,7 @@ class View implements Renderable
     {
         // Добавление данных пользователя в свойство класса
         $data['user'] = Profile::getInstance()->getAll();
-        // Все заголовки статических страниц в одном массиве
+        // Все заголовки статичных страниц в одном массиве
         $data['staticPages'] = Page::pluck('title', 'id')->toArray();
         // Сохранение
         $this->view = $view;

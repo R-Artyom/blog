@@ -76,19 +76,19 @@ $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 $router->get(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"
 $router->post(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
-// Страница "Управление статичскими страницами"
+// Страница "Управление статичными страницами"
 $router->get(PATH_ADMIN_PAGES, [AdminPageController::class, 'adminStatic']);
-// Страница "Редактирование статической страницы"
+// Страница "Редактирование статичной страницы"
 $router->get(PATH_ADMIN_PAGES . '/*/edit', [AdminPageController::class, 'adminStaticEdit']);
-// Страница "Редактирование статической страницы - отправка формы"
+// Страница "Редактирование статичной страницы - отправка формы"
 $router->post(PATH_ADMIN_PAGES . '/*/edit', [AdminPageController::class, 'adminStaticEdit']);
-// Страница "Добавление новой статической страницы"
+// Страница "Добавление новой статичной страницы"
 $router->get(PATH_ADMIN_PAGES . '/add', [AdminPageController::class, 'adminStaticAdd']);
-// Страница "Добавление новой статической страницы - отправка формы"
+// Страница "Добавление новой статичной страницы - отправка формы"
 $router->post(PATH_ADMIN_PAGES . '/add', [AdminPageController::class, 'adminStaticAdd']);
-// Страница "Удаление статической страницы"
+// Страница "Удаление статичной страницы"
 $router->post(PATH_ADMIN_PAGES . '/*/delete', [AdminPageController::class, 'adminStaticDelete']);
-// Страница "Статическая"
+// Страница "Статичной"
 $router->get(PATH_STATIC_PAGES . '/*', [StaticPageController::class, 'staticPages']);
 
 // Страница "Оформление подписки"

@@ -16,7 +16,7 @@ const ALLOWED_IMG_TYPE = ['image/jpeg', 'image/png'];
 const PATH_IMG_USERS = '/img/users';
 // Изображения к статьям
 const PATH_IMG_POSTS = '/img/posts';
-// Изображения к статическим страницам
+// Изображения к статичным страницам
 const PATH_IMG_PAGES = '/img/pages';
 // Страница "Главная"
 const PATH_HOME = '/';
@@ -26,11 +26,11 @@ const PATH_ABOUT = '/about';
 const PATH_ADMIN_COMMENTS = '/admin/comments';
 // Страница "Управление статьями"
 const PATH_ADMIN_POSTS = '/admin/posts';
-// Страница "Управление статическими страницами"
+// Страница "Управление статичными страницами"
 const PATH_ADMIN_PAGES = '/admin/pages';
 // Страница "Управление пользователями"
 const PATH_ADMIN_USERS = '/admin/users';
-// Страница "Статическая"
+// Страница "Статичная"
 const PATH_STATIC_PAGES = '/static_pages';
 // Страница "Детальная страница статьи"
 const PATH_POSTS = '/posts';
@@ -76,12 +76,12 @@ const ACCESS_TO_PAGE = [
     'admin_comments' => ADMIN | MANAGER, // Управление комментариями
     'admin_post_edit' => ADMIN | MANAGER, // Редактирование статьи
     'admin_posts'   => ADMIN | MANAGER, // Управление статьями
-    'admin_pages'  => ADMIN | MANAGER, // Управление статическими страницами
-    'admin_page_edit'  => ADMIN | MANAGER, // Редактирование статической страницы
+    'admin_pages'  => ADMIN | MANAGER, // Управление статичными страницами
+    'admin_page_edit'  => ADMIN | MANAGER, // Редактирование статичной страницы
     'admin_users'   => ADMIN, // Управление пользователями
     'authorization' => UNREG, // Авторизация
     'homepage'      => ALL, // Главнаая
-    'pages'         => ALL, // Страница статическая
+    'pages'         => ALL, // Страница статичная
     'posts'         => ALL, // Детальная страница статьи
     'profile'       => REG, // Профиль пользователя
     'profile_edit'  => REG, // Редактирование профиля пользователя
@@ -157,7 +157,7 @@ const DROPDOWN_MENU = [
         'access' => MANAGER | ADMIN,
     ],
     [
-        'title' => 'Статические страницы',
+        'title' => 'Статичные страницы',
         'path' => PATH_ADMIN_PAGES,
         'icon' => '<i class="bi bi-filetype-html"></i>',
         'access' => MANAGER | ADMIN,

@@ -29,7 +29,7 @@ class StaticPageController
         return new View('terms', ['title' => 'Правила пользования сайтом']);
     }
 
-    // Страница "Статическая"
+    // Страница "Статичная"
     public function staticPages($idPage): View
     {
         // Поиск страницы с указанным id
@@ -43,7 +43,7 @@ class StaticPageController
         $result['page'] = $page[0];
         // Заголовок страницы
         $result['title'] = $page[0]->title;
-        // Возврат объекта - шаблона страницы "Статическая страница"
+        // Возврат объекта - шаблона страницы "Статичная страница"
         return new View('pages', $result);
     }
 }

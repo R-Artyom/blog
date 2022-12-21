@@ -45,7 +45,7 @@
             </div>
 
             <p class="mb-2">
-                <strong>Текст статической страницы:</strong>
+                <strong>Текст статичной страницы:</strong>
             </p>
             <div>
                 <label class="placeholder-box">

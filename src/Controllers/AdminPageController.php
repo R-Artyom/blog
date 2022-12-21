@@ -9,31 +9,31 @@ use Exception;
 
 class AdminPageController extends FormController
 {
-    // Страница "Управление статическими страницами"
+    // Страница "Управление статичными страницами"
     public function adminStatic(): View
     {
         // Массив объектов таблицы pages модели Page, отсортированный по убыванию даты создания
         $result['pages'] = Page::orderBy('created_at', 'desc')->get();
         // Заголовок страницы
-        $result['title'] = 'Управление статическими страницами';
-        // Возврат объекта - шаблона страницы "Управление статическими страницами"
+        $result['title'] = 'Управление статичными страницами';
+        // Возврат объекта - шаблона страницы "Управление статичными страницами"
         return new View('admin_pages', $result);
     }
 
-    // Страница "Редактирование статической страницы"
+    // Страница "Редактирование статичной страницы"
     public function adminStaticEdit($idPage): View
     {
         // Проверка формы
         $result['form'] = $this->checkForm();
         // Массив объектов
         $page = Page::where('id', $idPage)->get();
-        // Если в БД не найдено ни одной статической страницы с указанным id
+        // Если в БД не найдено ни одной статичной страницы с указанным id
         if (count($page) < 1) {
             // Выброс исключения
             throw new NotFoundException('Страница не найдена', 404);
         }
         // Заголовок страницы
-        $result['title'] = 'Редактирование статической страницы';
+        $result['title'] = 'Редактирование статичной страницы';
         // Страница
         $result['page'] = $page[0];
         // Если форма не отправлялась, то некоторые поля надо заполнить сразу
@@ -41,27 +41,27 @@ class AdminPageController extends FormController
             $result['form']['title'] = $result['page']->title;
             $result['form']['text'] = $result['page']->text;
         }
-        // Возврат объекта - шаблона страницы "Редактирование статической страницы"
+        // Возврат объекта - шаблона страницы "Редактирование статичной страницы"
         return new View('admin_page_edit', $result);
     }
 
-    // Страница "Добавление новой статической страницы"
+    // Страница "Добавление новой статичной страницы"
     public function adminStaticAdd(): View
     {
         // Проверка формы
         $result['form'] = $this->checkForm();
         // Заголовок страницы
-        $result['title'] = 'Добавление новой статической страницы';
-        // Возврат объекта - шаблона страницы "Редактирование статической страницы"
+        $result['title'] = 'Добавление новой статичной страницы';
+        // Возврат объекта - шаблона страницы "Редактирование статичной страницы"
         return new View('admin_page_edit', $result);
     }
 
-    // Страница "Удаление статической страницы"
+    // Страница "Удаление статичной страницы"
     public function adminStaticDelete($idPage): View
     {
         // Массив объектов
         $page = Page::where('id', $idPage)->get();
-        // Если в БД не найдено ни одной статической страницы с указанным id
+        // Если в БД не найдено ни одной статичной страницы с указанным id
         if (count($page) < 1) {
             // Выброс исключения
             throw new NotFoundException('Страница не найдена', 404);
@@ -69,25 +69,25 @@ class AdminPageController extends FormController
         // Проверка формы
         $result['form'] = $this->checkForm();
         // Заголовок страницы
-        $result['title'] = 'Удаление статической страницы';
+        $result['title'] = 'Удаление статичной страницы';
         // Статья
         $result['page'] = $page[0];
-        // Возврат объекта - шаблона страницы "Редактирование статической страницы"
+        // Возврат объекта - шаблона страницы "Редактирование статичной страницы"
         return new View('admin_page_edit', $result);
     }
 
     // Валидация полей формы
     protected function validateForm(array $data)
     {
-        // Если это не удаление статической страницы
+        // Если это не удаление статичной страницы
         if (!isset($data['delete'])) {
             // Если поле 'Заголовок' не заполнено
             if (!(isset($data['title']) && $data['title'] !== '')) {
-                throw new Exception('Введите заголовок статической страницы', FORM_TITLE);
+                throw new Exception('Введите заголовок статичной страницы', FORM_TITLE);
             }
             // Если поле 'Текст' не заполнено
             if (!(isset($data['text']) && $data['text'] !== '')) {
-                throw new Exception('Введите текст статической страницы', FORM_TEXT);
+                throw new Exception('Введите текст статичной страницы', FORM_TEXT);
             }
             // Если причина ошибки - слишком большой размер файла
             if ($_FILES['imgName']['error'] === UPLOAD_ERR_FORM_SIZE) {
@@ -101,7 +101,7 @@ class AdminPageController extends FormController
             }
             // Если "Изображение к странице" не загружено и это добавления новой страницы
             if (($_FILES['imgName']['tmp_name'] === '') && !isset($data['idPage'])) {
-                throw new Exception('Загрузите изображение к статической странице', FORM_IMAGE);
+                throw new Exception('Загрузите изображение к статичной странице', FORM_IMAGE);
             }
         }
     }
@@ -120,7 +120,7 @@ class AdminPageController extends FormController
                 // Удалить запись из БД
                 Page::where('id', $data['idPage'])->delete();
             }
-            throw new Exception('Статическая страница успешно удалена!', FORM_SUCCESS);
+            throw new Exception('Статичная страница успешно удалена!', FORM_SUCCESS);
         }
         // Если это редактирование страницы
         if (isset($data['idPage'])) {
@@ -139,7 +139,7 @@ class AdminPageController extends FormController
                     'text' => $data['text'],
                     'img_name' => $newNamePhoto ?? $data['imgName'],
                 ]);
-            throw new Exception('Статическая страница успешно отредактирована!', FORM_SUCCESS);
+            throw new Exception('Статичная страница успешно отредактирована!', FORM_SUCCESS);
         }
         // Если это добавление новой страницы
         // Создать новую запись в таблице (без названия файла изображения)
@@ -154,6 +154,6 @@ class AdminPageController extends FormController
         // Обновить название файла изображения в базе
         Page::where('id', $page[0]->id)
             ->update(['img_name' => $newNamePhoto]);
-        throw new Exception('Статическая страница успешно добавлена!', FORM_SUCCESS);
+        throw new Exception('Статичная страница успешно добавлена!', FORM_SUCCESS);
     }
 }
