@@ -54,8 +54,6 @@
                                     </li>
                                 <?php endif?>
                             <?php endforeach?>
-<!--                            <li><a class="dropdown-item active" href="#">Активная ссылка</a></li>-->
-<!--                            <li><a class="dropdown-item disabled" href="#">Отключенная ссылка</a></li>-->
                         </ul>
                     </div>
                 <?php endif?>
@@ -64,6 +62,9 @@
         <div class="container py-2 g-2">
             <nav class="nav d-flex justify-content-start">
                 <a class="p-2 nav-link link-style-2 <?=isCurrentUrl(PATH_HOME) ? 'active' : ''?>" href="<?=PATH_HOME?>">Главная</a>
+                <?php foreach ($staticPages as $key => $value):?>
+                    <a class="p-2 nav-link link-style-2 <?=isCurrentUrl(PATH_STATIC_PAGES . '/' . $key) ? 'active' : ''?>" href="<?=PATH_STATIC_PAGES . '/' . $key?>"><?=$value?></a>
+                <?php endforeach?>
                 <a class="p-2 nav-link link-style-2 <?=isCurrentUrl(PATH_TERMS) ? 'active' : ''?>" href="<?=PATH_TERMS?>">Правила пользования сайтом</a>
             </nav>
         </div>

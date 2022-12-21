@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 // Импорт необходимого класса
 use App\Exception\NotFoundException;
-use App\Models\Comment;
-use App\Models\Post;
+use App\Models\Page;
 use App\View\View;
 
 class StaticPageController
@@ -28,5 +27,23 @@ class StaticPageController
     {
         // Возврат объекта - шаблона страницы "Правила пользования сайтом"
         return new View('terms', ['title' => 'Правила пользования сайтом']);
+    }
+
+    // Страница "Статическая"
+    public function staticPages($idPage): View
+    {
+        // Поиск страницы с указанным id
+        $page = Page::where('id', $idPage)->get();
+        // Если в БД не найдено ни одной страницы
+        if (count($page) < 1) {
+            // Выброс исключения
+            throw new NotFoundException('Страница не найдена', 404);
+        }
+        // Страница
+        $result['page'] = $page[0];
+        // Заголовок страницы
+        $result['title'] = $page[0]->title;
+        // Возврат объекта - шаблона страницы "Статическая страница"
+        return new View('pages', $result);
     }
 }

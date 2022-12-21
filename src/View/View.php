@@ -4,6 +4,7 @@ namespace App\View;
 // Импорт классов
 use App\Exception\ApplicationException;
 use App\Exception\NotFoundException;
+use App\Models\Page;
 use App\Profile;
 
 // Класс "Шаблонизатор приложения" - используется для подключения view страницы
@@ -18,6 +19,8 @@ class View implements Renderable
     {
         // Добавление данных пользователя в свойство класса
         $data['user'] = Profile::getInstance()->getAll();
+        // Все заголовки статических страниц в одном массиве
+        $data['staticPages'] = Page::pluck('title', 'id')->toArray();
         // Сохранение
         $this->view = $view;
         $this->data = $data;

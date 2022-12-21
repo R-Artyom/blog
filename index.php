@@ -4,6 +4,7 @@
 use App\Application;
 use App\Controllers\AdminCommentsController;
 use App\Controllers\AdminPostController;
+use App\Controllers\AdminPageController;
 use App\Controllers\AdminUserController;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
@@ -41,9 +42,9 @@ $router->get(PATH_ADMIN_POSTS, [AdminPostController::class, 'adminPost']);
 $router->get(PATH_ADMIN_POSTS . '/*/edit', [AdminPostController::class, 'adminPostEdit']);
 // Страница "Редактирование статьи - отправка формы"
 $router->post(PATH_ADMIN_POSTS . '/*/edit', [AdminPostController::class, 'adminPostEdit']);
-// Страница "Редактирование статьи"
+// Страница "Добавление новой статьи"
 $router->get(PATH_ADMIN_POSTS . '/add', [AdminPostController::class, 'adminPostAdd']);
-// Страница "Редактирование статьи - отправка формы"
+// Страница "Добавление новой статьи - отправка формы"
 $router->post(PATH_ADMIN_POSTS . '/add', [AdminPostController::class, 'adminPostAdd']);
 // Страница "Удаление статьи"
 $router->post(PATH_ADMIN_POSTS . '/*/delete', [AdminPostController::class, 'adminPostDelete']);
@@ -75,6 +76,21 @@ $router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 $router->get(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"
 $router->post(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
+// Страница "Управление статичскими страницами"
+$router->get(PATH_ADMIN_PAGES, [AdminPageController::class, 'adminStatic']);
+// Страница "Редактирование статической страницы"
+$router->get(PATH_ADMIN_PAGES . '/*/edit', [AdminPageController::class, 'adminStaticEdit']);
+// Страница "Редактирование статической страницы - отправка формы"
+$router->post(PATH_ADMIN_PAGES . '/*/edit', [AdminPageController::class, 'adminStaticEdit']);
+// Страница "Добавление новой статической страницы"
+$router->get(PATH_ADMIN_PAGES . '/add', [AdminPageController::class, 'adminStaticAdd']);
+// Страница "Добавление новой статической страницы - отправка формы"
+$router->post(PATH_ADMIN_PAGES . '/add', [AdminPageController::class, 'adminStaticAdd']);
+// Страница "Удаление статической страницы"
+$router->post(PATH_ADMIN_PAGES . '/*/delete', [AdminPageController::class, 'adminStaticDelete']);
+// Страница "Статическая"
+$router->get(PATH_STATIC_PAGES . '/*', [StaticPageController::class, 'staticPages']);
+
 // Страница "Оформление подписки"
 $router->post(PATH_SUBSCRIPTION, [SubscriptionController::class, 'subscription']);
 // Страница "Правила пользования сайтом"
