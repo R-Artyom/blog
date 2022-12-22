@@ -143,3 +143,21 @@ function genToken(string $data): string
 {
     return md5($data . time());
 }
+
+/**
+ * Фильтрация данных
+ * @param array $data - фильтруемый массив
+ * @return array - отфильтрованный массив
+ */
+function filterData(array $data): array
+{
+    $result = [];
+    // Конвертирование
+    foreach ($data as $key => $value) {
+        // Копирование всех непустых данных
+        if (isset($value) && $value !== '') {
+            $result[$key] = htmlspecialchars($value);
+        }
+    }
+    return $result;
+}

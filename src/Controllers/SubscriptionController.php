@@ -15,12 +15,8 @@ class SubscriptionController extends FormController
     {
         // Если есть GET-параметры
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            // Конвертирование для безопасности
-            foreach ($_GET as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
+            // Фильтрация GET-параметров
+            $result = filterData($_GET);
         }
         // Поиск подписчика
         $subscriber = Subscriber::where('token', $result['token'])->get();

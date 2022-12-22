@@ -14,11 +14,7 @@ abstract class FormController
         // Если форма была отправлена
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Копирование всех непустых данных формы
-            foreach ($_POST as $key => $value) {
-                if (isset($value) && $value !== '') {
-                    $result[$key] = htmlspecialchars($value);
-                }
-            }
+            $result = filterData($_POST);
             try {
                 // Валидация полей формы
                 $this->validateForm($result);
