@@ -18,6 +18,8 @@ const PATH_IMG_USERS = '/img/users';
 const PATH_IMG_POSTS = '/img/posts';
 // Изображения к статичным страницам
 const PATH_IMG_PAGES = '/img/pages';
+// Логи писем с уведомлениями
+const PATH_LOGS_MAILS = '/logs/mails';
 // Страница "Главная"
 const PATH_HOME = '/';
 // Страница "О нас"

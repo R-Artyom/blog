@@ -134,3 +134,12 @@ function deleteFile(string $path, string $name)
         unlink($path . $name);
     }
 }
+
+/**
+ * Генерация токена
+ * @param string $data - Сообщение для хеширования
+ */
+function genToken(string $data): string
+{
+    return md5($data . time());
+}

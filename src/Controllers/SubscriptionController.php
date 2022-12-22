@@ -3,12 +3,45 @@
 namespace App\Controllers;
 
 // Импорт необходимых классов
+use App\Exception\NotFoundException;
 use App\Models\Subscriber;
 use App\View\View;
 use Exception;
 
 class SubscriptionController extends FormController
 {
+    // Страница "Отписка по ссылке"
+    public function unsubscriptionByLink(): View
+    {
+        // Если есть GET-параметры
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            // Конвертирование для безопасности
+            foreach ($_GET as $key => $value) {
+                if (isset($value) && $value !== '') {
+                    $result[$key] = htmlspecialchars($value);
+                }
+            }
+        }
+        // Поиск подписчика
+        $subscriber = Subscriber::where('token', $result['token'])->get();
+        // Если данный email подписан на рассылку
+        if (isset($result['token']) && count($subscriber) > 0) {
+            // Удаление подписчика из таблицы
+            Subscriber::where('token', $result['token'])->delete();
+            // Сообщение без выброса исключения
+            $result['form']['message'] = "Почтовый адрес \"{$subscriber[0]->email}\" успешно отписан от рассылки!";
+            // Код
+            $result['form']['error'] = FORM_SUCCESS;
+        } else {
+            // Выброс исключения
+            throw new NotFoundException('Страница не найдена', 404);
+        }
+        // Заголовок страницы
+        $result['title'] = 'Оформление отписки';
+        // Возврат объекта - шаблона страницы "Оформление подписки"
+        return new View('subscription', $result);
+    }
+
     // Страница "Оформление подписки"
     public function subscription(): View
     {
@@ -40,7 +73,10 @@ class SubscriptionController extends FormController
         if ($data['subscribe'] === 'yes') {
             // Если данный email еще не подписан на рассылку
             if (count(Subscriber::where('email', $data['email'])->get()) < 1) {
-                Subscriber::insert(['email' => $data['email']]);
+                Subscriber::insert([
+                    'email' => $data['email'],
+                    'token' => genToken($data['email'])
+                ]);
             }
             throw new Exception("Поздравляем! Почтовый адрес \"{$data['email']}\" подписан на получение уведомлений о появлении новой статьи на сайте!", FORM_SUCCESS);
         // Отписка

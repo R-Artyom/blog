@@ -25,6 +25,9 @@ class Application
     public function run(string $url, string $method)
     {
         try {
+            // Необходимо взять только основной путь, без GET-параметров
+            $url = explode('?', $url);
+            $url = $url[0];
             // Отображение результата работы метода dispatch() маршрутизатора
             $result = $this->router->dispatch($url, $method);
             // Если $result - объект, реализующий интерфейс Renderable

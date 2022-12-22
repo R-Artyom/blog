@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 21 2022 г., 08:09
+-- Время создания: Дек 22 2022 г., 11:11
 -- Версия сервера: 5.7.38
 -- Версия PHP: 7.4.29
 
@@ -159,21 +159,20 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `subscribers` (
   `id` int(11) NOT NULL COMMENT 'Уникальный идентификатор подписчика',
-  `email` varchar(255) NOT NULL COMMENT 'Электронная почта подписчика'
+  `email` varchar(255) NOT NULL COMMENT 'Электронная почта подписчика',
+  `token` varchar(255) NOT NULL COMMENT 'Уникальная последовательность символов для формирования защищенной от подбора ссылки для отписки'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `subscribers`
 --
 
-INSERT INTO `subscribers` (`id`, `email`) VALUES
-(9, 'admin@gmail.com'),
-(16, 'asd@mail.ru'),
-(23, 'hjk@po.ru'),
-(22, 'manager@gmail.com'),
-(11, 'sdf@ngs.ru'),
-(10, 'tem@gmail.com'),
-(25, 'user@gmail.com');
+INSERT INTO `subscribers` (`id`, `email`, `token`) VALUES
+(1, 'admin@gmail.com', '52bb37c85d4a96ec7d75344755765218'),
+(2, 'manager@gmail.com', '3bac279629ec3df801b454b07cfc7215'),
+(3, 'user@gmail.com', 'df1d49a7489c92bf5caa025f3e1c12ec'),
+(4, 'tem@gmail.com', '3905e4af68dd143a408b6f32263c5fd0'),
+(5, 'asd@mail.ru', '9df514ec9d08186daa3e4ee10a829dd4');
 
 -- --------------------------------------------------------
 
@@ -293,7 +292,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT для таблицы `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор статьи', AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор статьи', AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT для таблицы `roles`
@@ -305,7 +304,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT для таблицы `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор подписчика', AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Уникальный идентификатор подписчика', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

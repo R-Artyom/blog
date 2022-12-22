@@ -93,6 +93,8 @@ $router->get(PATH_STATIC_PAGES . '/*', [StaticPageController::class, 'staticPage
 
 // Страница "Оформление подписки"
 $router->post(PATH_SUBSCRIPTION, [SubscriptionController::class, 'subscription']);
+// Страница "Отписка по ссылке"
+$router->get(PATH_SUBSCRIPTION, [SubscriptionController::class, 'unsubscriptionByLink']);
 // Страница "Правила пользования сайтом"
 $router->get(PATH_TERMS, [StaticPageController::class, 'terms']);
 

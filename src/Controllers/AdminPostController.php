@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Exception\NotFoundException;
 use App\Models\Post;
+use App\Models\Subscriber;
+use App\Notification;
 use App\View\View;
 use Exception;
 
@@ -163,6 +165,9 @@ class AdminPostController extends FormController
             ->update([
                 'img_name' => $newNamePhoto,
             ]);
+        // Отправка email-уведомления всем пользователям, подписанным на рассылку
+        (new Notification(Subscriber::pluck('token','email'), $post))->send();
+        // Отображение сообщения
         throw new Exception('Статья успешно опубликована!', FORM_SUCCESS);
     }
 }
