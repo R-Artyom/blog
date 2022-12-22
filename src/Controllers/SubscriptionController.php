@@ -18,10 +18,8 @@ class SubscriptionController extends FormController
             // Фильтрация GET-параметров
             $result = filterData($_GET);
         }
-        // Поиск подписчика
-        $subscriber = Subscriber::where('token', $result['token'])->get();
         // Если данный email подписан на рассылку
-        if (isset($result['token']) && count($subscriber) > 0) {
+        if (isset($result['token']) && count($subscriber = Subscriber::where('token', $result['token'])->get()) > 0) {
             // Удаление подписчика из таблицы
             Subscriber::where('token', $result['token'])->delete();
             // Сообщение без выброса исключения
