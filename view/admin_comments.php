@@ -4,6 +4,7 @@
     </div>
 <?php elseif (isset($comments) && count($comments) > 0):?>
     <div class="row g-0">
+        <?php require 'layout/pagination_header.php';?>
         <?php foreach ($comments as $comment):?>
             <div class="row comment g-0 px-5 py-4 border shadow">
                 <div class="col-auto pt-2 me-4 mb-4 avatar-thumbnail">
@@ -43,6 +44,7 @@
                 </div>
             </div>
         <?php endforeach?>
+        <?php require 'layout/pagination_footer.php';?>
     </div>
 <?php else:?>
     <span class="h3">Извините, пользователи ещё не написали ни олного комментария к статьям</span>
