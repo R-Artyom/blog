@@ -161,3 +161,13 @@ function filterData(array $data): array
     }
     return $result;
 }
+
+/**
+ * Запрос основного пути страницы (без GET-параметров)
+ */
+function getActiveUrl(): string
+{
+    $url = $_SERVER['REQUEST_URI'];
+    $url = explode('?', $url);
+    return $url[0];
+}
