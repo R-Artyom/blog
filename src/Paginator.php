@@ -21,10 +21,10 @@ class Paginator
     /**
      * Инициализация некоторых свойств при создании экземпляра класса
      * @param string $elementsCount - максимальное количество отображаемых элементов
-     * @param string $elementsPerPage - количество элементов на одной странице, введенное пользователем (из GET-параметров)
-     * @param string $activePage - номер текущей страницы, введенный пользователем (из GET-параметров)
+     * @param string|null $elementsPerPage - количество элементов на одной странице, введенное пользователем (из GET-параметров)
+     * @param string|null $activePage - номер текущей страницы, введенный пользователем (из GET-параметров)
      */
-    public function __construct(string $elementsCount, string $elementsPerPage, string $activePage)
+    public function __construct(string $elementsCount, ?string $elementsPerPage, ?string $activePage)
     {
         // Общее количество элементов
         $this->elementsCount = $elementsCount;
