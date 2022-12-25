@@ -85,6 +85,11 @@ body {
     width: 200px;
 }
 
+/* Минисальная высота элемента 55 px */
+.min-height-55 {
+    min-height: 55px;
+}
+
 /* Отрицательные поля */
 .mt-n1 {
     margin-top: -0.25rem;
@@ -539,4 +544,23 @@ header, footer {
 }
 .placeholder-box textarea:invalid + .placeholder-text {
     display: block;
+}
+
+/* Кнопки пагинации "1" */
+.page-link-style-1 {
+    border: 0;
+}
+.page-link-style-1:focus {
+    /* Цвет текста в активном состоянии */
+    color: var(--color-5);
+    /* Цвет фона в активном состоянии */
+    background-color: var(--color-6);
+    /* Цвет тени в активном состоянии */
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+.page-link-style-1.active, .active > .page-link-style-1 {
+    /* Цвет текста в активном состоянии */
+    color: var(--color-5);
+    /* Цвет фона в активном состоянии */
+    background-color: var(--color-8);
 }

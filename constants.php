@@ -183,3 +183,100 @@ const DROPDOWN_MENU = [
         'access' => USER | MANAGER | ADMIN,
     ],
 ];
+
+// Выпадающее меню "Количество записей на странице"
+const ELEMENTS_PER_PAGE = [
+    10,
+    'default' => 20,
+    50,
+    200,
+    'Все'
+];
+
+// "Кнопки постраничной навигации", значения по умолчанию
+const PAGE_BUTTONS = [
+    // Кнопка "Предыдущая (<)"
+    'previous' => [
+        'show' => true,
+        'num' => null,
+        'text' => '<i class="bi bi-chevron-left"></i>',
+        'class' => 'paginator-flip',
+        'active' => null,
+    ],
+    // Кнопка "Первая страница (1)"
+    'first' => [
+        'show' => true,
+        'num' => 1,
+        'text' => '1',
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    // Кнопка "Левый разделитель (...)"
+    'firstSep' => [
+        'show' => true,
+        'num' => null,
+        'text' => '...',
+        'class' => 'paginator-sep',
+        'active' => null,
+    ],
+    'left2' => [
+        'show' => null,
+        'num' => null,
+        'text' => null,
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    'left1' => [
+        'show' => true,
+        'num' => null,
+        'text' => null,
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    // Кнопка "Текущая страница"
+    'active' => [
+        'show' => true,
+        'num' => 1,
+        'text' => '1',
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    'right1' => [
+        'show' => true,
+        'num' => null,
+        'text' => null,
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    'right2' => [
+        'show' => null,
+        'num' => null,
+        'text' => null,
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    // Кнопка "Правый разделитель (...)"
+    'lastSep' => [
+        'show' => true,
+        'num' => null,
+        'text' => '...',
+        'class' => 'paginator-sep',
+        'active' => null,
+    ],
+    // Кнопка "Последняя страница"
+    'last' => [
+        'show' => true,
+        'num' => 1,
+        'text' => '1',
+        'class' => 'paginator-item',
+        'active' => null,
+    ],
+    // Кнопка "Следующая страница (>)"
+    'next' => [
+        'show' => true,
+        'num' => null,
+        'text' => '<i class="bi bi-chevron-right"></i>',
+        'class' => 'paginator-flip',
+        'active' => null,
+    ],
+];

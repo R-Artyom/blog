@@ -6,6 +6,7 @@ use App\Exception\NotFoundException;
 use App\Models\Post;
 use App\Models\Subscriber;
 use App\Notification;
+use App\Paginator;
 use App\View\View;
 use Exception;
 
@@ -14,8 +15,26 @@ class AdminPostController extends FormController
     // Страница "Управление статьями"
     public function adminPost(): View
     {
+        // Запрос количества записей в таблице
+        $rowCount = Post::count();
+        // Если есть GET-параметры
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            // Фильтрация GET-параметров
+            $result = filterData($_GET);
+        }
+        // Создание экземпляра "Пагинатор"
+        $paginator = new Paginator($rowCount, $result['quantity'] ?? null, $result['page'] ?? null);
+        // Формирование массива "Кнопки постраничной навигации"
+        $result['pageButtons'] = $paginator->getPageButtons(PAGE_BUTTONS);
+        // Количество элементов на странице для меню dropdown
+        $result['quantity'] = $paginator->getQuantity();
         // Массив объектов таблицы posts модели Post, отсортированный по убыванию даты создания
-        $result['posts'] = Post::orderBy('created_at', 'desc')->get();
+        // смещение до первого элемента необходимой страницы
+        // ограничение по количеству записей на одной странице
+        $result['posts'] = Post::orderBy('created_at', 'desc')
+            ->offset($paginator->getOffset())
+            ->limit($paginator->getLimit())
+            ->get();
         // Заголовок страницы
         $result['title'] = 'Управление статьями';
         // Возврат объекта - шаблона страницы "Управление статьями"
