@@ -194,7 +194,7 @@ const ELEMENTS_PER_PAGE = [
 ];
 
 // "Кнопки постраничной навигации", значения по умолчанию
-const PAGE_BUTTONS = [
+const PAGINATION_BUTTONS = [
     // Кнопка "Предыдущая (<)"
     'previous' => [
         'show' => true,

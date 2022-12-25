@@ -15,25 +15,14 @@ class AdminPostController extends FormController
     // Страница "Управление статьями"
     public function adminPost(): View
     {
-        // Запрос количества записей в таблице
-        $rowCount = Post::count();
-        // Если есть GET-параметры
-        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-            // Фильтрация GET-параметров
-            $result = filterData($_GET);
-        }
         // Создание экземпляра "Пагинатор"
-        $paginator = new Paginator($rowCount, $result['quantity'] ?? null, $result['page'] ?? null);
-        // Формирование массива "Кнопки постраничной навигации"
-        $result['pageButtons'] = $paginator->getPageButtons(PAGE_BUTTONS);
-        // Количество элементов на странице для меню dropdown
-        $result['quantity'] = $paginator->getQuantity();
+        $result['paginator'] = (new Paginator(Post::count(), PAGINATION_BUTTONS))->run();
         // Массив объектов таблицы posts модели Post, отсортированный по убыванию даты создания
         // смещение до первого элемента необходимой страницы
         // ограничение по количеству записей на одной странице
         $result['posts'] = Post::orderBy('created_at', 'desc')
-            ->offset($paginator->getOffset())
-            ->limit($paginator->getLimit())
+            ->offset($result['paginator']['offset'])
+            ->limit($result['paginator']['limit'])
             ->get();
         // Заголовок страницы
         $result['title'] = 'Управление статьями';

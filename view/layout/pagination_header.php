@@ -10,7 +10,7 @@
         <div class="d-flex text-style-1 me-3">
             <select class="form-select form-select-style-1 rounded-0" id="quantity" name="quantity" aria-label="Default select example">
                 <?php foreach (ELEMENTS_PER_PAGE as $value):?>
-                    <option <?=$quantity == $value ? 'selected' : ''?> value="<?=$value?>"><?=$value?></option>
+                    <option <?=$paginator['quantity'] == $value ? 'selected' : ''?> value="<?=$value?>"><?=$value?></option>
                 <?php endforeach?>
             </select>
         </div>

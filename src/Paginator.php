@@ -12,123 +12,134 @@ class Paginator
     // Количество элементов на одной странице (для запроса к БД - число, м.б. число в виде строки)
     private $elementsPerPageDb;
     // Общее количество страниц (= номер последней страницы))
-    private $pageCount;
+    private $pagesCount;
     // Номер текущей страницы
     private $activePage;
     // Смещение (для запроса к БД)
     private $pageOffset;
+    // Массив "Кнопки постраничной навигации" с установленными начальными значениями
+    private $defaultButtons = [];
 
     /**
      * Инициализация некоторых свойств при создании экземпляра класса
      * @param string $elementsCount - максимальное количество отображаемых элементов
-     * @param string|null $elementsPerPage - количество элементов на одной странице, введенное пользователем (из GET-параметров)
-     * @param string|null $activePage - номер текущей страницы, введенный пользователем (из GET-параметров)
+     * @param array $defaultButtons - массив-шаблон постраничной навигации с установленными начальными значениями
      */
-    public function __construct(string $elementsCount, ?string $elementsPerPage, ?string $activePage)
+    public function __construct(string $elementsCount, array $defaultButtons)
     {
+        // Если есть GET-параметры
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            // Фильтрация GET-параметров
+            $result = filterData($_GET);
+        }
+        // Кнопки постраничной навигации
+        $this->defaultButtons = $defaultButtons;
         // Общее количество элементов
         $this->elementsCount = $elementsCount;
         // Количество записей на одной странице для отображения в dropdown:
         // если не задано - то значение "по умолчанию",
         // если не равен ни одному из элементов массива - то значение "по умолчанию",
         // если это целое число и больше, чем максимум - то последний элемент массива (все записи)
-        $this->elementsPerPageMenu = $elementsPerPage ?? ELEMENTS_PER_PAGE['default'];
+        $this->elementsPerPageMenu = $result['quantity'] ?? ELEMENTS_PER_PAGE['default'];
         $this->elementsPerPageMenu = in_array($this->elementsPerPageMenu, ELEMENTS_PER_PAGE) ? $this->elementsPerPageMenu : ELEMENTS_PER_PAGE['default'];
         $this->elementsPerPageMenu = is_int($this->elementsPerPageMenu) && $this->elementsPerPageMenu > max(ELEMENTS_PER_PAGE) ? ELEMENTS_PER_PAGE[array_key_last(ELEMENTS_PER_PAGE)] : $this->elementsPerPageMenu;
-        // Окончательное значение (число) количества записей на одной странице (с учетом пункта меню "Все")
-        $this->elementsPerPageDb = $this->elementsPerPageMenu === ELEMENTS_PER_PAGE[array_key_last(ELEMENTS_PER_PAGE)] ? $this->elementsCount : $this->elementsPerPageMenu;
+        // Окончательное значение (число) количества записей на одной странице ()
+        // если выбран пункт меню "Все" или если выбран пункт с большим, чем общее количество элементов - то равно общему количеству элементов
+        $this->elementsPerPageDb = $this->elementsPerPageMenu === ELEMENTS_PER_PAGE[array_key_last(ELEMENTS_PER_PAGE)] || $this->elementsCount < $this->elementsPerPageMenu ? $this->elementsCount : $this->elementsPerPageMenu;
         // Общее количество страниц
-        $this->pageCount = ceil($this->elementsCount / $this->elementsPerPageDb);
+        $this->pagesCount = ceil($this->elementsCount / $this->elementsPerPageDb);
         // Номер активной (текущей) страницы:
         // если не задан - то "1",
         // если больше последней страницы - то приравнивается к последней странице
-        $this->activePage = $activePage ?? 1;
-        $this->activePage = $this->activePage < $this->pageCount ? $this->activePage : $this->pageCount;
+        $this->activePage = $result['page'] ?? 1;
+        $this->activePage = $this->activePage < $this->pagesCount ? $this->activePage : $this->pagesCount;
         // Смещение (для запроса к БД)
         $this->pageOffset = $this->elementsPerPageDb * ($this->activePage - 1);
     }
 
     /**
      * Формирование массива, необходимого для постраничной навигации
-     * @param array $pageButtons - массив "Кнопки постраничной навигации"
      * @return array - результирующий массив
      */
-    public function getPageButtons(array $pageButtons): array
+    public function getButtons(): array
     {
+        // Копирование массива кнопок пагинации со значениями по умолчанию
+        $buttons = $this->defaultButtons;
+
         // Кнопка "Текущая страница"
-        $pageButtons['active']['num'] = $this->activePage;
-        $pageButtons['active']['text'] = $this->activePage;
+        $buttons['active']['num'] = $this->activePage;
+        $buttons['active']['text'] = $this->activePage;
 
         // Кнопка "Последняя страница"
-        $pageButtons['last']['num'] = $this->pageCount;
-        $pageButtons['last']['text'] = $this->pageCount;
+        $buttons['last']['num'] = $this->pagesCount;
+        $buttons['last']['text'] = $this->pagesCount;
 
         // Формирование номера необходимых кнопок страниц
-        $pageButtons['previous']['num'] = $this->activePage - 1;
-        $pageButtons['left2']['num'] = $this->activePage - 2;
-        $pageButtons['left1']['num'] = $this->activePage - 1;
-        $pageButtons['right1']['num'] = $this->activePage + 1;
-        $pageButtons['right2']['num'] = $this->activePage + 2;
-        $pageButtons['next']['num'] = $this->activePage + 1;
+        $buttons['previous']['num'] = $this->activePage - 1;
+        $buttons['left2']['num'] = $this->activePage - 2;
+        $buttons['left1']['num'] = $this->activePage - 1;
+        $buttons['right1']['num'] = $this->activePage + 1;
+        $buttons['right2']['num'] = $this->activePage + 2;
+        $buttons['next']['num'] = $this->activePage + 1;
 
         // Формирование текста необходимых кнопок страниц
-        $pageButtons['left2']['text'] = $pageButtons['left2']['num'];
-        $pageButtons['left1']['text'] = $pageButtons['left1']['num'];
-        $pageButtons['right1']['text'] = $pageButtons['right1']['num'];
-        $pageButtons['right2']['text'] = $pageButtons['right2']['num'];
+        $buttons['left2']['text'] = $buttons['left2']['num'];
+        $buttons['left1']['text'] = $buttons['left1']['num'];
+        $buttons['right1']['text'] = $buttons['right1']['num'];
+        $buttons['right2']['text'] = $buttons['right2']['num'];
 
         // Формирование признака "Показывать кнопку страницы"
         // Левая часть кнопок
-        if ($pageButtons['left1']['num'] < 1) {
-            $pageButtons['left1']['show'] = null;
-            $pageButtons['right2']['show'] = true;
+        if ($buttons['left1']['num'] < 1) {
+            $buttons['left1']['show'] = null;
+            $buttons['right2']['show'] = true;
         }
-        if ($pageButtons['active']['num'] == 1) {
-            $pageButtons['previous']['show'] = null;
-            $pageButtons['firstSep']['show'] = null;
-            $pageButtons['first']['show'] = null;
+        if ($buttons['active']['num'] == 1) {
+            $buttons['previous']['show'] = null;
+            $buttons['firstSep']['show'] = null;
+            $buttons['first']['show'] = null;
         }
-        if ($pageButtons['active']['num'] == 2) {
-            $pageButtons['first']['show'] = null;
-            $pageButtons['firstSep']['show'] = null;
+        if ($buttons['active']['num'] == 2) {
+            $buttons['first']['show'] = null;
+            $buttons['firstSep']['show'] = null;
         }
-        if ($pageButtons['active']['num'] == 3) {
-            $pageButtons['firstSep']['show'] = null;
+        if ($buttons['active']['num'] == 3) {
+            $buttons['firstSep']['show'] = null;
         }
         // Правая часть кнопок (аналогична левой)
-        if ($pageButtons['right1']['num'] > $this->pageCount) {
-            $pageButtons['right1']['show'] = null;
-            $pageButtons['left2']['show'] = true;
+        if ($buttons['right1']['num'] > $this->pagesCount) {
+            $buttons['right1']['show'] = null;
+            $buttons['left2']['show'] = true;
         }
-        if ($pageButtons['active']['num'] == $this->pageCount) {
-            $pageButtons['lastSep']['show'] = null;
-            $pageButtons['next']['show'] = null;
-            $pageButtons['last']['show'] = null;
+        if ($buttons['active']['num'] == $this->pagesCount) {
+            $buttons['lastSep']['show'] = null;
+            $buttons['next']['show'] = null;
+            $buttons['last']['show'] = null;
         }
-        if ($pageButtons['active']['num'] >= $this->pageCount - 1) {
-            $pageButtons['lastSep']['show'] = null;
-            $pageButtons['last']['show'] = null;
+        if ($buttons['active']['num'] >= $this->pagesCount - 1) {
+            $buttons['lastSep']['show'] = null;
+            $buttons['last']['show'] = null;
         }
-        if ($pageButtons['active']['num'] >= $this->pageCount - 2) {
-            $pageButtons['lastSep']['show'] = null;
+        if ($buttons['active']['num'] >= $this->pagesCount - 2) {
+            $buttons['lastSep']['show'] = null;
         }
         // Проверка граничных значений вторых кнопок
-        if ($pageButtons['left2']['num'] <= 1) {
-            $pageButtons['left2']['show'] = null;
+        if ($buttons['left2']['num'] <= 1) {
+            $buttons['left2']['show'] = null;
         }
-        if ($pageButtons['right2']['num'] >= $this->pageCount) {
-            $pageButtons['right2']['show'] = null;
+        if ($buttons['right2']['num'] >= $this->pagesCount) {
+            $buttons['right2']['show'] = null;
         }
-        if ($this->pageCount == 1) {
-            $pageButtons['active']['show'] = null;
+        if ($this->pagesCount == 1) {
+            $buttons['active']['show'] = null;
         }
-        if ($this->pageCount == 4) {
-            $pageButtons['firstSep']['show'] = null;
-            $pageButtons['lastSep']['show'] = null;
+        if ($this->pagesCount == 4) {
+            $buttons['firstSep']['show'] = null;
+            $buttons['lastSep']['show'] = null;
         }
 
         // Возврат массива
-        return $pageButtons;
+        return $buttons;
     }
 
     /**
@@ -156,5 +167,25 @@ class Paginator
     public function getQuantity(): string
     {
         return $this->elementsPerPageMenu;
+    }
+
+    /**
+     * Запуск пагинатора
+     * @return array - результирующий массив с данными, необходимыми для шаблона страницы
+     */
+    public function run(): array
+    {
+        // Кнопки постраничной навигации
+        $result['buttons'] = $this->getButtons();
+        // Количества элементов на странице (для отображения в меню dropdown)
+        $result['quantity'] = $this->getQuantity();
+        // Смещение (для работы с БД)
+        $result['offset'] = $this->getOffset();
+        // Количество элементов на одной странице (для работы с БД)
+        $result['limit'] = $this->getLimit();
+        // Признак "Отображать футер пагинатора"
+        $result['showFooter'] = $this->elementsCount === $this->elementsPerPageDb ? null : true;
+        // Результирующий массив
+        return $result;
     }
 }
