@@ -6,6 +6,7 @@ if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
     </div>
 <?php else:?>
     <div class="row g-0">
+        <?php require 'layout/pagination_header.php';?>
         <?php foreach ($users as $user):?>
             <div class="row comment g-0 px-5 py-4 border shadow">
                 <div class="col-auto pt-2 me-4 mb-4 avatar-thumbnail">
@@ -41,5 +42,6 @@ if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
                 </div>
             </div>
         <?php endforeach?>
+        <?php require 'layout/pagination_footer.php';?>
     </div>
 <?php endif?>

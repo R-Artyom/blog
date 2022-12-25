@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Paginator;
 use App\Profile;
 use App\View\View;
 use Exception;
@@ -14,11 +15,17 @@ class AdminUserController extends FormController
     {
         // Проверка формы
         $result['form'] = $this->checkForm();
+        // Создание экземпляра "Пагинатор"
+        $result['paginator'] = (new Paginator(User::count(), PAGINATION_BUTTONS))->run();
         // Запрос всех пользователей.
         // Сортировка пользователей по уровню доступа к сайту, начиная от админа.
         // Сортировка пользователей по дате регистрации, сначала старые.
+        // смещение до первого элемента необходимой страницы
+        // ограничение по количеству записей на одной странице
         $result['users'] = User::orderBy('role_id', 'desc')
             ->orderBy('created_at', 'asc')
+            ->offset($result['paginator']['offset'])
+            ->limit($result['paginator']['limit'])
             ->get();
         // Заголовок страницы
         $result['title'] = 'Управление пользователями';
