@@ -24,8 +24,9 @@ class Paginator
      * Инициализация некоторых свойств при создании экземпляра класса
      * @param string $elementsCount - максимальное количество отображаемых элементов
      * @param array $defaultButtons - массив-шаблон постраничной навигации с установленными начальными значениями
+     * @param array $defaultDropdownMenu - массив-шаблон выпадающего списка меню с установленными начальными значениями
      */
-    public function __construct(string $elementsCount, array $defaultButtons)
+    public function __construct(string $elementsCount, array $defaultButtons, array $defaultDropdownMenu = ELEMENTS_PER_PAGE)
     {
         // Если есть GET-параметры
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -40,12 +41,12 @@ class Paginator
         // если не задано - то значение "по умолчанию",
         // если не равен ни одному из элементов массива - то значение "по умолчанию",
         // если это целое число и больше, чем максимум - то последний элемент массива (все записи)
-        $this->elementsPerPageMenu = $result['quantity'] ?? ELEMENTS_PER_PAGE['default'];
-        $this->elementsPerPageMenu = in_array($this->elementsPerPageMenu, ELEMENTS_PER_PAGE) ? $this->elementsPerPageMenu : ELEMENTS_PER_PAGE['default'];
-        $this->elementsPerPageMenu = is_int($this->elementsPerPageMenu) && $this->elementsPerPageMenu > max(ELEMENTS_PER_PAGE) ? ELEMENTS_PER_PAGE[array_key_last(ELEMENTS_PER_PAGE)] : $this->elementsPerPageMenu;
+        $this->elementsPerPageMenu = $result['quantity'] ?? $defaultDropdownMenu['default'];
+        $this->elementsPerPageMenu = in_array($this->elementsPerPageMenu, $defaultDropdownMenu) ? $this->elementsPerPageMenu : $defaultDropdownMenu['default'];
+        $this->elementsPerPageMenu = is_int($this->elementsPerPageMenu) && $this->elementsPerPageMenu > max($defaultDropdownMenu) ? $defaultDropdownMenu[array_key_last($defaultDropdownMenu)] : $this->elementsPerPageMenu;
         // Окончательное значение (число) количества записей на одной странице ()
         // если выбран пункт меню "Все" или если выбран пункт с большим, чем общее количество элементов - то равно общему количеству элементов
-        $this->elementsPerPageDb = $this->elementsPerPageMenu === ELEMENTS_PER_PAGE[array_key_last(ELEMENTS_PER_PAGE)] || $this->elementsCount < $this->elementsPerPageMenu ? $this->elementsCount : $this->elementsPerPageMenu;
+        $this->elementsPerPageDb = $this->elementsPerPageMenu === 'Все' || $this->elementsCount < $this->elementsPerPageMenu ? $this->elementsCount : $this->elementsPerPageMenu;
         // Общее количество страниц
         $this->pagesCount = ceil($this->elementsCount / $this->elementsPerPageDb);
         // Номер активной (текущей) страницы:

@@ -16,6 +16,7 @@
                 </div>
             </div>
         <?php endforeach?>
+        <?php require 'layout/pagination_footer.php';?>
     </div>
 <?php else:?>
     <span class="h3">Извините, автор ещё не опубликовал ни одной статьи</span>
