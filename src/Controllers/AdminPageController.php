@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Exception\NotFoundException;
 use App\Models\Page;
+use App\Paginator;
 use App\View\View;
 use Exception;
 
@@ -12,8 +13,15 @@ class AdminPageController extends FormController
     // Страница "Управление статичными страницами"
     public function adminStatic(): View
     {
+        // Создание экземпляра "Пагинатор"
+        $result['paginator'] = (new Paginator(Page::count(), PAGINATION_BUTTONS))->run();
         // Массив объектов таблицы pages модели Page, отсортированный по убыванию даты создания
-        $result['pages'] = Page::orderBy('created_at', 'desc')->get();
+        // смещение до первого элемента необходимой страницы
+        // ограничение по количеству записей на одной странице
+        $result['pages'] = Page::orderBy('created_at', 'desc')
+            ->offset($result['paginator']['offset'])
+            ->limit($result['paginator']['limit'])
+            ->get();
         // Заголовок страницы
         $result['title'] = 'Управление статичными страницами';
         // Возврат объекта - шаблона страницы "Управление статичными страницами"

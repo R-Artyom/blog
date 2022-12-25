@@ -1,17 +1,6 @@
 <?php if (isset($pages) && count($pages) > 0):?>
     <div class="row g-0 m-auto">
-        <div class="post row g-0 border">
-            <div class="col d-flex link-style-3 justify-content-center align-items-center position-relative border shadow">
-                <a class="link-style-5 stretched-link" href="<?=PATH_ADMIN_PAGES . '/add'?>">
-                    <i class="bi bi-plus-circle h1 me-1"></i>
-                    <span class="h1">Создать страницу</span>
-                </a>
-            </div>
-            <div class="col-auto d-none d-lg-block align-self-center border shadow">
-                <img class="post-thumbnail-sm" src="<?=PATH_IMG_PAGES . '/' . 'default.jpg'?>" alt="dots icon">
-            </div>
-        </div>
-
+        <?php require 'layout/pagination_header.php';?>
         <?php foreach ($pages as $page):?>
             <div class="post row g-0 border shadow">
                 <div class="col p-4 position-relative link-style-3">
@@ -40,6 +29,7 @@
                 </div>
             </div>
         <?php endforeach?>
+        <?php require 'layout/pagination_footer.php';?>
     </div>
 <?php else:?>
     <div class="row g-0 m-auto">

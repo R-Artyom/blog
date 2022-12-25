@@ -5,6 +5,11 @@
             <i class="bi bi-plus-circle me-1"></i><strong>Добавить статью</strong>
         </a>
     <?php endif?>
+    <?php if (getActiveUrl() === PATH_ADMIN_PAGES):?>
+        <a class="d-flex min-height-55 px-4 py-2 ms-auto me-2 w-auto rounded-3 link-style-3 align-items-center link-style-5 border shadow-sm" href="<?=PATH_ADMIN_PAGES . '/add'?>">
+            <i class="bi bi-plus-circle me-1"></i><strong>Создать страницу</strong>
+        </a>
+    <?php endif?>
     <form class="d-flex min-height-55 px-4 py-2 w-auto rounded-3 border shadow-sm" method="get" action="<?=getActiveUrl()?>">
         <label for="quantity" class="d-flex mb-2 me-3 align-items-end"><strong>Количество записей на странице:</strong></label>
         <div class="d-flex text-style-1 me-3">
