@@ -82,7 +82,7 @@ const ACCESS_TO_PAGE = [
     'admin_posts'   => ADMIN | MANAGER, // Управление статьями
     'admin_pages'  => ADMIN | MANAGER, // Управление статичными страницами
     'admin_page_edit'  => ADMIN | MANAGER, // Редактирование статичной страницы
-    'admin_settings' => ADMIN | MANAGER, // Управление настройками
+    'admin_settings' => ADMIN, // Управление настройками
     'admin_users'   => ADMIN, // Управление пользователями
     'authorization' => UNREG, // Авторизация
     'homepage'      => ALL, // Главнаая
@@ -179,7 +179,7 @@ const DROPDOWN_MENU = [
         'title' => 'Настройки',
         'path' => PATH_ADMIN_SETTINGS,
         'icon' => '<i class="bi bi-gear"></i>',
-        'access' => MANAGER | ADMIN,
+        'access' => ADMIN,
     ],
     [
         'title' => 'Выйти',
