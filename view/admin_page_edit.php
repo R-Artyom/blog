@@ -1,4 +1,6 @@
-<?php if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
+<?php use App\Config;
+
+if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
     <div class="py-3 px-5 m-auto alert alert-success alert-dismissible fade show rounded-0 text-center" role="alert">
         <?=$form['message']?>
     </div>
@@ -17,8 +19,8 @@
                         <img class="post-thumbnail-sm rounded-3" id="preview" src="<?=isset($page->img_name) ? PATH_IMG_PAGES . '/' . $page->img_name : PATH_IMG_PAGES . '/' . 'default.jpg'?>" alt="Изображение к статье">
                     </div>
                     <div>
-                        <input type="hidden" name="MAX_FILE_SIZE" value="<?=MAX_FILE_SIZE?>">
-                        <input class="form-control form-style-3 <?=$form['error'] === FORM_IMAGE ? 'focus' : ''?>" type="file" name="imgName" id="imgName" accept="<?php foreach (ALLOWED_IMG_TYPE as $value):?><?=$value . ','?><?php endforeach ?>"/>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="<?=Config::getInstance()->get('image.maxSize')?>">
+                        <input class="form-control form-style-3 <?=$form['error'] === FORM_IMAGE ? 'focus' : ''?>" type="file" name="imgName" id="imgName" accept="<?php foreach (Config::getInstance()->get('image.allowedType') as $value):?><?=$value . ','?><?php endforeach ?>">
                     </div>
                 </label>
                 <?php if ($form['error'] === FORM_IMAGE):?>

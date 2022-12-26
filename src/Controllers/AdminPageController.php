@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Config;
 use App\Exception\NotFoundException;
 use App\Models\Page;
 use App\Paginator;
@@ -103,7 +104,7 @@ class AdminPageController extends FormController
             }
             // Если тип файла не найден в списке разрешенных
             if (($_FILES['imgName']['tmp_name'] !== '')
-                && !in_array (mime_content_type($_FILES['imgName']['tmp_name']), ALLOWED_IMG_TYPE, true)) {
+                && !in_array (mime_content_type($_FILES['imgName']['tmp_name']), Config::getInstance()->get('image.allowedType'), true)) {
                 // Вывести сообщение и прекратить выполнение текущего скрипта
                 throw new Exception("Файл \"{$_FILES['imgName']['name']}\" не загружен!!! Тип файла не поддерживается.", FORM_IMAGE);
             }
