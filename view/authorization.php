@@ -1,5 +1,5 @@
 <?php if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
-    <div class="py-3 px-4 m-auto alert alert-success alert-dismissible fade show rounded-0 text-center" role="alert">
+    <div class="py-3 px-5 m-auto alert alert-success alert-dismissible fade show rounded-0 text-center" role="alert">
         <?=$form['message']?>
     </div>
 <?php else:?>
@@ -33,4 +33,3 @@
         </form>
     </div>
 <?php endif?>
-
