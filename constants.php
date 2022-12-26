@@ -30,6 +30,8 @@ const PATH_ADMIN_COMMENTS = '/admin/comments';
 const PATH_ADMIN_POSTS = '/admin/posts';
 // Страница "Управление статичными страницами"
 const PATH_ADMIN_PAGES = '/admin/pages';
+// Страница "Управление настройками"
+const PATH_ADMIN_SETTINGS = '/admin/settings';
 // Страница "Управление пользователями"
 const PATH_ADMIN_USERS = '/admin/users';
 // Страница "Статичная"
@@ -80,6 +82,7 @@ const ACCESS_TO_PAGE = [
     'admin_posts'   => ADMIN | MANAGER, // Управление статьями
     'admin_pages'  => ADMIN | MANAGER, // Управление статичными страницами
     'admin_page_edit'  => ADMIN | MANAGER, // Редактирование статичной страницы
+    'admin_settings' => ADMIN | MANAGER, // Управление настройками
     'admin_users'   => ADMIN, // Управление пользователями
     'authorization' => UNREG, // Авторизация
     'homepage'      => ALL, // Главнаая
@@ -135,6 +138,8 @@ const FORM_IMAGE = 8;
 const FORM_TITLE = 9;
 // Поле 'Краткое описание статьи'
 const FORM_SHORT_TEXT = 10;
+// Поле 'Значение'
+const FORM_VALUE = 11;
 
 /**
  * Выпадающее меню профиля зарегистрированного пользователя
@@ -172,7 +177,7 @@ const DROPDOWN_MENU = [
     ],
     [
         'title' => 'Настройки',
-        'path' => '/settings',
+        'path' => PATH_ADMIN_SETTINGS,
         'icon' => '<i class="bi bi-gear"></i>',
         'access' => MANAGER | ADMIN,
     ],

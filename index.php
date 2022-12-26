@@ -5,6 +5,7 @@ use App\Application;
 use App\Controllers\AdminCommentsController;
 use App\Controllers\AdminPostController;
 use App\Controllers\AdminPageController;
+use App\Controllers\AdminSettingsController;
 use App\Controllers\AdminUserController;
 use App\Controllers\AuthorizationController;
 use App\Controllers\HomeController;
@@ -88,9 +89,12 @@ $router->get(PATH_ADMIN_PAGES . '/add', [AdminPageController::class, 'adminStati
 $router->post(PATH_ADMIN_PAGES . '/add', [AdminPageController::class, 'adminStaticAdd']);
 // Страница "Удаление статичной страницы"
 $router->post(PATH_ADMIN_PAGES . '/*/delete', [AdminPageController::class, 'adminStaticDelete']);
-// Страница "Статичной"
+// Страница "Статичная"
 $router->get(PATH_STATIC_PAGES . '/*', [StaticPageController::class, 'staticPages']);
-
+// Страница "Управление настройками"
+$router->get(PATH_ADMIN_SETTINGS, [AdminSettingsController::class, 'adminSettings']);
+// Страница "Управление настройками"
+$router->post(PATH_ADMIN_SETTINGS, [AdminSettingsController::class, 'adminSettings']);
 // Страница "Оформление подписки"
 $router->post(PATH_SUBSCRIPTION, [SubscriptionController::class, 'subscription']);
 // Страница "Отписка по ссылке"
