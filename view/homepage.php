@@ -1,5 +1,5 @@
 <?php if (isset($posts) && count($posts) > 0):?>
-    <div class="row g-0 m-auto">
+    <div class="container row g-0 m-auto">
         <?php foreach ($posts as $post):?>
             <div class="post row g-0 border shadow">
                 <div class="col p-4 position-relative link-style-3">
