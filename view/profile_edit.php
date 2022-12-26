@@ -1,10 +1,9 @@
-<div class="row d-flex profile-thumbnail m-auto border shadow">
-    <?php if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
-        <div class="py-3 px-4 m-auto alert alert-success alert-dismissible fade show rounded-0 text-center" role="alert">
-            <?=$form['message']?>
-        </div>
-    <?php else:?>
-
+<?php if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
+    <div class="py-3 px-4 m-auto alert alert-success alert-dismissible fade show rounded-0 text-center" role="alert">
+        <?=$form['message']?>
+    </div>
+<?php else:?>
+    <div class="row d-flex profile-thumbnail m-auto border shadow">
         <form method="post" class="py-3 px-4 m-auto" enctype="multipart/form-data" action="<?=PATH_PROFILE_EDIT?>">
             <h4 class="mb-3 text-start">Редактирование профиля пользователя</h4>
 
@@ -109,5 +108,5 @@
                 </div>
             </div>
         </form>
-    <?php endif?>
-</div>
+    </div>
+<?php endif?>
