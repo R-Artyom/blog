@@ -108,7 +108,7 @@ function uploadFile(array $file, string $path, string $name): ?string
         // Определение расширение файла, зная позицию знака "точка"
         $filenameExtension = mb_substr($file['name'], $positionPoint);
         // Новое полное название файла, time() - для обхода кэширования изображения браузером
-        $newNameFile = $name . '_' . time() . $filenameExtension;
+        $newNameFile = time() . '_' . $name . $filenameExtension;
         // Загрузка файла в папку
         move_uploaded_file($file['tmp_name'], $path . $newNameFile);
     }
