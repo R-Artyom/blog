@@ -9,18 +9,6 @@ use App\View\View;
 
 class StaticPageController
 {
-    // Страница "О нас"
-    public function about(): View
-    {
-        // Возврат объекта - шаблона страницы "О нас"
-        return new View('about', ['title' => 'Страница о нас']);
-    }
-
-    // Страница "Тест"
-    public function test($param1, $param2): string
-    {
-        return "Test Page With param1=$param1 param2=$param2";
-    }
 
     // Страница "Правила пользования сайтом"
     public function terms(): View

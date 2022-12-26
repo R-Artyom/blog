@@ -22,8 +22,6 @@ const PATH_IMG_PAGES = '/img/pages';
 const PATH_LOGS_MAILS = '/logs/mails';
 // Страница "Главная"
 const PATH_HOME = '/';
-// Страница "О нас"
-const PATH_ABOUT = '/about';
 // Страница "Управление комментариями"
 const PATH_ADMIN_COMMENTS = '/admin/comments';
 // Страница "Управление статьями"
@@ -76,7 +74,6 @@ const ROLES = [
  * Массив "Права доступа к шаблонам сайта"
  */
 const ACCESS_TO_PAGE = [
-    'about'         => ALL, // О нас
     'admin_comments' => ADMIN | MANAGER, // Управление комментариями
     'admin_post_edit' => ADMIN | MANAGER, // Редактирование статьи
     'admin_posts'   => ADMIN | MANAGER, // Управление статьями
