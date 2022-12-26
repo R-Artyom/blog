@@ -80,11 +80,6 @@ body {
     width: 120px;
 }
 
-/* Ширина элемента 200 px */
-.width-200 {
-    width: 200px;
-}
-
 /* Минисальная высота элемента 55 px */
 .min-height-55 {
     min-height: 55px;

@@ -106,7 +106,7 @@ if (isset($form['error']) && ($form['error'] === FORM_SUCCESS)):?>
                     </a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <button type="submit" class="btn btn-style-4 width-200 rounded-0" name="save" value="yes" formnovalidate>Сохранить изменения</button>
+                    <button type="submit" class="btn btn-style-4 rounded-0" name="save" value="yes" formnovalidate>Сохранить изменения</button>
                 </div>
             </div>
         </form>
