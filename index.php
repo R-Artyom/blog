@@ -31,8 +31,6 @@ $session->run();
 
 // Создание маршрутизатора
 $router = new Router();
-// Добавление в роутер страницы сайта "О нас" с HTTP-методом запроса GET
-$router->get(PATH_ABOUT, [StaticPageController::class, 'about']);
 // Страница "Управление комментариями"
 $router->get(PATH_ADMIN_COMMENTS, [AdminCommentsController::class, 'adminComments']);
 // Страница "Редактирование комментария"
@@ -71,8 +69,6 @@ $router->get(PATH_PROFILE, [ProfileController::class, 'profile']);
 $router->get(PATH_PROFILE_EDIT, [ProfileController::class, 'profileEdit']);
 // Страница "Редактирование профиля пользователя" - отправка формы
 $router->post(PATH_PROFILE_EDIT, [ProfileController::class, 'profileEdit']);
-// Добавление в роутер страницы сайта "Тест" с HTTP-методом запроса GET
-$router->get('test/*/test2/*', [StaticPageController::class, 'test']);
 // Страница "Регистрация"
 $router->get(PATH_REGISTRATION, [RegistrationController::class, 'registration']);
 // Страница "Регистрация - отправка формы"
